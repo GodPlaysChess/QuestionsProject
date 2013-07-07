@@ -5,5 +5,5 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
-    private ManageQuestion manageQuestion;
+    private ManageQuestion manageQuestion();
 }
