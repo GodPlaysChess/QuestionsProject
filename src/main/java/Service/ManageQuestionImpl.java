@@ -4,10 +4,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
+import org.springframework.stereotype.Repository;
 
 import java.util.Iterator;
 import java.util.List;
 
+@Repository
 public class ManageQuestionImpl implements ManageQuestion {
 
     private static SessionFactory factory;
@@ -31,25 +33,21 @@ public class ManageQuestionImpl implements ManageQuestion {
     }
 
     /* Method to READ all questions */
-    public List<String> listQuestions() {
+    public List<Object> listQuestions() {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             List Questions = session.createQuery("FROM Question").list();
-            for (Iterator iterator =
-                         Questions.iterator(); iterator.hasNext(); ) {
-                Question Question = (Question) iterator.next();
-                System.out.print("Type: |" + Question.getType());
-                System.out.print("  Text: " + Question.getText());
-            }
             tx.commit();
+            return Questions;
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
         } finally {
             session.close();
         }
+        return null;
     }
 
     /* Method to UPDATE text of the question */
