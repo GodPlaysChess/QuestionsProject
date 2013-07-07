@@ -12,33 +12,6 @@ import java.util.List;
 public class ManageQuestion {
     private static SessionFactory factory;
 
-    public static void main(String[] args){
-        try {
-            factory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Failed to create sessionFactory object." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-
-        ManageQuestion MQ = new ManageQuestion();
-
-        /*Integer empID1 = MQ.addQuestion("Zara", "Ali", 1000);
-        Integer empID2 = MQ.addQuestion("Daisy", "Das", 5000);
-        Integer empID3 = MQ.addQuestion("John", "Paul", 10000);*/
-
-        MQ.listQuestions();
-
-      /* Update Question's records */
-        //MQ.updateQuestion(empID1, 5000);
-
-      /* Delete an Question from the database */
-        //MQ.deleteQuestion(empID2);
-
-      /* List down new list of the Questions */
-        MQ.listQuestions();
-
-    }
-
     public Integer addQuestion(String type, String text) {
         Session session = factory.openSession();
         Transaction tx = null;
