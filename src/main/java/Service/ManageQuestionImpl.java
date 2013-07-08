@@ -1,6 +1,7 @@
 package Service;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
@@ -39,7 +40,26 @@ public class ManageQuestionImpl implements ManageQuestion {
 
     @Override
     public Question getQuestion(Integer QuestionID) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Session session = factory.openSession();
+        Transaction tx = null;
+        String text = null;
+        String type = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("SELECT text FROM Question WHERE " +
+                    "id =" + QuestionID);
+            text = query.toString();
+            query = session.createQuery("SELECT type FROM Question WHERE " +
+                    "id =" + QuestionID);
+            type = query.toString();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return new Question(type, text);
     }
 
     /* Method to READ all questions */
