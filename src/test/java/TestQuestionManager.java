@@ -1,4 +1,5 @@
 import Service.ManageQuestion;
+import Service.ManageQuestionImpl;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class TestQuestionManager {
             throw new ExceptionInInitializerError(ex);
         }
 
-        ManageQuestion MQ = new ManageQuestion();
+        ManageQuestion MQ = new ManageQuestionImpl();
 
         //Integer empID3 = MQ.addQuestion("John", "Paul", 10000);
 

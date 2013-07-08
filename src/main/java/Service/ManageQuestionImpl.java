@@ -14,14 +14,14 @@ public class ManageQuestionImpl implements ManageQuestion {
 
     private static SessionFactory factory;
 
-    public Integer addQuestion(String type, String text) {
+    @Override
+    public Integer addQuestion(Question question) {
         Session session = factory.openSession();
         Transaction tx = null;
         Integer QuestionID = null;
         try {
             tx = session.beginTransaction();
-            Question Question = new Question(type, text);
-            QuestionID = (Integer) session.save(Question);
+            QuestionID = (Integer) session.save(question);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -32,8 +32,19 @@ public class ManageQuestionImpl implements ManageQuestion {
         return QuestionID;
     }
 
+    @Override
+    public Question getRandomQuestion() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Question getQuestion(Integer QuestionID) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     /* Method to READ all questions */
-    public List<Object> listQuestions() {
+    @Override
+    public List listQuestions() {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -51,14 +62,15 @@ public class ManageQuestionImpl implements ManageQuestion {
     }
 
     /* Method to UPDATE text of the question */
-    public void updateQuestion(Integer QuestionID, String newText) {
+    @Override
+    public void updateQuestion(Question question) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             Question Question =
                     (Question) session.get(Question.class, QuestionID);
-            Question.setText(newText);
+            Question.setText(question.getText());
             session.update(Question);
             tx.commit();
         } catch (HibernateException e) {
@@ -70,6 +82,7 @@ public class ManageQuestionImpl implements ManageQuestion {
     }
 
     /* Method to DELETE the Question from the records */
+    @Override
     public void deleteQuestion(Integer QuestionID) {
         Session session = factory.openSession();
         Transaction tx = null;

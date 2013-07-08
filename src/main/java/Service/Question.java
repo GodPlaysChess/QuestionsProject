@@ -5,7 +5,8 @@ public class Question {
     private String type;
     private String text;
 
-    public Question(){}
+    public Question() {
+    }
 
     public Question(String type, String text) {
         this.type = type;

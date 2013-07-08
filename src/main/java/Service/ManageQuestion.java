@@ -6,10 +6,14 @@ public interface ManageQuestion {
 
     public void deleteQuestion(Integer QuestionID);
 
-    public void updateQuestion(Integer QuestionID, String newText);
+    public void updateQuestion(Question question);
 
-    public List<Object> listQuestions();
+    public List listQuestions();
 
-    public Integer addQuestion(String type, String text);
+    public Integer addQuestion(Question question);
+
+    Question getRandomQuestion();
+
+    Question getQuestion(Integer QuestionID);
 
 }
