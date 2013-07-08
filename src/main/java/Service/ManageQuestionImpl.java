@@ -46,10 +46,10 @@ public class ManageQuestionImpl implements ManageQuestion {
         String type = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("SELECT text FROM Question WHERE " +
+            Query query = session.createSQLQuery("SELECT text FROM Question WHERE " +
                     "id =" + QuestionID);
             text = query.toString();
-            query = session.createQuery("SELECT type FROM Question WHERE " +
+            query = session.createSQLQuery("SELECT type FROM Question WHERE " +
                     "id =" + QuestionID);
             type = query.toString();
             tx.commit();
