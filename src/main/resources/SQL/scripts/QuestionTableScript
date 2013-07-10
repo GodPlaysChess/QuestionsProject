@@ -1,0 +1,10 @@
+CREATE  TABLE `questionsproject`.`Questions` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `type` VARCHAR(45) NOT NULL ,
+  `text` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) );
+
+
+INSERT into Questions (id, text, type) values (1, 'math', '5*2')
+INSERT into Questions (id, text, type) values (2, 'math', '5*3')
+INSERT into Questions (id, text, type) values (3, 'phys', 'why?')

@@ -6,8 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.springframework.stereotype.Repository;
-
-import java.util.Iterator;
 import java.util.List;
 
 @Repository
@@ -89,7 +87,7 @@ public class ManageQuestionImpl implements ManageQuestion {
         try {
             tx = session.beginTransaction();
             Question Question =
-                    (Question) session.get(Question.class, QuestionID);
+                    (Question) session.get(Question.class, question.getId());
             Question.setText(question.getText());
             session.update(Question);
             tx.commit();

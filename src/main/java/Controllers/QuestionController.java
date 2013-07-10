@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class QuestionControlelr {
+public class QuestionController {
 
-    @RequestMapping(value = {"/question.html"}, method RequestMethod.POST)
+    private QuestionService questrionService;
+
+    @RequestMapping(value = {"/question.html"}, method = RequestMethod.GET)
     public ModelAndView showPage
 
+    public QuestionController(QuestionService questrionService) {
+        this.questrionService = questrionService;
+    }
 }

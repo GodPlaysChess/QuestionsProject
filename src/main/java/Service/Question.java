@@ -38,5 +38,9 @@ public class Question {
         return text;
     }
 
+    public String toString(){
+        return "Question # " + id + "| " + type + " | " + text;
+    }
+
 
 }

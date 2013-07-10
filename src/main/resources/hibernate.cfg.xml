@@ -10,7 +10,7 @@
             com.mysql.jdbc.Driver
         </property>
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost/hibernatetest
+            jdbc:mysql://localhost/questionsproject
         </property>
         <property name="hibernate.connection.username">
             root
@@ -19,7 +19,7 @@
             warcraft
         </property>
 
-    <mapping resource="Question.hbm.xml"/>
+    <mapping resource="questions.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>
