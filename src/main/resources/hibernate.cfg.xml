@@ -19,7 +19,7 @@
             warcraft
         </property>
 
-    <mapping resource="questions.hbm.xml"/>
+        <mapping resource="question.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>

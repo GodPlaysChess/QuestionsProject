@@ -8,12 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class QuestionController {
 
-    private QuestionService questrionService;
-
     @RequestMapping(value = {"/question.html"}, method = RequestMethod.GET)
-    public ModelAndView showPage
-
-    public QuestionController(QuestionService questrionService) {
-        this.questrionService = questrionService;
+    public ModelAndView getNextPage() {
+        System.out.println("nextpage");
+        return new ModelAndView("Questions");
     }
+
 }

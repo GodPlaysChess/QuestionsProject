@@ -10,38 +10,42 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+
 public class TestQuestionManager {
-    private static SessionFactory factory;
 
     @Test
     public void test() {
 
- /*       try {
-            factory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Failed to create sessionFactory object." + ex);
-            throw new ExceptionInInitializerError(ex);
-        } finally {
-
-        }*/
-
         ManageQuestion MQ = new ManageQuestionImpl();
-        Integer empID3 = MQ.addQuestion(new Question("geo", "where?"));
+
+        /* ADD Questions - OK */
+        Integer questionNum = MQ.addQuestion(new Question("geo", "when?"));
+        System.out.println(questionNum);
+        assertTrue(questionNum > 0);
 
       /* Update Question's records */
-        //MQ.updateQuestion(empID1, 5000);
+        //MQ.updateQuestion(new Question("geo", "what?"));
 
-      /* Delete an Question from the database */
-        //MQ.deleteQuestion(empID2);
+        Question q = MQ.getQuestion(questionNum);
+        System.out.println(q);
+
+      /* Delete an Question from the database
+      *  DELETE - OK.. do not know how to write a test here
+      *  mb make deleteQuestion() to return something */
+        MQ.deleteQuestion(questionNum);
+
+
+
+
 
       /* List down new list of the Questions */
-        List questionList = MQ.listQuestions();
+/*        List questionList = MQ.listQuestions();
         for (Object question : questionList) {
             if (question instanceof Question) {
                 System.out.println(question);
             }
-        }
-
+        }*/
 
 
     }

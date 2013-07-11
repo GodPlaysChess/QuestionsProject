@@ -1,0 +1,108 @@
+package ru.planeta.dao.commondb;
+
+import org.apache.log4j.Logger;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.planeta.dao.TransactionScope;
+import ru.planeta.model.common.Banner;
+import ru.planeta.model.enums.BannerStatus;
+import ru.planeta.model.enums.BannerType;
+import ru.planeta.test.AbstractTest;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
+/**
+ * Class TestBannerDAO
+ *
+ * @author a.savanovich
+ */
+public class TestBannerDAO  extends AbstractTest {
+
+    private static final Logger log = Logger.getLogger(TestBannerDAO.class);
+
+ @Autowired
+ private BannerDAO bannerDAO;
+
+    @Test
+    public void testSelectUpdateDelete() {
+
+
+
+            Banner banner = insertBanner(bannerDAO);
+            assertTrue(banner.getBannerId() > 0);
+
+
+            Banner selected = bannerDAO.select(banner.getBannerId());
+            assertBannerEquals(selected, banner);
+
+            List<Banner> banners = bannerDAO.selectList(EnumSet.allOf(BannerStatus.class), 0, 0);
+            assertTrue(!banners.isEmpty());
+
+            banners = bannerDAO.selectList(EnumSet.of(BannerStatus.ON), 0, 0);
+            assertTrue(!banners.isEmpty());
+
+            banner.setName("new name");
+            banner.setHtml("<html>");
+            banner.setStatus(BannerStatus.OFF);
+            bannerDAO.update(banner);
+
+            Banner updated = bannerDAO.select(banner.getBannerId());
+            assertBannerEquals(updated, banner);
+
+            String[] keywords={"group, info","user, info","Amar","santosh","deepak"};
+            bannerDAO.setKeywords(banner.getBannerId(), Arrays.asList(keywords));
+            List<String> loadedKeywords = bannerDAO.loadKeywords(banner.getBannerId());
+            banner.setKeywords(loadedKeywords);
+
+            banners = bannerDAO.selectList(EnumSet.of(BannerStatus.OFF), 0, 0);
+            assertTrue(!banners.isEmpty());
+
+            log.info(loadedKeywords);
+
+            bannerDAO.delete(banner.getBannerId());
+            assertNull(bannerDAO.select(banner.getBannerId()));
+
+    }
+
+    private void assertBannerEquals(Banner expected, Banner actual) {
+        assertNotNull(expected);
+        assertEquals(expected.getBannerId(), actual.getBannerId());
+        assertEquals(expected.getName(), actual.getName());
+        assertEquals(expected.getHtml(), actual.getHtml());
+        assertEquals(expected.getTimeAdded(), actual.getTimeAdded());
+        assertEquals(expected.getTimeUpdated(), actual.getTimeUpdated());
+    }
+
+    private Banner insertBanner(BannerDAO bannerDAO) {
+        Banner banner = new Banner();
+        banner.setName("name");
+        banner.setHtml("html");
+        banner.setTimeAdded(new Date());
+        banner.setTimeUpdated(banner.getTimeAdded());
+        banner.setStatus(BannerStatus.ON);
+        bannerDAO.insert(banner);
+        return banner;
+    }
+
+
+    private Banner insertNewBanner(BannerDAO bannerDAO) {
+        Banner banner = insertBanner(bannerDAO);
+        banner.setMask("*/group/*\\.html");
+        banner.setType(BannerType.TEASER);
+        try {
+            banner.setTimeStart(new SimpleDateFormat().parse("10.10.1990"));
+            banner.setTimeFinish(new SimpleDateFormat().parse("10.10.2030"));
+        } catch (ParseException pe) {
+            //
+        }
+        return banner;
+    }
+}
+
