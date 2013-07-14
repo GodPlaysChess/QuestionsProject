@@ -1,4 +1,4 @@
-﻿package Service;
+package Service;
 
 import java.util.EnumSet;
 import java.util.HashMap;
