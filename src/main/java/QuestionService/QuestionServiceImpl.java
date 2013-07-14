@@ -3,21 +3,23 @@ package QuestionService;
 import Service.ManageQuestion;
 import Service.Question;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private ManageQuestion manageQuestion;
 
     @Override
-    public Integer addQuestion(Question question) {
+    public Long addQuestion(Question question) {
         return manageQuestion.addQuestion(question);
     }
 
     @Override
-    public void deleteQuestion(Integer QuestionID) {
+    public void deleteQuestion(Long QuestionID) {
         manageQuestion.deleteQuestion(QuestionID);
     }
 
@@ -27,7 +29,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<Object> listQuestions() {
+    public List<Question> listQuestions() {
         return manageQuestion.listQuestions();
     }
 
@@ -37,7 +39,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question getQuestion(Integer QuestionID) {
+    public Question getQuestion(Long QuestionID) {
         return manageQuestion.getQuestion(QuestionID);
     }
 }

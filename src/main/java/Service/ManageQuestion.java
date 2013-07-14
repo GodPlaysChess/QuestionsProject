@@ -2,18 +2,18 @@ package Service;
 
 import java.util.List;
 
-public interface ManageQuestion {
+public interface ManageQuestion extends BaseDAO {
 
-    public void deleteQuestion(Integer QuestionID);
+    void deleteQuestion(Long QuestionID);
 
-    public void updateQuestion(Question question);
+    void updateQuestion(Question question);
 
-    public List listQuestions();
+    List<Question> listQuestions();
 
-    public Integer addQuestion(Question question);
+    Long addQuestion(Question question);
 
     Question getRandomQuestion();
 
-    Question getQuestion(Integer QuestionID);
+    Question getQuestion(Long QuestionID);
 
 }

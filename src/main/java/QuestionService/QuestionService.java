@@ -4,16 +4,16 @@ import java.util.List;
 
 public interface QuestionService {
 
-    public Integer addQuestion(Question question);
+    Long addQuestion(Question question);
 
-    public void deleteQuestion(Integer QuestionID);
+    void deleteQuestion(Long QuestionID);
 
-    public void updateQuestion(Question question);
+    void updateQuestion(Question question);
 
-    public List listQuestions();
+    List<Question> listQuestions();
 
     Question getRandomQuestion();
 
-    Question getQuestion(Integer QuestionID);
+    Question getQuestion(Long QuestionID);
 
 }

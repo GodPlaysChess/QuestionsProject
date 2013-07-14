@@ -1,7 +1,9 @@
 package Service;
 
-public class Question {
-    private int id;
+import Service.models.BaseModel;
+
+public class Question implements BaseModel {
+    private long id;
     private String type;
     private String text;
 
@@ -25,7 +27,8 @@ public class Question {
         this.text = text;
     }
 
-    public int getId() {
+    @Override
+    public long getId() {
 
         return id;
     }

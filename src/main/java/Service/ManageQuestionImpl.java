@@ -25,14 +25,14 @@ public class ManageQuestionImpl implements ManageQuestion {
     }
 
     @Override
-    public Integer addQuestion(Question question) {
+    public Long addQuestion(Question question) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
-        Integer QuestionID = null;
+        Long QuestionID = null;
         try {
             tx = session.beginTransaction();
-            QuestionID = (Integer) session.save(question);
+            QuestionID = (Long) session.save(question);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -49,7 +49,7 @@ public class ManageQuestionImpl implements ManageQuestion {
     }
 
     @Override
-    public Question getQuestion(Integer QuestionID) {
+    public Question getQuestion(Long QuestionID) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -60,8 +60,8 @@ public class ManageQuestionImpl implements ManageQuestion {
             Query query = session.createSQLQuery("SELECT type, text FROM Questions WHERE " +
                     "id = " + QuestionID);
             List list = query.list();
-            type = String.valueOf(list.get(0)[0]);
-            text = list.get(0);*/       //todo finish the method
+            // type = String.valueOf(list.get(0)[0]);
+            text = (String) list.get(0);// */       //todo finish the method
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -125,7 +125,7 @@ public class ManageQuestionImpl implements ManageQuestion {
 
     /* Method to DELETE the Question from the records */
     @Override
-    public void deleteQuestion(Integer QuestionID) {
+    public void deleteQuestion(Long QuestionID) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -143,6 +143,27 @@ public class ManageQuestionImpl implements ManageQuestion {
         }
     }
 
+    @Override
+    public Object selectById(long id) {
+        return getQuestion(id);
+    }
+
+    @Override
+    public List<Question> selectList(int offset, int limit) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean update(Object model) {
+        updateQuestion((Question) model);
+        return true;
+    }
+
+    @Override
+    public boolean delete(long id) {
+        deleteQuestion(id);
+        return true;
+    }
 }
 
 
