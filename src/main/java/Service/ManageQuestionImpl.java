@@ -1,5 +1,6 @@
 package Service;
 
+import Service.models.BaseModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -144,7 +145,7 @@ public class ManageQuestionImpl implements ManageQuestion {
     }
 
     @Override
-    public Object selectById(long id) {
+    public Question selectById(long id) {
         return getQuestion(id);
     }
 
@@ -154,7 +155,7 @@ public class ManageQuestionImpl implements ManageQuestion {
     }
 
     @Override
-    public boolean update(Object model) {
+    public boolean update(BaseModel model) {
         updateQuestion((Question) model);
         return true;
     }

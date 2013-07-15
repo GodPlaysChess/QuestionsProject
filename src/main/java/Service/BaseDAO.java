@@ -1,5 +1,7 @@
 package Service;
 
+import Service.models.BaseModel;
+
 import java.util.List;
 
 /**
@@ -9,11 +11,11 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface BaseDAO {
-    Object selectById(long id);
+    BaseModel selectById(long id);
 
     List selectList(int offset, int limit);
 
-    boolean update(Object model);
+    boolean update(BaseModel model);
 
     boolean delete(long id);
 }
