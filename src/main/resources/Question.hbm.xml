@@ -3,9 +3,9 @@
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="Employee" table="QUESTION">
-        <meta attribute="class-desricption">
-            This class contains employee detail.
+    <class name="Service.Question" table="questions">
+        <meta attribute="class-description">
+            This class contains questions detail.
         </meta>
         <id name="id" type="int" column="id">
             <generator class="native"/>
