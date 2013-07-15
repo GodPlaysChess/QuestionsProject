@@ -9,15 +9,24 @@ import java.util.List;
  */
 public class Course implements BaseModel {
     private long id;
-    List<Long> questionsIds;
-    int examenQuestionsNumber;
+    private List<Long> questionsIds;
+    private int examQuestionsNumber;
+    private GradingSystem gradingSystem;
 
-    public int getExamenQuestionsNumber() {
-        return examenQuestionsNumber;
+    public GradingSystem getGradingSystem() {
+        return gradingSystem;
     }
 
-    public void setExamenQuestionsNumber(int examenQuestionsNumber) {
-        this.examenQuestionsNumber = examenQuestionsNumber;
+    public void setGradingSystem(GradingSystem gradingSystem) {
+        this.gradingSystem = gradingSystem;
+    }
+
+    public int getExamQuestionsNumber() {
+        return examQuestionsNumber;
+    }
+
+    public void setExamQuestionsNumber(int examQuestionsNumber) {
+        this.examQuestionsNumber = examQuestionsNumber;
     }
 
     public long getId() {

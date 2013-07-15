@@ -12,12 +12,21 @@ public class Answer implements BaseModel {
     private long id;
     private long studentId;
     private long questionId;
+    private long examId;
     private String text;
-    int intAnswer;
+    private int intAnswer;
     private Mark mark;
     private AnswerStatus answerStatus;
     private Date timeStart;
     private Date timeFinish;
+
+    public long getExamId() {
+        return examId;
+    }
+
+    public void setExamId(long examId) {
+        this.examId = examId;
+    }
 
     public long getId() {
         return id;

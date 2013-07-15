@@ -1,6 +1,9 @@
 package QuestionService;
 
-import Service.Question;
+import QuestionService.models.QuestionInfo;
+import Service.models.Exam;
+
+import java.util.List;
 
 /**
  * author: a.savanovich
@@ -9,9 +12,13 @@ import Service.Question;
  * To change this template use File | Settings | File Templates.
  */
 public interface ExaminationService {
-    Question start(long studentId, long courseId);
+    QuestionInfo start(long studentId, long courseId);
 
-    Question next(long examenId);
+    QuestionInfo next(long examenId);
+
+    QuestionInfo current(long examenId);
 
     void finish(long examenId);
+
+    List<Exam> getCurrentExams(long studentId);
 }

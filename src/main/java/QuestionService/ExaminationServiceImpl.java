@@ -1,5 +1,6 @@
 package QuestionService;
 
+import QuestionService.models.QuestionInfo;
 import Service.Question;
 import Service.ManageQuestion;
 import Service.dao.CourseDAO;
@@ -31,8 +32,7 @@ public class ExaminationServiceImpl implements ExaminationService {
     ExamDAO examDAO;
 
     @Override
-    public Question start(long studentId, long courseId) {
-
+    public QuestionInfo start(long studentId, long courseId) {
         Course course = courseDAO.selectById(courseId);
         Exam exam = new Exam();
         exam.setCourseId(courseId);
@@ -43,26 +43,42 @@ public class ExaminationServiceImpl implements ExaminationService {
             throw new IllegalArgumentException();
         }
         Collections.shuffle(questions);
-        questions = ListUtils.subList(questions, 0, course.getExamenQuestionsNumber());
+        questions = ListUtils.subList(questions, 0, course.getExamQuestionsNumber());
         exam.setQuestionIds(BaseModelUtils.createIdsList(questions));
         Question firstQuestion = questions.get(0);
         exam.setCurrentQuestion(firstQuestion.getId());
         examDAO.insert(exam);
-        return firstQuestion;
+        QuestionInfo questionInfo = new QuestionInfo();
+        questionInfo.setExam(exam);
+        questionInfo.setQuestion(firstQuestion);
+        return questionInfo;
     }
 
     @Override
-    public Question next(long examenId) {
+    public QuestionInfo next(long examenId) {
         Exam exam = examDAO.selectById(examenId);
         int index = exam.getQuestionIds().indexOf(exam.getCurrentQuestion());
+        Question currentQuestion = null;
         if (index < exam.getQuestionIds().size()) {
             exam.setCurrentQuestion(index + 1);
-            Question currentQuestion = manageQuestion.getQuestion(exam.getCurrentQuestion());
-            return currentQuestion;
+            currentQuestion = manageQuestion.getQuestion(exam.getCurrentQuestion());
         } else {
             exam.setCurrentQuestion(-1);
-            return null;
         }
+        QuestionInfo questionInfo = new QuestionInfo();
+        questionInfo.setExam(exam);
+        questionInfo.setQuestion(currentQuestion);
+        return questionInfo;
+    }
+
+    @Override
+    public QuestionInfo current(long examenId) {
+        Exam exam = examDAO.selectById(examenId);
+        Question currentQuestion = manageQuestion.getQuestion(exam.getCurrentQuestion());
+        QuestionInfo questionInfo = new QuestionInfo();
+        questionInfo.setExam(exam);
+        questionInfo.setQuestion(currentQuestion);
+        return questionInfo;
     }
 
     @Override
@@ -71,5 +87,10 @@ public class ExaminationServiceImpl implements ExaminationService {
         exam.setCurrentQuestion(-1);
         exam.setTimeFinish(new Date());
         examDAO.update(exam);
+    }
+
+    @Override
+    public List<Exam> getCurrentExams(long studentId) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

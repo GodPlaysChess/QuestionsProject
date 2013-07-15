@@ -13,10 +13,10 @@ public class Exam implements BaseModel {
     private long id;
     private long courseId;
     private long studentId;
-    List<Long> questionIds;
-    Date timeStart;
-    Date timeFinish;
-    long currentQuestion;
+    private List<Long> questionIds;
+    private Date timeStart;
+    private Date timeFinish;
+    private long currentQuestion;
 
     public long getId() {
         return id;
