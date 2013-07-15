@@ -10,6 +10,15 @@ import java.util.List;
 public class Course implements BaseModel {
     private long id;
     List<Long> questionsIds;
+    int examenQuestionsNumber;
+
+    public int getExamenQuestionsNumber() {
+        return examenQuestionsNumber;
+    }
+
+    public void setExamenQuestionsNumber(int examenQuestionsNumber) {
+        this.examenQuestionsNumber = examenQuestionsNumber;
+    }
 
     public long getId() {
         return id;

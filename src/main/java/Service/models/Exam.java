@@ -9,7 +9,7 @@ import java.util.List;
  * Time: 15:53
  * To change this template use File | Settings | File Templates.
  */
-public class Examen implements BaseModel {
+public class Exam implements BaseModel {
     private long id;
     private long courseId;
     private long studentId;

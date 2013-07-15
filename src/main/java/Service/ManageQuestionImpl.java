@@ -103,6 +103,11 @@ public class ManageQuestionImpl implements ManageQuestion {
         return null;
     }
 
+    @Override
+    public List<Question> selectList(List<Long> questionIds) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     /* Method to UPDATE text of the question */
     @Override
     public void updateQuestion(Question question) {
@@ -147,6 +152,11 @@ public class ManageQuestionImpl implements ManageQuestion {
     @Override
     public Question selectById(long id) {
         return getQuestion(id);
+    }
+
+    @Override
+    public void insert(BaseModel model) {
+        addQuestion((Question) model);
     }
 
     @Override

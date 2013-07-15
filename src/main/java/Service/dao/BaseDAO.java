@@ -1,4 +1,4 @@
-package Service;
+package Service.dao;
 
 import Service.models.BaseModel;
 
@@ -13,7 +13,9 @@ import java.util.List;
 public interface BaseDAO {
     BaseModel selectById(long id);
 
-    List selectList(int offset, int limit);
+    void insert(BaseModel model);
+
+    List<? extends BaseModel> selectList(int offset, int limit);
 
     boolean update(BaseModel model);
 
