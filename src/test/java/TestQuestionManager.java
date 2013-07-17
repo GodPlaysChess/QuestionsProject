@@ -19,7 +19,6 @@ public class TestQuestionManager {
         MQ.addQuestion(question);
 
 
-
    /*   *//* Update Question's records *//*
         //MQ.updateQuestion(new Question("geo", "what?"));
 
