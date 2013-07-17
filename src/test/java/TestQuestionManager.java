@@ -15,7 +15,7 @@ public class TestQuestionManager {
         /* ADD Questions - OK */
 
         Question question = new Question();
-        question.setText("new");
+        question.setText("testDel");
         question.setTypeCode(1);
         boolean result = MQ.addQuestion(question);
 
@@ -25,7 +25,8 @@ public class TestQuestionManager {
         assertTrue(quest != null);
 
         MQ.deleteQuestion(quest.getId());
-        assertTrue(MQ.getQuestion(question.getId()) == null);
+        Question questDeleted = MQ.getQuestion(question.getId());
+        assertTrue(questDeleted == null);
 
 
 
