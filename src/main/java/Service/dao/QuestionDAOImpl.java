@@ -1,22 +1,22 @@
-package Service;
+package Service.dao;
 
 import Service.models.BaseModel;
+import Service.models.Question;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
-import org.hibernate.impl.SessionFactoryImpl;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class ManageQuestionImpl implements ManageQuestion {
+public class QuestionDAOImpl implements QuestionDAO {
     private SessionFactory factory;
 
-    private void createFactory(){
+    private void createFactory() {
         try {
             factory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
@@ -26,22 +26,22 @@ public class ManageQuestionImpl implements ManageQuestion {
     }
 
     @Override
-    public Long addQuestion(Question question) {
+    public boolean addQuestion(Question question) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
-        Long QuestionID = null;
         try {
             tx = session.beginTransaction();
-            QuestionID = (Long) session.save(question);
+            session.save(question);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
+            return false;
         } finally {
             session.close();
         }
-        return QuestionID;
+        return true;
     }
 
     @Override
@@ -54,15 +54,10 @@ public class ManageQuestionImpl implements ManageQuestion {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
-        String text = null;
-        String type = null;
+        Question question = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createSQLQuery("SELECT type, text FROM Questions WHERE " +
-                    "id = " + QuestionID);
-            List list = query.list();
-            // type = String.valueOf(list.get(0)[0]);
-            text = (String) list.get(0);// */       //todo finish the method
+            question = (Question)session.load(Question.class, QuestionID);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -70,7 +65,7 @@ public class ManageQuestionImpl implements ManageQuestion {
         } finally {
             session.close();
         }
-        return new Question(type, text);
+        return question;
     }
 
 /*
@@ -85,7 +80,7 @@ public class ManageQuestionImpl implements ManageQuestion {
 
     /* Method to READ all questions */
     @Override
-    public List listQuestions() {
+    public List<Question> listQuestions() {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -110,28 +105,32 @@ public class ManageQuestionImpl implements ManageQuestion {
 
     /* Method to UPDATE text of the question */
     @Override
-    public void updateQuestion(Question question) {
+    public boolean updateQuestion(Question question) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Question Question =
-                    (Question) session.get(Question.class, question.getId());
-            Question.setText(question.getText());
-            session.update(Question);
+            session.update(question);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
+            return false;
         } finally {
             session.close();
         }
+        return true;
     }
+/*
+    UPDATE questions
+    SET text = {question.text}
+    .....
+    where id = {question.id}*/
 
     /* Method to DELETE the Question from the records */
     @Override
-    public void deleteQuestion(Long QuestionID) {
+    public boolean deleteQuestion(Long QuestionID) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -144,9 +143,11 @@ public class ManageQuestionImpl implements ManageQuestion {
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
+            return false;
         } finally {
             session.close();
         }
+        return true;
     }
 
     @Override

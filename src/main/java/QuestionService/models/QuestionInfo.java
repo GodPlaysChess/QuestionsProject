@@ -1,6 +1,6 @@
 package QuestionService.models;
 
-import Service.Question;
+import Service.models.Question;
 import Service.models.Exam;
 
 /**

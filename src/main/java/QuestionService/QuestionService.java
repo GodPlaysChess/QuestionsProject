@@ -1,10 +1,10 @@
 package QuestionService;
-import Service.Question;
+import Service.models.Question;
 import java.util.List;
 
 public interface QuestionService {
 
-    Long addQuestion(Question question);
+    boolean addQuestion(Question question);
 
     void deleteQuestion(Long QuestionID);
 

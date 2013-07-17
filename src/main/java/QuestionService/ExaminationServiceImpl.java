@@ -1,8 +1,8 @@
 package QuestionService;
 
 import QuestionService.models.QuestionInfo;
-import Service.Question;
-import Service.ManageQuestion;
+import Service.models.Question;
+import Service.dao.QuestionDAO;
 import Service.dao.CourseDAO;
 import Service.dao.ExamDAO;
 import Service.models.Course;
@@ -27,7 +27,7 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Autowired
     private CourseDAO courseDAO;
     @Autowired
-    private ManageQuestion manageQuestion;
+    private QuestionDAO questionDAO;
     @Autowired
     ExamDAO examDAO;
 
@@ -38,7 +38,7 @@ public class ExaminationServiceImpl implements ExaminationService {
         exam.setCourseId(courseId);
         exam.setStudentId(studentId);
         exam.setTimeStart(new Date());
-        List<Question> questions = manageQuestion.selectList(course.getQuestionsIds());
+        List<Question> questions = questionDAO.selectList(course.getQuestionsIds());
         if (questions == null || questions.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -61,7 +61,7 @@ public class ExaminationServiceImpl implements ExaminationService {
         Question currentQuestion = null;
         if (index < exam.getQuestionIds().size()) {
             exam.setCurrentQuestion(index + 1);
-            currentQuestion = manageQuestion.getQuestion(exam.getCurrentQuestion());
+            currentQuestion = questionDAO.getQuestion(exam.getCurrentQuestion());
         } else {
             exam.setCurrentQuestion(-1);
         }
@@ -74,7 +74,7 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Override
     public QuestionInfo current(long examenId) {
         Exam exam = examDAO.selectById(examenId);
-        Question currentQuestion = manageQuestion.getQuestion(exam.getCurrentQuestion());
+        Question currentQuestion = questionDAO.getQuestion(exam.getCurrentQuestion());
         QuestionInfo questionInfo = new QuestionInfo();
         questionInfo.setExam(exam);
         questionInfo.setQuestion(currentQuestion);

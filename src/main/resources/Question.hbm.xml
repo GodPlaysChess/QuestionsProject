@@ -3,14 +3,14 @@
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="Service.Question" table="questions">
+    <class name="Service.models.Question" table="questions">
         <meta attribute="class-description">
             This class contains questions detail.
         </meta>
-        <id name="id" type="int" column="id">
+        <id name="id" type="long" column="id">
             <generator class="native"/>
         </id>
-        <property name="type" column="type" type="string"/>
+        <property name="typeCode" column="type" type="int"/>
         <property name="text" column="text" type="string"/>
     </class>
 </hibernate-mapping>

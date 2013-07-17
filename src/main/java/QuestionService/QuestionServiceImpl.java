@@ -1,7 +1,7 @@
 package QuestionService;
 
-import Service.ManageQuestion;
-import Service.Question;
+import Service.dao.QuestionDAO;
+import Service.models.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,35 +11,35 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
-    private ManageQuestion manageQuestion;
+    private QuestionDAO questionDAO;
 
     @Override
-    public Long addQuestion(Question question) {
-        return manageQuestion.addQuestion(question);
+    public boolean addQuestion(Question question) {
+        return questionDAO.addQuestion(question);
     }
 
     @Override
     public void deleteQuestion(Long QuestionID) {
-        manageQuestion.deleteQuestion(QuestionID);
+        questionDAO.deleteQuestion(QuestionID);
     }
 
     @Override
     public void updateQuestion(Question question) {
-        manageQuestion.updateQuestion(question);
+        questionDAO.updateQuestion(question);
     }
 
     @Override
     public List<Question> listQuestions() {
-        return manageQuestion.listQuestions();
+        return questionDAO.listQuestions();
     }
 
     @Override
     public Question getRandomQuestion() {
-        return manageQuestion.getRandomQuestion();
+        return questionDAO.getRandomQuestion();
     }
 
     @Override
     public Question getQuestion(Long QuestionID) {
-        return manageQuestion.getQuestion(QuestionID);
+        return questionDAO.getQuestion(QuestionID);
     }
 }
