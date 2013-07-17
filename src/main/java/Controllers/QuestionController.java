@@ -20,7 +20,7 @@ public class QuestionController {
         return modelAndView;
     }
 
-    public ModelAndView sumbitQustion
+
 
 
 }
