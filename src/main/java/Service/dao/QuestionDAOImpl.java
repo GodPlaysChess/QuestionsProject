@@ -57,7 +57,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         Question question = null;
         try {
             tx = session.beginTransaction();
-            question = (Question)session.load(Question.class, QuestionID);
+            question = (Question)session.get(Question.class, QuestionID);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();

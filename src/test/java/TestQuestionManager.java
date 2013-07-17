@@ -13,6 +13,7 @@ public class TestQuestionManager {
         QuestionDAO MQ = new QuestionDAOImpl();
 
         /* ADD Questions - OK */
+
         Question question = new Question();
         question.setText("new");
         question.setTypeCode(1);
@@ -22,6 +23,14 @@ public class TestQuestionManager {
 
         Question quest = MQ.getQuestion(question.getId());
         assertTrue(quest != null);
+
+        MQ.deleteQuestion(quest.getId());
+        assertTrue(MQ.getQuestion(question.getId()) == null);
+
+
+
+
+
 
 
    /*   *//* Update Question's records *//*
