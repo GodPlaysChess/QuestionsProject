@@ -16,7 +16,9 @@ public class TestQuestionManager {
         Question question = new Question();
         question.setText("new");
         question.setTypeCode(1);
-        MQ.addQuestion(question);
+        assertTrue(MQ.addQuestion(question));
+
+        System.out.println(MQ.getQuestion(4l));
 
 
    /*   *//* Update Question's records *//*
@@ -28,7 +30,7 @@ public class TestQuestionManager {
       /* Delete an Question from the database
       *  DELETE - OK.. do not know how to write a test here
       *  mb make deleteQuestion() to return something */
-       // assertTrue(MQ.deleteQuestion(questionNum));
+     //   MQ.deleteQuestion(4l);
 
       /* List down new list of the Questions */
     /*        List questionList = MQ.listQuestions();

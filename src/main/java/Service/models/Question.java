@@ -1,8 +1,5 @@
 package Service.models;
 
-import Service.QuestionType;
-import Service.models.BaseModel;
-
 public class Question implements BaseModel {
     private long id;
     private QuestionType type;
