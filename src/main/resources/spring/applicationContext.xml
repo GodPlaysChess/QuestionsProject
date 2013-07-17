@@ -13,10 +13,8 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/context">
 
-    <context:component-scan base-package="DataLayer"/>
-    <context:component-scan base-package="QuestionService"/>
-    <context:component-scan base-package="Controllers"/>
-    <context:annotation-config></context:annotation-config>
+    <context:component-scan base-package="examination"/>
+    <context:annotation-config/>
     <mvc:annotation-driven/>
     <!--
     <mvc:view-controller path="/login" view-name="login"/>

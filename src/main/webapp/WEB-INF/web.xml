@@ -5,6 +5,14 @@
 
 	<display-name>Spring MVC Application</display-name>
 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath*:spring/applicationContext.xml
+        </param-value>
+    </context-param>
+
+
     <servlet>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -16,11 +24,28 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+<<<<<<< HEAD
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath*:spring/applicationContext.xml
         </param-value>
     </context-param>
+=======
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
+>>>>>>> controller work good
 
 </web-app>

@@ -1,7 +1,7 @@
-import DataLayer.dao.QuestionDAO;
-import DataLayer.dao.QuestionDAOImpl;
-import DataLayer.models.Question;
-import DataLayer.models.QuestionType;
+import examination.DataLayer.dao.QuestionDAO;
+import examination.DataLayer.dao.QuestionDAOImpl;
+import examination.DataLayer.models.Question;
+import examination.DataLayer.models.QuestionType;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;

@@ -3,7 +3,7 @@
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="DataLayer.models.Question" table="questions">
+    <class name="examination.DataLayer.models.Question" table="questions">
         <meta attribute="class-description">
             This class contains questions detail.
         </meta>
