@@ -218,7 +218,7 @@
                     <contextPath>/</contextPath>
                     <connectors>
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                            <port>8189</port>
+                            <port>8188</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
