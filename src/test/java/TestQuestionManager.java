@@ -18,7 +18,7 @@ public class TestQuestionManager {
         question.setTypeCode(1);
         assertTrue(MQ.addQuestion(question));
 
-        System.out.println(MQ.getQuestion(4l));
+        MQ.getQuestion(question.getId());
 
 
    /*   *//* Update Question's records *//*
