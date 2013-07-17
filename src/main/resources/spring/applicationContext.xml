@@ -13,7 +13,9 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/context">
 
-    <context:component-scan base-package="DataLayer, QuestionService, Controllers"/>
+    <context:component-scan base-package="DataLayer"/>
+    <context:component-scan base-package="QuestionService"/>
+    <context:component-scan base-package="Controllers"/>
     <context:annotation-config></context:annotation-config>
     <mvc:annotation-driven/>
     <!--
@@ -21,7 +23,7 @@ http://www.springframework.org/schema/context">
     <mvc:view-controller path="/protected" view-name="protected"/>
     -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
