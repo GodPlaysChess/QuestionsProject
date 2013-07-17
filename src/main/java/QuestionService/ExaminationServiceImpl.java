@@ -1,15 +1,15 @@
 package QuestionService;
 
 import QuestionService.models.QuestionInfo;
-import Service.models.Question;
-import Service.dao.QuestionDAO;
-import Service.dao.CourseDAO;
-import Service.dao.ExamDAO;
-import Service.models.Course;
-import Service.models.Exam;
+import DataLayer.models.Question;
+import DataLayer.dao.QuestionDAO;
+import DataLayer.dao.CourseDAO;
+import DataLayer.dao.ExamDAO;
+import DataLayer.models.Course;
+import DataLayer.models.Exam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import Service.BaseModelUtils;
+import DataLayer.BaseModelUtils;
 import utils.ListUtils;
 
 import java.util.Collections;

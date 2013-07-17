@@ -1,7 +1,7 @@
 package QuestionService;
 
 import QuestionService.models.QuestionInfo;
-import Service.models.Exam;
+import DataLayer.models.Exam;
 
 import java.util.List;
 

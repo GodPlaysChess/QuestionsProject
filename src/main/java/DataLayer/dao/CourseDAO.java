@@ -1,6 +1,6 @@
-package Service.dao;
+package DataLayer.dao;
 
-import Service.models.Course;
+import DataLayer.models.Course;
 
 import java.util.List;
 

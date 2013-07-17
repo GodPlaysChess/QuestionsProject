@@ -1,4 +1,4 @@
-package Service.models;
+package DataLayer.models;
 
 public class Question implements BaseModel {
     private long id;

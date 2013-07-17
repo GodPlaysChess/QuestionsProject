@@ -13,7 +13,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/context">
 
-    <context:component-scan base-package="Service, QuestionService, Controllers"/>
+    <context:component-scan base-package="DataLayer, QuestionService, Controllers"/>
     <context:annotation-config></context:annotation-config>
     <mvc:annotation-driven/>
     <!--

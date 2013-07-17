@@ -1,7 +1,7 @@
 package QuestionService;
 
-import Service.dao.QuestionDAO;
-import Service.models.Question;
+import DataLayer.dao.QuestionDAO;
+import DataLayer.models.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

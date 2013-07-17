@@ -1,4 +1,4 @@
-package Service.models;
+package DataLayer.models;
 
 /**
  * author: a.savanovich

@@ -1,5 +1,5 @@
 package QuestionService;
-import Service.models.Question;
+import DataLayer.models.Question;
 import java.util.List;
 
 public interface QuestionService {

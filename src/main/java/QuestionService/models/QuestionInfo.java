@@ -1,7 +1,7 @@
 package QuestionService.models;
 
-import Service.models.Question;
-import Service.models.Exam;
+import DataLayer.models.Question;
+import DataLayer.models.Exam;
 
 /**
  * author: a.savanovich

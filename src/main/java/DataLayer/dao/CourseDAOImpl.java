@@ -1,7 +1,7 @@
-package Service.dao;
+package DataLayer.dao;
 
-import Service.models.BaseModel;
-import Service.models.Course;
+import DataLayer.models.BaseModel;
+import DataLayer.models.Course;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

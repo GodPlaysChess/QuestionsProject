@@ -1,9 +1,8 @@
-package Service.dao;
+package DataLayer.dao;
 
-import Service.models.BaseModel;
-import Service.models.Question;
+import DataLayer.models.BaseModel;
+import DataLayer.models.Question;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;

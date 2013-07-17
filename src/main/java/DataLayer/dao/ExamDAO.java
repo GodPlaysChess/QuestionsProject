@@ -1,6 +1,6 @@
-package Service.dao;
+package DataLayer.dao;
 
-import Service.models.Exam;
+import DataLayer.models.Exam;
 
 import java.util.List;
 

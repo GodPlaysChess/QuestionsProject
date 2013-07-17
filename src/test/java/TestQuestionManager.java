@@ -1,8 +1,11 @@
-import Service.dao.QuestionDAO;
-import Service.dao.QuestionDAOImpl;
-import Service.models.Question;
+import DataLayer.dao.QuestionDAO;
+import DataLayer.dao.QuestionDAOImpl;
+import DataLayer.models.Question;
+import DataLayer.models.QuestionType;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class TestQuestionManager {
@@ -16,17 +19,17 @@ public class TestQuestionManager {
 
         Question question = new Question();
         question.setText("testDel");
-        question.setTypeCode(1);
+        question.setType(QuestionType.RADIOBUTTON);
         boolean result = MQ.addQuestion(question);
 
         assertTrue(result);
 
         Question quest = MQ.getQuestion(question.getId());
-        assertTrue(quest != null);
+        assertNotNull(quest);
 
         MQ.deleteQuestion(quest.getId());
         Question questDeleted = MQ.getQuestion(question.getId());
-        assertTrue(questDeleted == null);
+        assertNull(questDeleted);
 
 
 

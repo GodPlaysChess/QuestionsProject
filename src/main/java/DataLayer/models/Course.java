@@ -1,4 +1,4 @@
-package Service.models;
+package DataLayer.models;
 
 import java.util.List;
 

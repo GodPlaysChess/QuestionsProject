@@ -1,6 +1,6 @@
-package Service;
+package DataLayer;
 
-import Service.models.BaseModel;
+import DataLayer.models.BaseModel;
 
 import java.util.ArrayList;
 import java.util.List;
