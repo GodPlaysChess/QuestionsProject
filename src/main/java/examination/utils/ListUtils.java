@@ -19,8 +19,10 @@ public class ListUtils {
      * @param comparator a Comparator to compare objects
      * @param <T>        an Object to compare
      */
-    public static <T> void removeAll(Collection<T> collection, Collection<T> toRemove, Comparator<T> comparator) {
-        if (collection == null || collection.isEmpty() || toRemove == null || toRemove.isEmpty()) {
+    public static <T> void removeAll(Collection<T> collection, Collection<T> toRemove,
+                                     Comparator<T> comparator) {
+        if (collection == null || collection.isEmpty() || toRemove == null
+                || toRemove.isEmpty()) {
             return;
         }
         Iterator<T> iterator = collection.iterator();
@@ -48,7 +50,8 @@ public class ListUtils {
      * @param predicate  object  the object to evaluate (optional)
      * @return Sub list
      */
-    public static <T> List<T> subList(final List<T> sourceList, int offset, int limit, Predicate predicate) {
+    public static <T> List<T> subList(final List<T> sourceList,
+                                      int offset, int limit, Predicate predicate) {
         List<T> subList = new ArrayList<T>(sourceList.size());
 
         if (offset < 0 || limit < 0) {
@@ -124,7 +127,8 @@ public class ListUtils {
     public static String prettyPrint(Map<?, ?> map) {
         StringBuilder sb = new StringBuilder("[\n");
         for (Map.Entry entry : map.entrySet()) {
-            sb.append("\t").append(entry.getKey()).append(" : ").append(entry.getValue()).append("\n");
+            sb.append("\t").append(entry.getKey()).append(
+                    " : ").append(entry.getValue()).append("\n");
         }
         return sb.append("]").toString();
     }

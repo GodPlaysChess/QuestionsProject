@@ -42,14 +42,14 @@ public class QuestionDAOImpl implements QuestionDAO {
         return true;
     }
 
-    private Question getQuestion(long QuestionID) {
+    private Question getQuestion(long questionID) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         Question question = null;
         try {
             tx = session.beginTransaction();
-            question = (Question)session.get(Question.class, QuestionID);
+            question = (Question)session.get(Question.class, questionID);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -122,14 +122,14 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     /* Method to DELETE the Question from the records */
 
-    private boolean deleteQuestion(long QuestionID) {
+    private boolean deleteQuestion(long questionID) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             Question Question =
-                    (Question) session.get(Question.class, QuestionID);
+                    (Question) session.get(Question.class, questionID);
             session.delete(Question);
             tx.commit();
         } catch (HibernateException e) {
