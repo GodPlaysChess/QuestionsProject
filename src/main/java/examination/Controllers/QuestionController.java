@@ -15,7 +15,7 @@ public class QuestionController {
 
     @RequestMapping(value = {"/question.html"}, method = RequestMethod.GET)
     public ModelAndView getQuestionPage(@RequestParam(value = "questionid", required = true) long questionId) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView("question");
         modelAndView.addObject("getQuestionPage", questionService.getQuestion(questionId));
         return modelAndView;
     }
