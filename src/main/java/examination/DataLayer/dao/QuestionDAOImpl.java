@@ -169,14 +169,14 @@ public class QuestionDAOImpl implements QuestionDAO {
     }
 
     @Override
-    public List<Question> selectList(int offset, int limit) {
+    public List<Question> selectList(long offset, int limit) {
         createFactory();
         List<Question> result = new LinkedList<>();
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            for (int id = offset - 1; id < offset + limit; id++) {
+            for (long id = offset - 1; id < offset + limit; id++) {
                 result.add(getQuestion(id));
             }
             tx.commit();
@@ -186,6 +186,25 @@ public class QuestionDAOImpl implements QuestionDAO {
             //log4j.error()
         }
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean deleteList(long offset, int limit) {
+        createFactory();
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            for (long id = offset - 1; id < offset + limit; id++) {
+                deleteQuestion(id);
+            }
+            tx.commit();
+            return true;
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            //log4j.error()
+        }
+        return false;
     }
 
     @Override

@@ -15,7 +15,9 @@ public interface BaseDAO <T extends BaseModel> {
 
     boolean insert(T model);
 
-    List<T> selectList(int offset, int limit);
+    List<T> selectList(long offset, int limit);
+
+    boolean deleteList(long offset, int limit);
 
     boolean update(T model);
 
