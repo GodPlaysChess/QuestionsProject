@@ -164,7 +164,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            for (long id = offset - 1; id < offset + limit - 2; id++) {
+            for (long id = offset; id < offset + limit; id++) {
                 result.add(getQuestion(id));
             }
             tx.commit();
@@ -183,7 +183,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            for (long id = offset - 1; id < offset + limit - 2; id++) {
+            for (long id = offset; id < offset + limit; id++) {
                 deleteQuestion(id);
             }
             tx.commit();

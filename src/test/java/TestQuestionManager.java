@@ -19,7 +19,6 @@ public class TestQuestionManager {
     private QuestionDAO questionDAO = new QuestionDAOImpl();
 
 
-
     @Test
     public void test() {
 
@@ -39,8 +38,8 @@ public class TestQuestionManager {
         Question questDeleted = questionDAO.selectById(question.getId());
         assertNull(questDeleted);
 
-        /* GET LIST Question by ids */
 
+        /* GET LIST with OFFSET Question */
         List<Long> ids = new ArrayList<Long>();
         for (int i = 0; i < 4; i++) {
             Question q = new Question();
@@ -53,7 +52,7 @@ public class TestQuestionManager {
                 ids.get(0), 3);
         assertNotNull(selectedQuestions);
 
-        /* GET LIST with OFFSET Question */
+        /* GET LIST Question by ids */
         List<Question> selectedByIdQuestions = questionDAO.selectList(ids);
         assertNotNull(selectedByIdQuestions);
 
