@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Repository
@@ -49,7 +50,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         Question question = null;
         try {
             tx = session.beginTransaction();
-            question = (Question)session.get(Question.class, questionID);
+            question = (Question) session.get(Question.class, questionID);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -92,6 +93,21 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     @Override
     public List<Question> selectList(List<Long> questionIds) {
+        createFactory();
+        List<Question> result = new LinkedList<>();
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            for (long id : questionIds) {
+                result.add(getQuestion(id));
+            }
+            tx.commit();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            //log4j.error()
+        }
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -154,6 +170,21 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     @Override
     public List<Question> selectList(int offset, int limit) {
+        createFactory();
+        List<Question> result = new LinkedList<>();
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            for (int id = offset - 1; id < offset + limit; id++) {
+                result.add(getQuestion(id));
+            }
+            tx.commit();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            //log4j.error()
+        }
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
