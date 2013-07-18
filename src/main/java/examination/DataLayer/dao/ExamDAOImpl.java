@@ -25,8 +25,13 @@ public class ExamDAOImpl implements ExamDAO {
     }
 
     @Override
-    public List<Exam> selectList(int offset, int limit) {
+    public List<Exam> selectList(long offset, int limit) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean deleteList(long offset, int limit) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

@@ -27,8 +27,13 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     @Override
-    public List<Course> selectList(int offset, int limit) {
+    public List<Course> selectList(long offset, int limit) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean deleteList(long offset, int limit) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

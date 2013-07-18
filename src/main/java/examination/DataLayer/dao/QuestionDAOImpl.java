@@ -94,7 +94,7 @@ public class QuestionDAOImpl implements QuestionDAO {
     @Override
     public List<Question> selectList(List<Long> questionIds) {
         createFactory();
-        List<Question> result = new LinkedList<>();
+        List<Question> result = new LinkedList<Question>();
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -171,7 +171,7 @@ public class QuestionDAOImpl implements QuestionDAO {
     @Override
     public List<Question> selectList(long offset, int limit) {
         createFactory();
-        List<Question> result = new LinkedList<>();
+        List<Question> result = new LinkedList<Question>();
         Session session = factory.openSession();
         Transaction tx = null;
         try {
