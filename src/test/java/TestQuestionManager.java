@@ -1,6 +1,6 @@
 import examination.DataLayer.dao.QuestionDAO;
 import examination.DataLayer.models.Question;
-import examination.DataLayer.models.QuestionType;
+import examination.DataLayer.models.enums.QuestionType;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

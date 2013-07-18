@@ -1,4 +1,4 @@
-package examination.DataLayer.models;
+package examination.DataLayer.models.enums;
 
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -7,30 +7,29 @@ import java.util.Map;
 /**
  * author: a.savanovich
  * Date: 14.07.13
- * Time: 14:59
+ * Time: 16:00
  * To change this template use File | Settings | File Templates.
  */
-public enum Role {
-    STUDENT(10), TEACHER(20), ADMIN(30);
+public enum AnswerStatus {
+    AUTOSAVE(0), APPROVED(1);
     private int code;
 
-    private Role(int code) {
+    private AnswerStatus(int code) {
         this.code = code;
     }
 
     public int getCode() {
         return code;
     }
-    private static final Map<Integer, Role> lookup = new HashMap<Integer, Role>();
+    private static final Map<Integer, AnswerStatus> lookup = new HashMap<Integer, AnswerStatus>();
 
     static {
-        for (Role s : EnumSet.allOf(Role.class)) {
+        for (AnswerStatus s : EnumSet.allOf(AnswerStatus.class)) {
             lookup.put(s.getCode(), s);
         }
     }
 
-    public static Role getByValue(int code) {
+    public static AnswerStatus getByValue(int code) {
         return lookup.get(code);
     }
-
 }

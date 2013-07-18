@@ -1,5 +1,8 @@
 package examination.DataLayer.models;
 
+import examination.DataLayer.models.enums.AnswerStatus;
+import examination.DataLayer.models.enums.Mark;
+
 import java.util.Date;
 
 /**

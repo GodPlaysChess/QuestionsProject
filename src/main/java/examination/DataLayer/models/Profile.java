@@ -1,5 +1,7 @@
 package examination.DataLayer.models;
 
+import examination.DataLayer.models.enums.Role;
+
 /**
  * author: a.savanovich
  * Date: 14.07.13

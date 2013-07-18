@@ -1,5 +1,7 @@
 package examination.DataLayer.models;
 
+import examination.DataLayer.models.enums.QuestionType;
+
 public class Question implements BaseModel {
     private long id;
     private QuestionType type;

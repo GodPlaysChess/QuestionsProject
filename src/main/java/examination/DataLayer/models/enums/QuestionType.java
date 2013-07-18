@@ -1,4 +1,4 @@
-package examination.DataLayer.models;
+package examination.DataLayer.models.enums;
 
 import java.util.EnumSet;
 import java.util.HashMap;
