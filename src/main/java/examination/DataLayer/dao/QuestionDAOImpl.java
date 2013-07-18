@@ -24,7 +24,6 @@ public class QuestionDAOImpl implements QuestionDAO {
         }
     }
 
-
     private boolean addQuestion(Question question) {
         createFactory();
         Session session = factory.openSession();
@@ -61,18 +60,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         return question;
     }
 
-/*
-        String SQL_QUERY = "select
-        max(FIELD_NAME)from Insurance insurance";
-        Query query = sess.createQuery(SQL_QUERY);
-        List list = query.list();
-        System.out.println("Max
-                Invested Amount: " + list.get(0));
-        */
-
-
     /* Method to READ all questions */
-
     private List<Question> listQuestions() {
         createFactory();
         Session session = factory.openSession();
@@ -176,7 +164,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            for (long id = offset - 1; id < offset + limit; id++) {
+            for (long id = offset - 1; id < offset + limit - 2; id++) {
                 result.add(getQuestion(id));
             }
             tx.commit();
@@ -195,7 +183,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            for (long id = offset - 1; id < offset + limit; id++) {
+            for (long id = offset - 1; id < offset + limit - 2; id++) {
                 deleteQuestion(id);
             }
             tx.commit();

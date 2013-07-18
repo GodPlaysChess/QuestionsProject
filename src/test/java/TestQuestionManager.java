@@ -1,5 +1,6 @@
 
 import examination.DataLayer.dao.QuestionDAO;
+import examination.DataLayer.dao.QuestionDAOImpl;
 import examination.DataLayer.models.Question;
 import examination.DataLayer.models.enums.QuestionType;
 import org.junit.Test;
@@ -14,14 +15,15 @@ import static org.junit.Assert.assertTrue;
 
 public class TestQuestionManager {
 
-    @Autowired
-    private QuestionDAO questionDAO;
+    //@Autowired
+    private QuestionDAO questionDAO = new QuestionDAOImpl();
+
+
 
     @Test
     public void test() {
 
         /* ADD Question  */
-
         Question question = new Question();
         question.setText("this message must be deleted");
         question.setType(QuestionType.RADIOBUTTON);
@@ -37,28 +39,27 @@ public class TestQuestionManager {
         Question questDeleted = questionDAO.selectById(question.getId());
         assertNull(questDeleted);
 
-        /* GET LIST Question */
-        List<Question> questionList = new ArrayList<Question>();
+        /* GET LIST Question by ids */
+
         List<Long> ids = new ArrayList<Long>();
         for (int i = 0; i < 4; i++) {
             Question q = new Question();
             q.setText("to insert # " + i);
             q.setType(QuestionType.RADIOBUTTON);
-            questionList.add(q);
+            questionDAO.insert(q);
             ids.add(q.getId());
         }
-        List<Question> selectedQuestions = questionDAO.selectList((int)
-                questionList.get(0).getId(), 4);
+        List<Question> selectedQuestions = questionDAO.selectList(
+                ids.get(0), 3);
         assertNotNull(selectedQuestions);
 
         /* GET LIST with OFFSET Question */
         List<Question> selectedByIdQuestions = questionDAO.selectList(ids);
-        assertNotNull(selectedQuestions);
+        assertNotNull(selectedByIdQuestions);
 
         /* DELETE LIST with OFFSET Question */
-        boolean deleted = questionDAO.deleteList(selectedByIdQuestions.get(0).getId(), 4);
+        boolean deleted = questionDAO.deleteList(ids.get(0), 3);
         assertTrue(deleted);
-
     }
 
 }
