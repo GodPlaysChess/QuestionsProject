@@ -10,10 +10,6 @@ public interface QuestionService {
 
     void updateQuestion(Question question);
 
-    List<Question> listQuestions();
-
-    Question getRandomQuestion();
-
     Question getQuestion(Long QuestionID);
 
 }

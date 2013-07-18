@@ -1,6 +1,5 @@
 package examination.DataLayer.dao;
 
-import examination.DataLayer.models.BaseModel;
 import examination.DataLayer.models.Question;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -24,8 +23,8 @@ public class QuestionDAOImpl implements QuestionDAO {
         }
     }
 
-    @Override
-    public boolean addQuestion(Question question) {
+
+    private boolean addQuestion(Question question) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -43,13 +42,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         return true;
     }
 
-    @Override
-    public Question getRandomQuestion() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public Question getQuestion(Long QuestionID) {
+    private Question getQuestion(long QuestionID) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -78,8 +71,8 @@ public class QuestionDAOImpl implements QuestionDAO {
 
 
     /* Method to READ all questions */
-    @Override
-    public List<Question> listQuestions() {
+
+    private List<Question> listQuestions() {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -103,8 +96,8 @@ public class QuestionDAOImpl implements QuestionDAO {
     }
 
     /* Method to UPDATE text of the question */
-    @Override
-    public boolean updateQuestion(Question question) {
+
+    private boolean updateQuestion(Question question) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -128,8 +121,8 @@ public class QuestionDAOImpl implements QuestionDAO {
     where id = {question.id}*/
 
     /* Method to DELETE the Question from the records */
-    @Override
-    public boolean deleteQuestion(Long QuestionID) {
+
+    private boolean deleteQuestion(long QuestionID) {
         createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -155,8 +148,8 @@ public class QuestionDAOImpl implements QuestionDAO {
     }
 
     @Override
-    public void insert(BaseModel model) {
-        addQuestion((Question) model);
+    public boolean insert(Question model) {
+        return addQuestion(model);
     }
 
     @Override
@@ -165,15 +158,13 @@ public class QuestionDAOImpl implements QuestionDAO {
     }
 
     @Override
-    public boolean update(BaseModel model) {
-        updateQuestion((Question) model);
-        return true;
+    public boolean update(Question model) {
+        return updateQuestion(model);
     }
 
     @Override
     public boolean delete(long id) {
-        deleteQuestion(id);
-        return true;
+        return deleteQuestion(id);
     }
 }
 

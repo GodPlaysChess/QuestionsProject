@@ -10,11 +10,5 @@ import java.util.List;
  * Time: 16:55
  * To change this template use File | Settings | File Templates.
  */
-public interface ExamDAO extends BaseDAO {
-    void insert(Exam exam);
-    @Override
-    Exam selectById(long id);
-
-    @Override
-    public List<Exam> selectList(int offset, int limit);
+public interface ExamDAO extends BaseDAO<Exam> {
 }

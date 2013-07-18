@@ -1,6 +1,5 @@
 package examination.DataLayer.dao;
 
-import examination.DataLayer.models.BaseModel;
 import examination.DataLayer.models.Exam;
 import org.springframework.stereotype.Repository;
 
@@ -15,8 +14,9 @@ import java.util.List;
 @Repository
 public class ExamDAOImpl implements ExamDAO {
     @Override
-    public void insert(Exam exam) {
+    public boolean insert(Exam exam) {
         //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override
@@ -25,17 +25,12 @@ public class ExamDAOImpl implements ExamDAO {
     }
 
     @Override
-    public void insert(BaseModel model) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public List<Exam> selectList(int offset, int limit) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public boolean update(BaseModel model) {
+    public boolean update(Exam model) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

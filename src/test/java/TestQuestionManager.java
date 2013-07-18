@@ -1,8 +1,8 @@
 import examination.DataLayer.dao.QuestionDAO;
-import examination.DataLayer.dao.QuestionDAOImpl;
 import examination.DataLayer.models.Question;
 import examination.DataLayer.models.QuestionType;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -10,25 +10,26 @@ import static org.junit.Assert.assertTrue;
 
 public class TestQuestionManager {
 
+    @Autowired
+    private QuestionDAO questionDAO;
+
     @Test
     public void test() {
-
-        QuestionDAO MQ = new QuestionDAOImpl();
 
         /* ADD Questions - OK */
 
         Question question = new Question();
         question.setText("testDel");
         question.setType(QuestionType.RADIOBUTTON);
-        boolean result = MQ.addQuestion(question);
+        boolean result = questionDAO.insert(question);
 
         assertTrue(result);
 
-        Question quest = MQ.getQuestion(question.getId());
+        Question quest = questionDAO.selectById(question.getId());
         assertNotNull(quest);
 
-        MQ.deleteQuestion(quest.getId());
-        Question questDeleted = MQ.getQuestion(question.getId());
+        questionDAO.delete(quest.getId());
+        Question questDeleted = questionDAO.selectById(question.getId());
         assertNull(questDeleted);
 
 
@@ -38,18 +39,18 @@ public class TestQuestionManager {
 
 
    /*   *//* Update Question's records *//*
-        //MQ.updateQuestion(new Question("geo", "what?"));
+        //questionDAO.updateQuestion(new Question("geo", "what?"));
 
-        Question q = MQ.getQuestion(questionNum);
+        Question q = questionDAO.getQuestion(questionNum);
         System.out.println(q);
 */
       /* Delete an Question from the database
       *  DELETE - OK.. do not know how to write a test here
       *  mb make deleteQuestion() to return something */
-        //   MQ.deleteQuestion(4l);
+        //   questionDAO.deleteQuestion(4l);
 
       /* List down new list of the Questions */
-    /*        List questionList = MQ.listQuestions();
+    /*        List questionList = questionDAO.listQuestions();
         for (Object question : questionList) {
             if (question instanceof Question) {
                 System.out.println(question);

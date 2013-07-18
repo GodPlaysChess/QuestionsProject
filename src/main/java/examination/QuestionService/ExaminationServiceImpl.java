@@ -61,7 +61,7 @@ public class ExaminationServiceImpl implements ExaminationService {
         Question currentQuestion = null;
         if (index < exam.getQuestionIds().size()) {
             exam.setCurrentQuestion(index + 1);
-            currentQuestion = questionDAO.getQuestion(exam.getCurrentQuestion());
+            currentQuestion = questionDAO.selectById(exam.getCurrentQuestion());
         } else {
             exam.setCurrentQuestion(-1);
         }
@@ -74,7 +74,7 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Override
     public QuestionInfo current(long examenId) {
         Exam exam = examDAO.selectById(examenId);
-        Question currentQuestion = questionDAO.getQuestion(exam.getCurrentQuestion());
+        Question currentQuestion = questionDAO.selectById(exam.getCurrentQuestion());
         QuestionInfo questionInfo = new QuestionInfo();
         questionInfo.setExam(exam);
         questionInfo.setQuestion(currentQuestion);

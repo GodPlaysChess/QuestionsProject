@@ -1,6 +1,5 @@
 package examination.DataLayer.dao;
 
-import examination.DataLayer.models.BaseModel;
 import examination.DataLayer.models.Course;
 import org.springframework.stereotype.Repository;
 
@@ -19,14 +18,12 @@ public class CourseDAOImpl implements CourseDAO {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
-    public void insert(BaseModel model) {
-        insert((Course) model);
-    }
+
 
     @Override
-    public void insert(Course course) {
+    public boolean insert(Course course) {
         //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override
@@ -35,7 +32,7 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     @Override
-    public boolean update(BaseModel model) {
+    public boolean update(Course model) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

@@ -10,14 +10,14 @@ import java.util.List;
  * Time: 15:15
  * To change this template use File | Settings | File Templates.
  */
-public interface BaseDAO {
-    BaseModel selectById(long id);
+public interface BaseDAO <T extends BaseModel> {
+    T selectById(long id);
 
-    void insert(BaseModel model);
+    boolean insert(T model);
 
-    List<? extends BaseModel> selectList(int offset, int limit);
+    List<T> selectList(int offset, int limit);
 
-    boolean update(BaseModel model);
+    boolean update(T model);
 
     boolean delete(long id);
 }
