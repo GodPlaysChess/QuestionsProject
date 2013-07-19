@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class QuestionDAOImpl implements QuestionDAO {
     private SessionFactory factory;
 
+    @PostConstruct
     private void createFactory() {
         try {
             factory = new Configuration().configure().buildSessionFactory();
@@ -25,7 +27,6 @@ public class QuestionDAOImpl implements QuestionDAO {
     }
 
     private boolean addQuestion(Question question) {
-        createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -43,7 +44,6 @@ public class QuestionDAOImpl implements QuestionDAO {
     }
 
     private Question getQuestion(long questionID) {
-        createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         Question question = null;
@@ -62,7 +62,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     /* Method to READ all questions */
     private List<Question> listQuestions() {
-        createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -81,7 +80,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     @Override
     public List<Question> selectList(List<Long> questionIds) {
-        createFactory();
         List<Question> result = new LinkedList<Question>();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -102,7 +100,6 @@ public class QuestionDAOImpl implements QuestionDAO {
     /* Method to UPDATE text of the question */
 
     private boolean updateQuestion(Question question) {
-        createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -127,7 +124,6 @@ public class QuestionDAOImpl implements QuestionDAO {
     /* Method to DELETE the Question from the records */
 
     private boolean deleteQuestion(long questionID) {
-        createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -158,7 +154,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     @Override
     public List<Question> selectList(long offset, int limit) {
-        createFactory();
         List<Question> result = new LinkedList<Question>();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -178,7 +173,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     @Override
     public boolean deleteList(long offset, int limit) {
-        createFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try {

@@ -4,7 +4,10 @@ import examination.DataLayer.dao.QuestionDAOImpl;
 import examination.DataLayer.models.Question;
 import examination.DataLayer.models.enums.QuestionType;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +16,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath*:/spring/applicationContext.xml"})
 public class TestQuestionManager {
 
-    //@Autowired
-    private QuestionDAO questionDAO = new QuestionDAOImpl();
+    @Autowired
+    private QuestionDAO questionDAO;
 
 
     @Test
@@ -41,7 +46,7 @@ public class TestQuestionManager {
 
         /* GET LIST with OFFSET Question */
         List<Long> ids = new ArrayList<Long>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             Question q = new Question();
             q.setText("to insert # " + i);
             q.setType(QuestionType.RADIOBUTTON);
