@@ -1,6 +1,7 @@
 package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Question;
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,6 +15,8 @@ import java.util.List;
 @Repository
 public class QuestionDAOImpl implements QuestionDAO {
     private SessionFactory factory;
+
+    private static Logger log = Logger.getLogger(QuestionDAOImpl.class);
 
     private void createFactory() {
         try {
@@ -34,7 +37,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
+            log.error("Add error", e);
             return false;
         } finally {
             session.close();
