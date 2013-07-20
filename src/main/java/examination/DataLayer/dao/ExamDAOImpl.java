@@ -5,12 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * author: a.savanovich
- * Date: 15.07.13
- * Time: 17:00
- * To change this template use File | Settings | File Templates.
- */
 @Repository
 public class ExamDAOImpl implements ExamDAO {
     @Override
