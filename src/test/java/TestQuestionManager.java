@@ -3,6 +3,7 @@ import examination.DataLayer.dao.QuestionDAO;
 import examination.DataLayer.dao.QuestionDAOImpl;
 import examination.DataLayer.models.Question;
 import examination.DataLayer.models.enums.QuestionType;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class TestQuestionManager {
 
     @Autowired
     private QuestionDAO questionDAO;
+    private static final Logger log = Logger.getLogger(TestQuestionManager.class);
 
 
     @Test
@@ -42,6 +44,8 @@ public class TestQuestionManager {
         questionDAO.delete(quest.getId());
         Question questDeleted = questionDAO.selectById(question.getId());
         assertNull(questDeleted);
+
+        /* GET ALL Questions as a LIST */
 
 
         /* GET LIST with OFFSET Question */
@@ -64,6 +68,8 @@ public class TestQuestionManager {
         /* DELETE LIST with OFFSET Question */
         boolean deleted = questionDAO.deleteList(ids.get(0), 3);
         assertTrue(deleted);
+
+        log.info(questionDAO);
     }
 
 }

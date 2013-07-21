@@ -2,14 +2,17 @@ package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Question;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import javax.management.Query;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         try {
             factory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
-            System.err.println("Failed to create sessionFactory object." + ex);
+            log.error("Failed to create session factory: ", ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
@@ -57,7 +60,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
+            log.error("Get question error: ", e);
         } finally {
             session.close();
         }
@@ -65,17 +68,18 @@ public class QuestionDAOImpl implements QuestionDAO {
     }
 
     /* Method to READ all questions */
-    private List<Question> listQuestions() {
+    public List<Question> listQuestions() {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            List Questions = session.createSQLQuery("SELECT * FROM Question").list();
+            List<Question> questions = (List<Question>) session.createQuery(
+                    "FROM examination.DataLayer.models.Question").list();
             tx.commit();
-            return Questions;
+            return questions;
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
+            log.error("List questions error: ", e);
         } finally {
             session.close();
         }
@@ -89,20 +93,19 @@ public class QuestionDAOImpl implements QuestionDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            for (long id : questionIds) {
-                result.add(getQuestion(id));
-            }
+            Criteria cr = session.createCriteria(Question.class);
+            cr.add(Restrictions.in("id", questionIds));
+            result = cr.list();
             tx.commit();
             return result;
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            //log4j.error()
+            log.error("Select list error: ", e);
         }
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     /* Method to UPDATE text of the question */
-
     private boolean updateQuestion(Question question) {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -112,21 +115,15 @@ public class QuestionDAOImpl implements QuestionDAO {
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
+            log.error("Update question error: ", e);
             return false;
         } finally {
             session.close();
         }
         return true;
     }
-/*
-    UPDATE questions
-    SET text = {question.text}
-    .....
-    where id = {question.id}*/
 
     /* Method to DELETE the Question from the records */
-
     private boolean deleteQuestion(long questionID) {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -138,7 +135,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
+            log.error("Delete question error: ", e);
             return false;
         } finally {
             session.close();
@@ -158,19 +155,19 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     @Override
     public List<Question> selectList(long offset, int limit) {
-        List<Question> result = new LinkedList<Question>();
+        List<Question> result;
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            for (long id = offset; id < offset + limit; id++) {
-                result.add(getQuestion(id));
-            }
+            Criteria cr = session.createCriteria(Question.class);
+            cr.add(Restrictions.between("id", offset, offset + limit));
+            result = cr.list();
             tx.commit();
             return result;
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            //log4j.error()
+            log.error("Select list error: ", e);
         }
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -183,12 +180,13 @@ public class QuestionDAOImpl implements QuestionDAO {
             tx = session.beginTransaction();
             for (long id = offset; id < offset + limit; id++) {
                 deleteQuestion(id);
+
             }
             tx.commit();
             return true;
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            //log4j.error()
+            log.error("Delete list error: ", e);
         }
         return false;
     }
