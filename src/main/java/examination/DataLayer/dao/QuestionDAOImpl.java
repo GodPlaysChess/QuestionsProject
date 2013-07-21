@@ -87,8 +87,15 @@ public class QuestionDAOImpl implements QuestionDAO {
     }
 
     @Override
+    public Question getRandomQuestion() {
+        //generate random long
+        //get this question
+        return null;
+    }
+
+    @Override
     public List<Question> selectList(List<Long> questionIds) {
-        List<Question> result = new LinkedList<Question>();
+        List<Question> result;
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -102,7 +109,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             if (tx != null) tx.rollback();
             log.error("Select list error: ", e);
         }
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     /* Method to UPDATE text of the question */
@@ -169,7 +176,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             if (tx != null) tx.rollback();
             log.error("Select list error: ", e);
         }
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     @Override
@@ -178,6 +185,13 @@ public class QuestionDAOImpl implements QuestionDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
+            String sql = "DELETE FROM Question WHERE id > :offset " +
+                    "AND id < :maxnum";
+            Query query = (Query) session.createSQLQuery(sql).addEntity(Question.class)
+                    .setParameter("offset", offset).setParameter("maxnum", offset+limit);
+
+
+
             for (long id = offset; id < offset + limit; id++) {
                 deleteQuestion(id);
 
