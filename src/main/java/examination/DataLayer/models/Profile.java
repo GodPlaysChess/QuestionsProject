@@ -2,11 +2,6 @@ package examination.DataLayer.models;
 
 import examination.DataLayer.models.enums.Role;
 
-/**
- * author: a.savanovich
- * Date: 14.07.13
- * Time: 15:03
- */
 public class Profile implements BaseModel {
     private long id;
     private String name;

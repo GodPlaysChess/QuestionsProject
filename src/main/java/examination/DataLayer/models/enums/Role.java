@@ -4,12 +4,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * author: a.savanovich
- * Date: 14.07.13
- * Time: 14:59
- * To change this template use File | Settings | File Templates.
- */
 public enum Role {
     STUDENT(10), TEACHER(20), ADMIN(30);
     private int code;

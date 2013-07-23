@@ -88,8 +88,20 @@ public class QuestionDAOImpl implements QuestionDAO {
 
     @Override
     public Question getRandomQuestion() {
-        //generate random long
-        //get this question
+     /*   Session session = factory.openSession();
+        Transaction tx = null;
+        Question question = null;
+        try {
+            tx = session.beginTransaction();
+            question = (Question) session.get(Question.class);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Get question error: ", e);
+        } finally {
+            session.close();
+        }
+        return question;*/
         return null;
     }
 

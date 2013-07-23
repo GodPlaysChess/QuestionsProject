@@ -1,5 +1,6 @@
 package examination.Controllers;
 
+import examination.DataLayer.models.Profile;
 import examination.DataLayer.models.Question;
 import examination.QuestionService.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.view.RedirectView;
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private AccountService accountService;
 
     @RequestMapping(value = {"/question.html"}, method = RequestMethod.GET)
     public ModelAndView getQuestionPage(@RequestParam(value = "questionid",
@@ -35,5 +38,17 @@ public class QuestionController {
        ModelAndView modelAndView = new ModelAndView("mainpage");
        return modelAndView;
    }
+
+    @RequestMapping(value = {"/enter.html"}, method = RequestMethod.GET)
+    public ModelAndView enterPage(){
+        return new ModelAndView("enter");
+    }
+
+    @RequestMapping(value = {"/savename.html"}, method = RequestMethod.POST)
+    public RedirectView saveName(Profile profile) {
+        questionService.addQuestion(question);
+        RedirectView redirectView = new RedirectView("/mainpage.html");
+        return redirectView;
+    }
 
 }

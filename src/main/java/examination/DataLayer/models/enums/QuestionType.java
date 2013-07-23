@@ -4,11 +4,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * Enum QuestionType
- * @author a.savanovich
- */
 public enum QuestionType {
 
     SIMPLE(0), RADIOBUTTON(1), CHECKBOX(2);
@@ -22,7 +17,7 @@ public enum QuestionType {
         return code;
     }
     private static final Map<Integer, QuestionType> lookup = new HashMap<Integer, QuestionType>();
-
+                       // Why not EnumMap here?
     static {
         for (QuestionType s : EnumSet.allOf(QuestionType.class)) {
             lookup.put(s.getCode(), s);

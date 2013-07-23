@@ -11,6 +11,11 @@
             location.href = '/question.html?questionid=' + x;
         }
     </script>
+    <%--    <script>
+            $("randq").click(function(){
+                $("h1").hide();
+            });
+        </script>--%>
 </head>
 <BODY>
 <h1 class='text-center'>Choose your action</h1>
@@ -28,7 +33,9 @@
             <input id="questionId" type="number">
 
             <p/>
-            <button type="submit" class="btn btn-large"> get random question</button>
+
+            <p/>
+            <button id="randq" type="submit" class="btn btn-large"> get random question</button>
             <p/>
             <button type="submit" class="btn btn-large"> get questions list</button>
         </div>
