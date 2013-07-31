@@ -11,14 +11,9 @@
             location.href = '/question.html?questionid=' + x;
         }
     </script>
-    <%--    <script>
-            $("randq").click(function(){
-                $("h1").hide();
-            });
-        </script>--%>
 </head>
 <BODY>
-<h1 class='text-center'>Choose your action</h1>
+<h1 class='text-center'>Choose your action, <%= session.getAttribute("lastName")%></h1>
 <dic class="container">
 
 </dic>
@@ -37,7 +32,7 @@
             <p/>
             <button id="randq" type="submit" class="btn btn-large"> get random question</button>
             <p/>
-            <button type="submit" class="btn btn-large"> get questions list</button>
+            <button type="submit" class="btn btn-large" onclick="location.href='questionlist.html'"> get questions list</button>
         </div>
     </div>
 </div>

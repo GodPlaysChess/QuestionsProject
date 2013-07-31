@@ -15,8 +15,8 @@ import org.springframework.web.servlet.view.RedirectView;
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
-    @Autowired
-    private AccountService accountService;
+/*    @Autowired
+    private AccountService accountService;*/
 
     @RequestMapping(value = {"/question.html"}, method = RequestMethod.GET)
     public ModelAndView getQuestionPage(@RequestParam(value = "questionid",
@@ -45,10 +45,18 @@ public class QuestionController {
     }
 
     @RequestMapping(value = {"/savename.html"}, method = RequestMethod.POST)
-    public RedirectView saveName(Profile profile) {
-        questionService.addQuestion(question);
+    public RedirectView saveName(@RequestParam(value = "lastName", required = false) String name) {
+        //accountService.addProfile(profile);
         RedirectView redirectView = new RedirectView("/mainpage.html");
         return redirectView;
     }
+
+    @RequestMapping(value = {"/questionlist.html"}, method = RequestMethod.GET)
+    public ModelAndView questionList(){
+        ModelAndView modelAndView = new ModelAndView("questionlist");
+        modelAndView.addObject("questionList", questionService.listQuestions());
+        return modelAndView;
+    }
+
 
 }

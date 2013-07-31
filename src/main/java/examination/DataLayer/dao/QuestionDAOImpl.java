@@ -67,25 +67,6 @@ public class QuestionDAOImpl implements QuestionDAO {
         return question;
     }
 
-    /* Method to READ all questions */
-    public List<Question> listQuestions() {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            List<Question> questions = (List<Question>) session.createQuery(
-                    "FROM examination.DataLayer.models.Question").list();
-            tx.commit();
-            return questions;
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            log.error("List questions error: ", e);
-        } finally {
-            session.close();
-        }
-        return null;
-    }
-
     @Override
     public Question getRandomQuestion() {
      /*   Session session = factory.openSession();
