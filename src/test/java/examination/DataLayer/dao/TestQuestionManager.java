@@ -1,6 +1,6 @@
+package examination.DataLayer.dao;
 
-import examination.DataLayer.dao.QuestionDAO;
-import examination.DataLayer.dao.QuestionDAOImpl;
+
 import examination.DataLayer.models.Question;
 import examination.DataLayer.models.enums.QuestionType;
 import org.apache.log4j.Logger;
@@ -13,9 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:/spring/applicationContext.xml"})
