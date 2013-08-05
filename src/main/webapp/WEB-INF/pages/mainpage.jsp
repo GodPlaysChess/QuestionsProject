@@ -14,9 +14,9 @@
 </head>
 <BODY>
 <h1 class='text-center'>Choose your action, <%= session.getAttribute("lastName")%></h1>
-<dic class="container">
+<div class="container">
 
-</dic>
+</div>
 
 <div id="global-container" class="container">
     <div id="main-container" class="row main-container">
@@ -27,11 +27,11 @@
             </button>
             <input id="questionId" type="number">
 
-            <p/>
+            <br/>
 
-            <p/>
+
             <button id="randq" type="submit" class="btn btn-large"> get random question</button>
-            <p/>
+            <br/>
             <button type="submit" class="btn btn-large" onclick="location.href='questionlist.html'"> get questions list</button>
         </div>
     </div>

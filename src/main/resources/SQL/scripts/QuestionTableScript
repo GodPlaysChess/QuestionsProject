@@ -7,3 +7,15 @@ CREATE  TABLE `questionsproject`.`Questions` (
 
 INSERT into Questions (id, type, text) values (1, 1, '5*2')
 
+
+CREATE  TABLE `questionsproject`.`exams` (
+  `idexams` BIGINT NULL AUTO_INCREMENT ,
+  `courseId` VARCHAR(45) NOT NULL ,
+  `studentId` VARCHAR(45) NOT NULL ,
+  `timeStart` DATE NOT NULL ,
+  `timeFinish` DATE NOT NULL ,
+  `currentQuestion` BIGINT NOT NULL ,
+  PRIMARY KEY (`idexams`) );
+
+INSERT into Questions (idexams, courseId, studentId, timeStart, timeFinish, currentQuestion)
+ values (1, 1, '1')

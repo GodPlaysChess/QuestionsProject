@@ -13,4 +13,15 @@
         <property name="typeCode" column="type" type="int"/>
         <property name="text" column="text" type="string"/>
     </class>
+    <class name="examination.DataLayer.models.Exam" table="exams">
+        <id name="id" type="long" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="courseId" column="courseId" type="long"/>
+        <property name="studentId" column="studentId" type="long"/>
+        <property name="timeStart" column="timeStart" type="Date"/>
+        <property name="timeFinish" column="timeFinish" type="Date"/>
+        <property name="currentQuestion" column="currentQuestion" type="long"/>
+
+    </class>
 </hibernate-mapping>

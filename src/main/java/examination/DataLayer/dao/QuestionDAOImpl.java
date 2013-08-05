@@ -183,11 +183,8 @@ public class QuestionDAOImpl implements QuestionDAO {
             Query query = (Query) session.createSQLQuery(sql).addEntity(Question.class)
                     .setParameter("offset", offset).setParameter("maxnum", offset+limit);
 
-
-
             for (long id = offset; id < offset + limit; id++) {
                 deleteQuestion(id);
-
             }
             tx.commit();
             return true;
