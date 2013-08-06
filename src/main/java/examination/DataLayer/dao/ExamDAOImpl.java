@@ -62,7 +62,7 @@ public class ExamDAOImpl implements ExamDAO {
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            log.error("Get question error: ", e);
+            log.error("Get exam error: ", e);
         } finally {
             session.close();
         }

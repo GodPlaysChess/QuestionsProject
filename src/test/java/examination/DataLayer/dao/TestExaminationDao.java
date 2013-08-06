@@ -24,9 +24,11 @@ public class TestExaminationDao {
     private ExamDAO examDAO;
     private static final Logger log = Logger.getLogger(TestExaminationDao.class);
 
-    /* Insert Examination */
+
     @Test
     public void test() {
+
+        /* Insert Examination */
         Exam exam = new Exam();
         exam.setCourseId(1);
         exam.setStudentId(2);
@@ -35,6 +37,17 @@ public class TestExaminationDao {
         exam.setCurrentQuestion(3);
         boolean inserted = examDAO.insert(exam);
         assertTrue(inserted);
+
+        long id = exam.getId();
+
+        /* get exam */
+        exam = examDAO.selectById(id);
+        assertNotNull(exam);
+
+        /* delete exam */
+        examDAO.delete(id);
+        assertNull(examDAO.selectById(id));
+
 
     }
 }
