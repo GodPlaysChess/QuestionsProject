@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="examination.DataLayer.models.Exam" table="exams">
+        <id name="id" type="long" column="idexams">
+            <generator class="native"/>
+        </id>
+        <property name="courseId" column="courseId" type="long"/>
+        <property name="studentId" column="studentId" type="long"/>
+        <property name="timeStart" column="timeStart" type="java.util.Date"/>
+        <property name="timeFinish" column="timeFinish" type="java.util.Date"/>
+        <property name="currentQuestion" column="currentQuestion" type="long"/>
+        <list name="questionIds" table="examcorrelation" cascade="all">
+            <key column="examid"/>
+            <list-index column="questionid"/>
+            <one-to-many class="long"/>
+        </list>
+        <!--  <property name="questionIds" column="fsdf" type="java.util.List"/>-->
+    </class>
+
+
+</hibernate-mapping>

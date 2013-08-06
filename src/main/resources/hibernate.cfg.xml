@@ -20,6 +20,7 @@
         </property>
 
         <mapping resource="question.hbm.xml"/>
+        <mapping resource="exam.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>

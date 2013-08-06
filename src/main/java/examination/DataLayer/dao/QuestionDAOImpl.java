@@ -20,7 +20,6 @@ import java.util.List;
 public class QuestionDAOImpl implements QuestionDAO {
 
     private SessionFactory factory;
-
     private static Logger log = Logger.getLogger(QuestionDAOImpl.class);
 
     @PostConstruct

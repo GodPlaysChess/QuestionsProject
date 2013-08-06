@@ -20,7 +20,6 @@ import java.util.List;
 public class ExamDAOImpl implements ExamDAO {
 
     private SessionFactory factory;
-
     private static Logger log = Logger.getLogger(ExamDAOImpl.class);
 
     @PostConstruct
