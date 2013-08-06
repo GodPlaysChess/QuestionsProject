@@ -20,7 +20,7 @@
         <property name="courseId" column="courseId" type="long"/>
         <property name="studentId" column="studentId" type="long"/>
         <property name="timeStart" column="timeStart" type="time"/>
-        <property name="timeFinish" column="timeFinish" type="time"/>
+        <property name="timeFinish" column="timeFinish" type="date"/>
         <property name="currentQuestion" column="currentQuestion" type="long"/>
 
     </class>
