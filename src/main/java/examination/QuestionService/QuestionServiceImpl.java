@@ -14,18 +14,16 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionDAO questionDAO;
 
     @Override
-    public boolean addQuestion(Question question) {
+    public boolean addOrModifyQuestion(Question question) {
+        if (question.getId() > 0) {
+            return questionDAO.update(question);
+        }
         return questionDAO.insert(question);
     }
 
     @Override
     public void deleteQuestion(Long QuestionID) {
         questionDAO.delete(QuestionID);
-    }
-
-    @Override
-    public void updateQuestion(Question question) {
-        questionDAO.update(question);
     }
 
     @Override

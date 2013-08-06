@@ -64,10 +64,10 @@ public class TestQuestionManager {
         assertNotNull(selectedByIdQuestions);
 
         /* DELETE LIST with OFFSET Question */
-        boolean deleted = questionDAO.deleteList(ids.get(0), 3);
-        assertTrue(deleted);
-
-        log.info(questionDAO);
+//        boolean deleted = questionDAO.deleteList(ids.get(0), 3);
+//        assertTrue(deleted);
+//
+//        log.info(questionDAO);
     }
 
 }

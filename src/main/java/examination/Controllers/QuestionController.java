@@ -28,9 +28,13 @@ public class QuestionController {
 
     @RequestMapping(value = {"/savequestion.html"}, method = RequestMethod.POST)
     public RedirectView saveQuestionPage(Question question) {
-        questionService.addQuestion(question);
-        RedirectView redirectView = new RedirectView("/mainpage.html");
+        questionService.addOrModifyQuestion(question);
+        RedirectView redirectView = new RedirectView(createRedirectUrl(question.getId()));
         return redirectView;
+    }
+
+    private static String createRedirectUrl(long questionId) {
+        return "/question.html?questionid="+ questionId;
     }
 
    @RequestMapping(value = {"/mainpage.html"}, method = RequestMethod.GET)
