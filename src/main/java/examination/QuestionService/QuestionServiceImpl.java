@@ -33,10 +33,6 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDAO.selectById(QuestionID);
     }
 
-    @Override
-    public List<Question> listQuestions() {
-        return questionDAO.listQuestions();
-    }
 
 
 }

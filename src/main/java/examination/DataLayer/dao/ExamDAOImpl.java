@@ -103,7 +103,6 @@ public class ExamDAOImpl implements ExamDAO {
             Query query = (Query) session.createSQLQuery(sql).addEntity(Exam.class)
                     .setParameter("offset", offset).setParameter("maxnum", offset+limit);
 
-
             for (long id = offset; id < offset + limit; id++) {
                 delete(id);
             }

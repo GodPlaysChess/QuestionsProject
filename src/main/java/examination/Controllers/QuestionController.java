@@ -54,7 +54,7 @@ public class QuestionController {
     @RequestMapping(value = {"/questionlist.html"}, method = RequestMethod.GET)
     public ModelAndView questionList(){
         ModelAndView modelAndView = new ModelAndView("questionlist");
-        modelAndView.addObject("questionList", questionService.listQuestions());
+        //modelAndView.addObject("questionList", questionService.listQuestions());
         return modelAndView;
     }
 

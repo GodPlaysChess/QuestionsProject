@@ -12,6 +12,5 @@ public interface QuestionService {
 
     Question getQuestion(Long QuestionID);
 
-    List<Question> listQuestions();
 
 }
