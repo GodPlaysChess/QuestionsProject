@@ -22,6 +22,13 @@
         <property name="timeStart" column="timeStart" type="java.util.Date"/>
         <property name="timeFinish" column="timeFinish" type="java.util.Date"/>
         <property name="currentQuestion" column="currentQuestion" type="long"/>
-
+        <list name="questionIds" cascade="all">
+            <key column="employee_id"/>
+            <list-index column="idx"/>
+            <one-to-many class="Certificate"/>
+        </list>
+        <property name="questionIds" column="fsdf" type="java.util.List"/>
     </class>
+
+
 </hibernate-mapping>

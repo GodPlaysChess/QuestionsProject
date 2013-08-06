@@ -1,0 +1,13 @@
+CREATE  TABLE `questionsproject`.`examCorrelation` (
+  `examid` BIGINT NOT NULL ,
+  `questionid` BIGINT NOT NULL ,
+  PRIMARY KEY (`examid`, `questionid`) );
+
+INSERT into examcorrelation (examid, questionid) values (1, 1);
+INSERT into examcorrelation (examid, questionid) values (1, 2);
+INSERT into examcorrelation (examid, questionid) values (1, 5);
+INSERT into examcorrelation (examid, questionid) values (1, 16);
+INSERT into examcorrelation (examid, questionid) values (1, 9);
+INSERT into examcorrelation (examid, questionid) values (2, 1);
+INSERT into examcorrelation (examid, questionid) values (2, 11);
+INSERT into examcorrelation (examid, questionid) values (3, 1);

@@ -1,0 +1,9 @@
+
+CREATE  TABLE `questionsproject`.`exams` (
+  `idexams` BIGINT NULL AUTO_INCREMENT ,
+  `courseId` VARCHAR(45) NOT NULL ,
+  `studentId` VARCHAR(45) NOT NULL ,
+  `timeStart` DATETIME NOT NULL ,
+  `timeFinish` DATETIME NOT NULL ,
+  `currentQuestion` BIGINT NOT NULL ,
+  PRIMARY KEY (`idexams`) );

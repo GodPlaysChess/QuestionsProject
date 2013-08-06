@@ -71,7 +71,20 @@ public class ExamDAOImpl implements ExamDAO {
 
     @Override
     public List<Exam> selectList(long offset, int limit) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        List<Exam> result;
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try{
+               /*
+               *
+               * WRITE CODE HERE
+               *
+               * */
+        }   catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Select list error: ", e);
+        }
+        return null;
     }
 
     public List<Exam> selectList(List<Long> examIds){
@@ -81,7 +94,7 @@ public class ExamDAOImpl implements ExamDAO {
         try {
             tx = session.beginTransaction();
             Criteria cr = session.createCriteria(Exam.class);
-            cr.add(Restrictions.in("id", examIds));
+            cr.add(Restrictions.in("idexams", examIds));
             result = cr.list();
             tx.commit();
             return result;
