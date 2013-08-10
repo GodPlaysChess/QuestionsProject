@@ -5,19 +5,18 @@
 <hibernate-mapping>
 
     <class name="examination.DataLayer.models.Exam" table="exams">
-        <id name="id" type="long" column="idexams">
+        <id name="id" type="long" column="exam_id">
             <generator class="native"/>
         </id>
-        <property name="courseId" column="courseId" type="long"/>
-        <property name="studentId" column="studentId" type="long"/>
-        <property name="timeStart" column="timeStart" type="java.util.Date"/>
-        <property name="timeFinish" column="timeFinish" type="java.util.Date"/>
-        <property name="currentQuestion" column="currentQuestion" type="long"/>
-        <list name="questionIds" table="examcorrelation" cascade="all">
-            <key column="examid"/>
-            <list-index column="questionid"/>
-            <one-to-many class="long"/>
-        </list>
+        <property name="courseId" column="course_id" type="long"/>
+        <property name="studentId" column="student_id" type="long"/>
+        <property name="timeStart" column="time_start" type="java.util.Date"/>
+        <property name="timeFinish" column="time_finish" type="java.util.Date"/>
+        <property name="currentQuestion" column="current_question" type="long"/>
+        <bag name="questionIds" table="examcorrelation" cascade="all">
+            <key column="exam_id"/>
+            <one-to-many class="examination.DataLayer.models.Exam"/>
+        </bag>
         <!--  <property name="questionIds" column="fsdf" type="java.util.List"/>-->
     </class>
 
