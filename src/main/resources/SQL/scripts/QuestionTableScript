@@ -6,8 +6,3 @@ CREATE  TABLE `questionsproject`.`Questions` (
 
 
 INSERT into Questions (id, type, text) values (1, 1, '5*2')
-
-
-
-INSERT into Questions (idexams, courseId, studentId, timeStart, timeFinish, currentQuestion)
- values (1, 1, '1')
