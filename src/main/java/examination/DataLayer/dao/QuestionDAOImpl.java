@@ -17,9 +17,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Repository
-public class QuestionDAOImpl implements QuestionDAO {
+public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
 
-    private SessionFactory factory;
+/*    private SessionFactory factory;
     private static Logger log = Logger.getLogger(QuestionDAOImpl.class);
 
     @PostConstruct
@@ -30,7 +30,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             log.error("Failed to create session factory: ", ex);
             throw new ExceptionInInitializerError(ex);
         }
-    }
+    }*/
 
     private boolean addQuestion(Question question) {
         Session session = factory.openSession();
@@ -159,8 +159,11 @@ public class QuestionDAOImpl implements QuestionDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
+
             Criteria cr = session.createCriteria(Question.class);
-            cr.add(Restrictions.between("id", offset, offset + limit));
+            cr.setFirstResult((int)offset);
+            cr.setMaxResults(limit);
+            //cr.add(Restrictions.between("id", offset, offset + limit));
             result = cr.list();
             tx.commit();
             return result;

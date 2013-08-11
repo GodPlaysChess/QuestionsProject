@@ -17,20 +17,7 @@ import javax.management.Query;
 import java.util.List;
 
 @Repository
-public class ExamDAOImpl implements ExamDAO {
-
-    private SessionFactory factory;
-    private static Logger log = Logger.getLogger(ExamDAOImpl.class);
-
-    @PostConstruct
-    private void createFactory() {
-        try {
-            factory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            log.error("Failed to create session factory: ", ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
+public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
 
     @Override
     public boolean insert(Exam exam) {

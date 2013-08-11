@@ -2,11 +2,6 @@ package examination.DataLayer.models;
 
 import java.util.List;
 
-/**
- * author: a.savanovich
- * Date: 14.07.13
- * Time: 15:12
- */
 public class Course implements BaseModel {
     private long id;
     private List<Long> questionsIds;

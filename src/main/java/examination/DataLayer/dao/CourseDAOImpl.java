@@ -9,17 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CourseDAOImpl implements CourseDAO {
-    private SessionFactory sessionFactory;
+public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
 
-/*    @Autowired
-    public CourseDAOImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }*/
-
-    private Session currentSession() {
-        return sessionFactory.getCurrentSession();
-    }
 
     @Override
     public Course selectById(long id) {
