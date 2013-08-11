@@ -1,8 +1,6 @@
 package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Exam;
-import examination.DataLayer.models.Question;
-import examination.DataLayer.models.enums.QuestionType;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,25 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:/spring/applicationContext.xml"})
-public class TestExaminationDao {
+public class TestCourseDao {
 
     @Autowired
     private ExamDAO examDAO;
     private static final Logger log = Logger.getLogger(TestExaminationDao.class);
 
-
     @Test
     public void test() {
-
         /* Insert Examination */
         Exam exam = new Exam();
         exam.setCourseId(1);
@@ -36,10 +31,7 @@ public class TestExaminationDao {
         exam.setTimeStart(new Date());
         exam.setTimeFinish(new Date());
         exam.setCurrentQuestion(3);
-        /*exam.setQuestions(new ArrayList<Question>() {
-            new Question();
-
-        })*/
+        //exam.setQuestionIds()
         boolean inserted = examDAO.insert(exam);
         assertTrue(inserted);
 

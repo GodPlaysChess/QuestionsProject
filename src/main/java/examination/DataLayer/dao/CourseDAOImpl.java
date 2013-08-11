@@ -1,21 +1,35 @@
 package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Course;
+import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class CourseDAOImpl implements CourseDAO {
+    private SessionFactory sessionFactory;
+
+/*    @Autowired
+    public CourseDAOImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }*/
+
+    private Session currentSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
     @Override
     public Course selectById(long id) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return (Course)currentSession().get(Course.class, id);
     }
 
     @Override
     public boolean insert(Course course) {
-        //To change body of implemented methods use File | Settings | File Templates.
-        return false;
+        currentSession().save(course);
+        return true;
     }
 
     @Override
@@ -30,7 +44,8 @@ public class CourseDAOImpl implements CourseDAO {
 
     @Override
     public boolean update(Course model) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        currentSession().update(model);
+        return true;
     }
 
     @Override
