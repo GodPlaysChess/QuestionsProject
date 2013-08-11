@@ -13,9 +13,10 @@
         <property name="timeStart" column="time_start" type="java.util.Date"/>
         <property name="timeFinish" column="time_finish" type="java.util.Date"/>
         <property name="currentQuestion" column="current_question" type="long"/>
-        <bag name="questionIds" table="examcorrelation" cascade="all">
+
+         <bag name="questions" table="examcorrelation" cascade="all">
             <key column="exam_id"/>
-            <one-to-many class="examination.DataLayer.models.Exam"/>
+            <many-to-many column="question_id" class="examination.DataLayer.models.Question"/>
         </bag>
         <!--  <property name="questionIds" column="fsdf" type="java.util.List"/>-->
     </class>

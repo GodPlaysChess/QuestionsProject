@@ -7,7 +7,7 @@ public class Exam implements BaseModel {
     private long id;
     private long courseId;
     private long studentId;
-    private List<Long> questionIds;
+    private List<Question> questions;
     private Date timeStart;
     private Date timeFinish;
     private long currentQuestion;
@@ -36,12 +36,12 @@ public class Exam implements BaseModel {
         this.studentId = studentId;
     }
 
-    public List<Long> getQuestionIds() {
-        return questionIds;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setQuestionIds(List<Long> questionIds) {
-        this.questionIds = questionIds;
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     public Date getTimeStart() {
