@@ -161,7 +161,7 @@ public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
             tx = session.beginTransaction();
 
             Criteria cr = session.createCriteria(Question.class);
-            cr.setFirstResult((int)offset);
+            cr.setFirstResult((int)offset);      // BAD Since cast offset to int!!
             cr.setMaxResults(limit);
             //cr.add(Restrictions.between("id", offset, offset + limit));
             result = cr.list();
