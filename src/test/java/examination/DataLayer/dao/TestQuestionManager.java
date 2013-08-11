@@ -32,6 +32,7 @@ public class TestQuestionManager {
         question.setText("this message must be deleted");
         question.setType(QuestionType.RADIOBUTTON);
         boolean result = questionDAO.insert(question);
+        assertTrue(question.getId() > 0);
         assertTrue(result);
 
         /* GET Question */
@@ -64,10 +65,10 @@ public class TestQuestionManager {
         assertNotNull(selectedByIdQuestions);
 
         /* DELETE LIST with OFFSET Question */
-//        boolean deleted = questionDAO.deleteList(ids.get(0), 3);
-//        assertTrue(deleted);
-//
-//        log.info(questionDAO);
+        /*boolean deleted = questionDAO.deleteList(ids.get(0), 3);
+        assertTrue(deleted);*/
+
+        log.info(questionDAO);
     }
 
 }
