@@ -16,12 +16,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-/**
- * author: a.savanovich
- * Date: 15.07.13
- * Time: 16:27
- * To change this template use File | Settings | File Templates.
- */
 @Service
 public class ExaminationServiceImpl implements ExaminationService {
     @Autowired
@@ -44,7 +38,7 @@ public class ExaminationServiceImpl implements ExaminationService {
         }
         Collections.shuffle(questions);
         questions = ListUtils.subList(questions, 0, course.getExamQuestionsNumber());
-        exam.setQuestionIds(BaseModelUtils.createIdsList(questions));
+      //  exam.setQuestions(BaseModelUtils.createIdsList(questions));
         Question firstQuestion = questions.get(0);
         exam.setCurrentQuestion(firstQuestion.getId());
         examDAO.insert(exam);
@@ -57,9 +51,9 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Override
     public QuestionInfo next(long examenId) {
         Exam exam = examDAO.selectById(examenId);
-        int index = exam.getQuestionIds().indexOf(exam.getCurrentQuestion());
+        int index = exam.getQuestions().indexOf(exam.getCurrentQuestion());
         Question currentQuestion = null;
-        if (index < exam.getQuestionIds().size()) {
+        if (index < exam.getQuestions().size()) {
             exam.setCurrentQuestion(index + 1);
             currentQuestion = questionDAO.selectById(exam.getCurrentQuestion());
         } else {
