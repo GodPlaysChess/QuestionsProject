@@ -24,7 +24,7 @@ public class TestExaminationDao {
 
     @Test
     public void test() {
-
+                                           // Need to finish
         /* Insert Examination */
         Exam exam = new Exam();
         exam.setCourseId(1);
