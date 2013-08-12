@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Course implements BaseModel {
     private long id;
-    private List<Long> questionsIds;
+    private List<Question> questions;
     private int examQuestionsNumber;
     private GradingSystem gradingSystem;
 
@@ -24,6 +24,7 @@ public class Course implements BaseModel {
         this.examQuestionsNumber = examQuestionsNumber;
     }
 
+    @Override
     public long getId() {
         return id;
     }
@@ -32,11 +33,11 @@ public class Course implements BaseModel {
         this.id = id;
     }
 
-    public List<Long> getQuestionsIds() {
-        return questionsIds;
+    public List<Question> getQuestionsIds() {
+        return questions;
     }
 
-    public void setQuestionsIds(List<Long> questionsIds) {
-        this.questionsIds = questionsIds;
+    public void setQuestionsIds(List<Question> questions) {
+        this.questions = questions;
     }
 }

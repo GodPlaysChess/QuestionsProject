@@ -25,6 +25,7 @@ public class TestCourseDao {
 
     @Autowired
     private CourseDAO courseDAO;
+    private QuestionDAO questionDAO;
     private static final Logger log = Logger.getLogger(TestExaminationDao.class);
 
     @Test
@@ -35,19 +36,22 @@ public class TestCourseDao {
         course.setGradingSystem(gradingSystem);
         course.setExamQuestionsNumber(5);
         List<Question> questions = new ArrayList<Question>(1);
+        questions.add(questionDAO.selectById(1));  // Change to getRandomQuestion
+        questions.add(questionDAO.selectById(2));  // when this method is finished
 
         boolean inserted = courseDAO.insert(course);
+        assertTrue(course.getId() > 0);
         assertTrue(inserted);
 
-        long id = exam.getId();
+        long id = course.getId();
 
         /* get exam */
-        exam = examDAO.selectById(id);
-        assertNotNull(exam);
+        course = courseDAO.selectById(id);
+        assertNotNull(course);
 
         /* delete exam */
-        examDAO.delete(id);
-        assertNull(examDAO.selectById(id));
+        courseDAO.delete(id);
+        assertNull(courseDAO.selectById(id));
 
 
     }
