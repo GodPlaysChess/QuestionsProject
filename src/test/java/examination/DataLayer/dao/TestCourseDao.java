@@ -25,18 +25,19 @@ public class TestCourseDao {
 
     @Autowired
     private CourseDAO courseDAO;
+    @Autowired
     private QuestionDAO questionDAO;
     private static final Logger log = Logger.getLogger(TestExaminationDao.class);
 
     @Test
     public void test() {
-        /* Insert Course */
+        /* INSERT course */
         Course course = new Course();
         GradingSystem gradingSystem = new GradingSystem();
         course.setGradingSystem(gradingSystem);
         course.setExamQuestionsNumber(5);
         List<Question> questions = new ArrayList<Question>(1);
-        questions.add(questionDAO.selectById(1));  // Change to getRandomQuestion
+        questions.add(questionDAO.selectById(1));  // Change to getRandomQuestion()
         questions.add(questionDAO.selectById(2));  // when this method is finished
 
         boolean inserted = courseDAO.insert(course);
@@ -45,14 +46,12 @@ public class TestCourseDao {
 
         long id = course.getId();
 
-        /* get exam */
+        /* GET course */
         course = courseDAO.selectById(id);
         assertNotNull(course);
 
-        /* delete exam */
+        /* DELETE course */
         courseDAO.delete(id);
         assertNull(courseDAO.selectById(id));
-
-
     }
 }
