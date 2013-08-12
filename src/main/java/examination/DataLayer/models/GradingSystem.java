@@ -2,12 +2,6 @@ package examination.DataLayer.models;
 
 import java.util.Map;
 
-/**
- * author: a.savanovich
- * Date: 15.07.13
- * Time: 19:43
- * To change this template use File | Settings | File Templates.
- */
 public class GradingSystem {
     private Map<Integer, Grade> map;
 

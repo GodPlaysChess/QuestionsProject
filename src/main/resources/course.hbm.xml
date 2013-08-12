@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="examination.DataLayer.models.Course" table="courses">
+        <id name="id" type="long" column="course_id">
+            <generator class="native"/>
+        </id>
+        <property name="examQuestionsNumber" column="questions_number" type="int"/>
+        <property name="gradingSystem" column="grading_system" type="long"/>
+
+        <bag name="questions" table="courses_questions" lazy="false">
+            <key column="course_id"/>
+            <many-to-many column="question_id" class="examination.DataLayer.models.Question"/>
+        </bag>
+
+    </class>
+
+</hibernate-mapping>

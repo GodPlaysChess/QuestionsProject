@@ -21,6 +21,7 @@
 
         <mapping resource="question.hbm.xml"/>
         <mapping resource="exam.hbm.xml"/>
+        <mapping resource="course.hmb.xml"/>
     </session-factory>
 
 </hibernate-configuration>
