@@ -16,7 +16,6 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <context:component-scan base-package="examination"/>
     <context:annotation-config/>
-    <mvc:annotation-driven/>
     <!--
     <mvc:view-controller path="/login" view-name="login"/>
     <mvc:view-controller path="/protected" view-name="protected"/>
@@ -25,6 +24,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <bean id="modelValidator" class="examination.validation.ModelValidator"/>
+    <mvc:annotation-driven validator="modelValidator"/>
 
 <!--    <bean id="sessionFactory"
           class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
