@@ -4,13 +4,10 @@ import examination.DataLayer.models.Course;
 import examination.DataLayer.models.Question;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.management.Query;
 import java.util.List;
 
 @Repository

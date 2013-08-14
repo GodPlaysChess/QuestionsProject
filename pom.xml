@@ -63,7 +63,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.5.1-Final</version>
+            <version>3.5.6-Final</version>
         </dependency>
 
         <dependency>
@@ -187,6 +187,19 @@
             <artifactId>servlet-api-2.5</artifactId>
             <version>6.1.14</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
+            <version>4.1.0.Final</version>
+        </dependency>
+
 
     </dependencies>
 

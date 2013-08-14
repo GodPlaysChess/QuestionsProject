@@ -4,11 +4,14 @@ import examination.DataLayer.models.Question;
 import examination.QuestionService.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import javax.validation.Valid;
 
 @Controller
 public class QuestionController {
@@ -26,7 +29,13 @@ public class QuestionController {
     }
 
     @RequestMapping(value = {"/savequestion.html"}, method = RequestMethod.POST)
-    public RedirectView saveQuestionPage(Question question) {
+    public RedirectView saveQuestionPage(@Valid Question question, BindingResult result) {
+
+        if (result.hasErrors()) {
+            // TODO add info about bad fields
+            return new RedirectView(createRedirectUrl(question.getId()));
+        }
+
         questionService.addOrModifyQuestion(question);
         RedirectView redirectView = new RedirectView(createRedirectUrl(question.getId()));
         return redirectView;

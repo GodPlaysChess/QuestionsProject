@@ -1,19 +1,13 @@
 package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Question;
-import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import javax.management.Query;
-import java.util.LinkedList;
 import java.util.List;
 
 @Repository
