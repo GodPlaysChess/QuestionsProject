@@ -31,7 +31,7 @@ public class ExaminationServiceImpl implements ExaminationService {
         exam.setCourseId(courseId);
         exam.setStudentId(studentId);
         exam.setTimeStart(new Date());
-        List<Question> questions = course.getQuestionsIds();
+        List<Question> questions = course.getQuestions();
         if (questions == null || questions.isEmpty()) {
             throw new IllegalArgumentException();
         }

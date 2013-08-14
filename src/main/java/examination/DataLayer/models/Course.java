@@ -33,11 +33,11 @@ public class Course implements BaseModel {
         this.id = id;
     }
 
-    public List<Question> getQuestionsIds() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestionsIds(List<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 }
