@@ -1,16 +1,15 @@
 package examination.QuestionService;
 
-import examination.QuestionService.models.QuestionInfo;
-import examination.DataLayer.models.Question;
-import examination.DataLayer.dao.QuestionDAO;
 import examination.DataLayer.dao.CourseDAO;
 import examination.DataLayer.dao.ExamDAO;
+import examination.DataLayer.dao.QuestionDAO;
 import examination.DataLayer.models.Course;
 import examination.DataLayer.models.Exam;
+import examination.DataLayer.models.Question;
+import examination.QuestionService.models.QuestionInfo;
+import examination.utils.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import examination.BaseModelUtils;
-import examination.utils.ListUtils;
 
 import java.util.Collections;
 import java.util.Date;
@@ -32,13 +31,13 @@ public class ExaminationServiceImpl implements ExaminationService {
         exam.setCourseId(courseId);
         exam.setStudentId(studentId);
         exam.setTimeStart(new Date());
-        List<Question> questions = questionDAO.selectList(course.getQuestionsIds());
+        List<Question> questions = course.getQuestionsIds();
         if (questions == null || questions.isEmpty()) {
             throw new IllegalArgumentException();
         }
         Collections.shuffle(questions);
         questions = ListUtils.subList(questions, 0, course.getExamQuestionsNumber());
-      //  exam.setQuestions(BaseModelUtils.createIdsList(questions));
+        exam.setQuestions(questions);
         Question firstQuestion = questions.get(0);
         exam.setCurrentQuestion(firstQuestion.getId());
         examDAO.insert(exam);
@@ -51,11 +50,11 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Override
     public QuestionInfo next(long examenId) {
         Exam exam = examDAO.selectById(examenId);
-        int index = exam.getQuestions().indexOf(exam.getCurrentQuestion());
+        int index = getCurrentQuestionIndex(exam.getQuestions(), exam.getCurrentQuestion());
         Question currentQuestion = null;
         if (index < exam.getQuestions().size()) {
-            exam.setCurrentQuestion(index + 1);
             currentQuestion = questionDAO.selectById(exam.getCurrentQuestion());
+            exam.setCurrentQuestion(currentQuestion.getId());
         } else {
             exam.setCurrentQuestion(-1);
         }
@@ -63,6 +62,17 @@ public class ExaminationServiceImpl implements ExaminationService {
         questionInfo.setExam(exam);
         questionInfo.setQuestion(currentQuestion);
         return questionInfo;
+    }
+
+    private static int getCurrentQuestionIndex(List<Question> questions, long questionId) {
+        int index = 0;
+        for (Question q : questions) {
+            if (q.getId() == questionId) {
+                break;
+            }
+            ++index;
+        }
+        return index;
     }
 
     @Override
