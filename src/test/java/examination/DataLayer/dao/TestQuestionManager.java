@@ -44,9 +44,6 @@ public class TestQuestionManager {
         Question questDeleted = questionDAO.selectById(question.getId());
         assertNull(questDeleted);
 
-        /* GET ALL Questions as a LIST */
-
-
         /* GET LIST with OFFSET Question */
         List<Long> ids = new ArrayList<Long>();
         for (int i = 0; i < 3; i++) {
@@ -64,9 +61,10 @@ public class TestQuestionManager {
         List<Question> selectedByIdQuestions = questionDAO.selectList(ids);
         assertNotNull(selectedByIdQuestions);
 
-        /* DELETE LIST with OFFSET Question */
-        /*boolean deleted = questionDAO.deleteList(ids.get(0), 3);
-        assertTrue(deleted);*/
+        /* Rollback */
+        for (long id : ids){
+            questionDAO.delete(id);
+        }
 
         log.info(questionDAO);
     }
