@@ -55,19 +55,17 @@ public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
         Session session = factory.openSession();
         Transaction tx = null;
         Question question = null;
-
         try {
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(Question.class);
             criteria.setProjection(Projections.rowCount());
-            int count = ((Number)criteria.uniqueResult()).intValue();
-            if (0!=count){
+            int count = ((Number) criteria.uniqueResult()).intValue();
+            if (0 != count) {
                 int index = new Random().nextInt(count);
                 criteria = session.createCriteria(Question.class);
                 question = (Question) criteria.setFirstResult(index)
                         .setMaxResults(1).uniqueResult();
             }
-            //question = (Question) session.get(Question.class);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -154,7 +152,7 @@ public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
             tx = session.beginTransaction();
 
             Criteria cr = session.createCriteria(Question.class);
-            cr.setFirstResult((int)offset);      // BAD Since cast offset to int!!
+            cr.setFirstResult((int) offset);      // BAD Since cast offset to int!!
             cr.setMaxResults(limit);
             result = cr.list();
             tx.commit();

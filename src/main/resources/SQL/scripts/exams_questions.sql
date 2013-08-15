@@ -1,5 +1,5 @@
 CREATE  TABLE `questionsproject`.`examCorrelation` (
-  `exam_id` BIGINT NOT NULL ,
+  `exam_id` BIGINT NOT NULL AUTO_INCREMENT,
   `question_id` BIGINT NOT NULL ,
   PRIMARY KEY (`exam_id`, `question_id`) );
 

@@ -30,9 +30,10 @@ public class TestExaminationDao {
 
     @Test
     public void test() {
-        // Need to finish
+
         /* Insert Examination */
         Exam exam = new Exam();
+
         exam.setCourseId(1);
         exam.setStudentId(2);
         exam.setTimeStart(new Date());
@@ -43,7 +44,9 @@ public class TestExaminationDao {
         questionList.add(questionDAO.getRandomQuestion());
         questionList.add(questionDAO.getRandomQuestion());
         exam.setQuestions(questionList);
+
         boolean inserted = examDAO.insert(exam);
+        assertTrue(exam.getId() > 0);
         assertTrue(inserted);
 
         long id = exam.getId();
