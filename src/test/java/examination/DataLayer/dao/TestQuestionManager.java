@@ -61,6 +61,10 @@ public class TestQuestionManager {
         List<Question> selectedByIdQuestions = questionDAO.selectList(ids);
         assertNotNull(selectedByIdQuestions);
 
+        /* Get Random Question */
+        Question question1 = questionDAO.getRandomQuestion();
+        assertNotNull(question1);
+
         /* Rollback */
         for (long id : ids){
             questionDAO.delete(id);

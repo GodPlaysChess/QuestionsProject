@@ -3,28 +3,18 @@ package examination.DataLayer.dao;
 import examination.DataLayer.models.Question;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Random;
 
 @Repository
 public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
-
-/*    private SessionFactory factory;
-    private static Logger log = Logger.getLogger(QuestionDAOImpl.class);
-
-    @PostConstruct
-    private void createFactory() {
-        try {
-            factory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            log.error("Failed to create session factory: ", ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }*/
 
     private boolean addQuestion(Question question) {
         Session session = factory.openSession();
@@ -62,12 +52,22 @@ public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
 
     @Override
     public Question getRandomQuestion() {
-     /*   Session session = factory.openSession();
+        Session session = factory.openSession();
         Transaction tx = null;
         Question question = null;
+
         try {
             tx = session.beginTransaction();
-            question = (Question) session.get(Question.class);
+            Criteria criteria = session.createCriteria(Question.class);
+            criteria.setProjection(Projections.rowCount());
+            int count = ((Number)criteria.uniqueResult()).intValue();
+            if (0!=count){
+                int index = new Random().nextInt(count);
+                criteria = session.createCriteria(Question.class);
+                question = (Question) criteria.setFirstResult(index)
+                        .setMaxResults(1).uniqueResult();
+            }
+            //question = (Question) session.get(Question.class);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -75,8 +75,7 @@ public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
         } finally {
             session.close();
         }
-        return question;*/
-        return null;
+        return question;
     }
 
     @Override
