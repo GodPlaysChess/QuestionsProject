@@ -30,10 +30,8 @@ public class TestExaminationDao {
 
     @Test
     public void test() {
-
         /* Insert Examination */
         Exam exam = new Exam();
-
         exam.setCourseId(1);
         exam.setStudentId(2);
         exam.setTimeStart(new Date());

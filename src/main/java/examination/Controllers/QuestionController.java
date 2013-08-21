@@ -1,6 +1,8 @@
 package examination.Controllers;
 
+import examination.DataLayer.models.Course;
 import examination.DataLayer.models.Question;
+import examination.QuestionService.ExaminationService;
 import examination.QuestionService.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +19,8 @@ import javax.validation.Valid;
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
-/*    @Autowired
-    private AccountService accountService;*/
+    @Autowired
+    private ExaminationService examinationService;
 
     @RequestMapping(value = {"/question.html"}, method = RequestMethod.GET)
     public ModelAndView getQuestionPage(@RequestParam(value = "questionid",
@@ -30,7 +32,6 @@ public class QuestionController {
 
     @RequestMapping(value = {"/savequestion.html"}, method = RequestMethod.POST)
     public RedirectView saveQuestionPage(@Valid Question question, BindingResult result) {
-
         if (result.hasErrors()) {
             // TODO add info about bad fields
             return new RedirectView(createRedirectUrl(question.getId()));
@@ -42,31 +43,36 @@ public class QuestionController {
     }
 
     private static String createRedirectUrl(long questionId) {
-        return "/question.html?questionid="+ questionId;
+        return "/question.html?questionid=" + questionId;
     }
 
-   @RequestMapping(value = {"/mainpage.html"}, method = RequestMethod.GET)
-   public ModelAndView indexPage(){
-       ModelAndView modelAndView = new ModelAndView("mainpage");
-       return modelAndView;
-   }
+    @RequestMapping(value = {"/mainpage.html"}, method = RequestMethod.GET)
+    public ModelAndView indexPage() {
+        ModelAndView modelAndView = new ModelAndView("mainpage");
+        return modelAndView;
+    }
 
     @RequestMapping(value = {"/enter.html"}, method = RequestMethod.GET)
-    public ModelAndView enterPage(){
+    public ModelAndView enterPage() {
         return new ModelAndView("enter");
     }
 
     @RequestMapping(value = {"/savename.html"}, method = RequestMethod.POST)
     public RedirectView saveName(@RequestParam(value = "lastName", required = false) String name) {
-        //accountService.addProfile(profile);
         RedirectView redirectView = new RedirectView("/mainpage.html");
         return redirectView;
     }
 
     @RequestMapping(value = {"/questionlist.html"}, method = RequestMethod.GET)
-    public ModelAndView questionList(){
+    public ModelAndView questionList() {
         ModelAndView modelAndView = new ModelAndView("questionlist");
-        //modelAndView.addObject("questionList", questionService.listQuestions());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/start.html"}, method = RequestMethod.GET)
+    public ModelAndView startExam(@RequestParam(value = "course", required = true) long courseId){
+        ModelAndView modelAndView = new ModelAndView("start");
+        modelAndView.addObject("questioninfo", examinationService.start(1, courseId));
         return modelAndView;
     }
 

@@ -82,7 +82,7 @@ public class ListUtils {
         }
 
 
-        for (int i = offset; i < limit && i < sourceList.size(); i++) {
+        for (int i = offset; i < limit; i++) {
 
             if (predicate.evaluate(sourceList.get(i))) {
                 subList.add(sourceList.get(i));

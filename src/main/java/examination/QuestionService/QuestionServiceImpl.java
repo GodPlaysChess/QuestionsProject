@@ -27,12 +27,11 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question getQuestion(Long QuestionID) {
         Question q = questionDAO.selectById(QuestionID);
-        if (q==null) {
+        if (q == null) {
             return new Question();
         }
         return q;
     }
-
 
 
 }

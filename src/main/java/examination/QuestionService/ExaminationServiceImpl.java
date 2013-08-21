@@ -48,8 +48,8 @@ public class ExaminationServiceImpl implements ExaminationService {
     }
 
     @Override
-    public QuestionInfo next(long examenId) {
-        Exam exam = examDAO.selectById(examenId);
+    public QuestionInfo next(long examId) {
+        Exam exam = examDAO.selectById(examId);
         int index = getCurrentQuestionIndex(exam.getQuestions(), exam.getCurrentQuestion());
         Question currentQuestion = null;
         if (index < exam.getQuestions().size()) {
