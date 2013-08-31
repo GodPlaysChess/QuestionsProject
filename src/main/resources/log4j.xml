@@ -4,66 +4,66 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
     <appender name="stderr" class="org.apache.log4j.ConsoleAppender">
-        <param name="threshold" value="WARN" />
-        <param name="target" value="System.err" />
+        <param name="threshold" value="WARN"/>
+        <param name="target" value="System.err"/>
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%5p %c %d: %m%n" />
+            <param name="ConversionPattern" value="%5p %c %d: %m%n"/>
         </layout>
     </appender>
     <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
-        <param name="threshold" value="TRACE" />
-        <param name="target" value="System.out" />
+        <param name="threshold" value="TRACE"/>
+        <param name="target" value="System.out"/>
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%5p %c %d: %m%n" />
+            <param name="ConversionPattern" value="%5p %c %d: %m%n"/>
         </layout>
         <filter class="org.apache.log4j.varia.LevelRangeFilter">
-            <param name="LevelMin" value="TRACE" />
-            <param name="LevelMax" value="INFO" />
+            <param name="LevelMin" value="TRACE"/>
+            <param name="LevelMax" value="INFO"/>
         </filter>
     </appender>
 
     <!-- 3rdparty Loggers -->
     <logger name="org.springframework.core">
-        <level value="INFO" />
+        <level value="INFO"/>
     </logger>
 
     <logger name="org.springframework.beans">
-        <level value="INFO" />
+        <level value="INFO"/>
     </logger>
 
     <logger name="org.springframework.context">
-        <level value="INFO" />
+        <level value="INFO"/>
     </logger>
 
     <logger name="org.springframework.web">
-        <level value="INFO" />
+        <level value="INFO"/>
 
     </logger>
 
     <logger name="org.springframework.security">
-        <level value="INFO" />
+        <level value="INFO"/>
     </logger>
 
     <logger name="com.ibatis">
-        <level value="ERROR" />
-        <appender-ref ref="stdout" />
-        <appender-ref ref="stderr" />
+        <level value="ERROR"/>
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="stderr"/>
     </logger>
 
     <logger name="com.asual">
-        <level value="INFO" />
+        <level value="INFO"/>
     </logger>
 
 
     <logger name="java.sql">
-        <level value="ERROR" />
+        <level value="ERROR"/>
     </logger>
 
     <!-- Root Logger -->
     <root>
-        <priority value="INFO" />
-        <appender-ref ref="stdout" />
-        <appender-ref ref="stderr" />
+        <priority value="INFO"/>
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="stderr"/>
     </root>
 
 </log4j:configuration>

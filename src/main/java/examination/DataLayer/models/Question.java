@@ -7,7 +7,7 @@ public class Question implements BaseModel {
     private QuestionType type;
     private String text;
 
-     public void setId(long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -32,15 +32,15 @@ public class Question implements BaseModel {
         return text;
     }
 
-    public void setTypeCode(int typeCode){
+    public void setTypeCode(int typeCode) {
         type = QuestionType.getByValue(typeCode);
     }
 
-    public int getTypeCode(){
+    public int getTypeCode() {
         return type.getCode();
     }
 
-    public String toString(){
+    public String toString() {
         return "Question # " + id + " | " + type + " | " + text;
     }
 

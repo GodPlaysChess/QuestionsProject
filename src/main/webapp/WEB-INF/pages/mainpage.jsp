@@ -13,7 +13,9 @@
     </script>
 </head>
 <BODY>
-<h1 class='text-center'>Choose your action, <%= session.getAttribute("lastName")%></h1>
+<h1 class='text-center'>Choose your action, <%= session.getAttribute("lastName")%>
+</h1>
+
 <div class="container">
 
 </div>
@@ -26,13 +28,17 @@
                 get specific question
             </button>
             <input id="questionId" type="number">
-
             <br/>
-
-
-            <button id="randq" type="submit" class="btn btn-large"> get random question</button>
+            <button id="randq" type="submit" class="btn btn-large">
+                get random question
+            </button>
             <br/>
-            <button type="submit" class="btn btn-large" onclick="location.href='questionlist.html'"> get questions list</button>
+            <button type="submit" class="btn btn-large" onclick="location.href='questionlist.html'">
+                get questions list
+            </button>
+            <button type="submit" class="btn-danger pull-right" onclick="location.href='start.html'">
+                start examination
+            </button>
         </div>
     </div>
 </div>

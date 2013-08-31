@@ -28,23 +28,23 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean id="modelValidator" class="examination.validation.ModelValidator"/>
     <mvc:annotation-driven validator="modelValidator"/>
 
-<!--    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="mappingResources">
-            <list>
-                <value>exam.hmb.xml</value>
-                <value>question.hmb.xml</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="dialect">org.hibernate.dialect.HSQLDialect</prop>
-            </props>
-        </property>
-    </bean>
+    <!--    <bean id="sessionFactory"
+              class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+            <property name="dataSource" ref="dataSource"/>
+            <property name="mappingResources">
+                <list>
+                    <value>exam.hmb.xml</value>
+                    <value>question.hmb.xml</value>
+                </list>
+            </property>
+            <property name="hibernateProperties">
+                <props>
+                    <prop key="dialect">org.hibernate.dialect.HSQLDialect</prop>
+                </props>
+            </property>
+        </bean>
 
-    <jdbc:embedded-database id="dataSource"/>-->
+        <jdbc:embedded-database id="dataSource"/>-->
 </beans>
 
 

@@ -11,7 +11,7 @@ public class GradingSystem {
 
     public Grade getGrade(int grade) {
         int key = 0;
-        for(int currKey : map.keySet()) {
+        for (int currKey : map.keySet()) {
             if (currKey > grade) break;
             key = currKey;
         }

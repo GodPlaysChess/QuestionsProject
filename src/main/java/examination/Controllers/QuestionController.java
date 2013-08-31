@@ -1,5 +1,6 @@
 package examination.Controllers;
 
+import examination.DataLayer.models.Answer;
 import examination.DataLayer.models.Course;
 import examination.DataLayer.models.Question;
 import examination.QuestionService.ExaminationService;
@@ -69,11 +70,28 @@ public class QuestionController {
         return modelAndView;
     }
 
+    // here are examination service controllers
+
     @RequestMapping(value = {"/start.html"}, method = RequestMethod.GET)
-    public ModelAndView startExam(@RequestParam(value = "course", required = true) long courseId){
+    public ModelAndView startExam(@RequestParam(value = "course", required = true) long courseId) {
         ModelAndView modelAndView = new ModelAndView("start");
-        modelAndView.addObject("questioninfo", examinationService.start(1, courseId));
+        modelAndView.addObject("question_info", examinationService.start(2, courseId));
         return modelAndView;
+    }
+
+    @RequestMapping(value = {"/exam_question.html"}, method = RequestMethod.GET)
+    public ModelAndView nextQuestion(@RequestParam(value = "exam_id",
+            required = true) long examId) {
+        ModelAndView modelAndView = new ModelAndView("nextQuestion");
+        modelAndView.addObject("question_info", examinationService.next(examId));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/submit_answer.html"}, method = RequestMethod.POST)
+    public RedirectView submitAnswerPage(Answer answer) {
+        /* save answer somewhere */
+        RedirectView redirectView = new RedirectView("/exam_question.html?exam_id=" + answer.getExamId());
+        return redirectView;
     }
 
 
