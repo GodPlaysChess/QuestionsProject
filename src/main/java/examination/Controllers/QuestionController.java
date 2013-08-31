@@ -1,9 +1,6 @@
 package examination.Controllers;
 
-import examination.DataLayer.models.Answer;
-import examination.DataLayer.models.Course;
 import examination.DataLayer.models.Question;
-import examination.QuestionService.ExaminationService;
 import examination.QuestionService.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
