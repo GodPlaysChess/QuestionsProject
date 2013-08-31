@@ -2,31 +2,19 @@ package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Exam;
 import examination.DataLayer.models.Question;
-import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-import static org.junit.Assert.*;
-
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:/spring/applicationContext.xml"})
-public class TestExaminationDao {
+public class TestExaminationDao extends AbstractTest<Exam> {
 
     @Autowired
     private ExamDAO examDAO;
     @Autowired
     private QuestionDAO questionDAO;
-    private static final Logger log = Logger.getLogger(TestExaminationDao.class);
-
 
     @Test
     public void test() {
@@ -43,20 +31,6 @@ public class TestExaminationDao {
         questionList.add(questionDAO.getRandomQuestion());
         exam.setQuestions(questionList);
 
-        boolean inserted = examDAO.insert(exam);
-        assertTrue(exam.getId() > 0);
-        assertTrue(inserted);
-
-        long id = exam.getId();
-
-        /* get exam */
-        exam = examDAO.selectById(id);
-        assertNotNull(exam);
-
-        /* delete exam */
-        examDAO.delete(id);
-        assertNull(examDAO.selectById(id));
-
-        log.info(examDAO);
+        baseCheck(exam, examDAO);
     }
 }
