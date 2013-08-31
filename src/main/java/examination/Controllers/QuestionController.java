@@ -20,8 +20,7 @@ import javax.validation.Valid;
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
-    @Autowired
-    private ExaminationService examinationService;
+
 
     @RequestMapping(value = {"/question.html"}, method = RequestMethod.GET)
     public ModelAndView getQuestionPage(@RequestParam(value = "questionid",
@@ -72,27 +71,7 @@ public class QuestionController {
 
     // here are examination service controllers
 
-    @RequestMapping(value = {"/start.html"}, method = RequestMethod.GET)
-    public ModelAndView startExam(@RequestParam(value = "course", required = true) long courseId) {
-        ModelAndView modelAndView = new ModelAndView("start");
-        modelAndView.addObject("question_info", examinationService.start(2, courseId));
-        return modelAndView;
-    }
 
-    @RequestMapping(value = {"/exam_question.html"}, method = RequestMethod.GET)
-    public ModelAndView nextQuestion(@RequestParam(value = "exam_id",
-            required = true) long examId) {
-        ModelAndView modelAndView = new ModelAndView("nextQuestion");
-        modelAndView.addObject("question_info", examinationService.next(examId));
-        return modelAndView;
-    }
-
-    @RequestMapping(value = {"/submit_answer.html"}, method = RequestMethod.POST)
-    public RedirectView submitAnswerPage(Answer answer) {
-        /* save answer somewhere */
-        RedirectView redirectView = new RedirectView("/exam_question.html?exam_id=" + answer.getExamId());
-        return redirectView;
-    }
 
 
 }
