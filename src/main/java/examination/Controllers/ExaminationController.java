@@ -24,7 +24,7 @@ public class ExaminationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/start_exam.html"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/start.html"}, method = RequestMethod.POST)
     public ModelAndView startExam(@RequestParam(value = "courseId", required = true) long courseId,
                                   @RequestParam(value = "studentId", required = true) long studentId) {
         ModelAndView modelAndView = new ModelAndView("next_question");
@@ -42,6 +42,7 @@ public class ExaminationController {
 
     @RequestMapping(value = {"/finish_exam.html"}, method = RequestMethod.GET)
     public ModelAndView finishExam() {
+        //examinationService.finish();
         ModelAndView modelAndView = new ModelAndView("finish_exam");
         return modelAndView;
     }

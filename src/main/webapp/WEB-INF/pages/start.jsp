@@ -7,7 +7,7 @@
 
 <div id="global-container" class="container">
 
-    <form action="/start_exam.html" method="get">
+    <form action="/start.html" method="post">
         <div class="container">
         <button class="btn btn-large btn-danger span12 ">
             START TEST

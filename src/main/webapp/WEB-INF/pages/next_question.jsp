@@ -19,12 +19,11 @@
             submit answer
         </button>
         <div id="answer-container" class="span8">
-            <textarea name="answer" rows="12" class="input-block-level span8">
+            <textarea name="text" rows="12" class="input-block-level span8">
 
             </textarea>
         </div>
         <input type="hidden" name="examId" value="${question_info.exam.id}">
-        <input type="hidden" name="answer">
     </form>
     <form action="/submit_answer.html" method="post">
         <button class="btn btn-large btn-warning pull-right">
