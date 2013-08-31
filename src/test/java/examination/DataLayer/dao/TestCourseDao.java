@@ -35,7 +35,7 @@ public class TestCourseDao {
         Course course = new Course();
         GradingSystem gradingSystem = new GradingSystem();
         course.setGradingSystem(gradingSystem);
-        course.setExamQuestionsNumber(5);
+        course.setExamQuestionsNumber(3);
         List<Question> questions = new ArrayList<Question>(1);
         questions.add(questionDAO.selectById(1));  // Change to getRandomQuestion()
         questions.add(questionDAO.selectById(2));  // when this method is finished
