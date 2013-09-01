@@ -25,6 +25,7 @@ public class TestExaminationDao extends AbstractTest<Exam> {
     public void test() {
         /* Insert Examination */
         Exam exam = new Exam();
+        //exam.setId(0);
         exam.setCourseId(1);
         exam.setStudentId(2);
         exam.setTimeStart(new Date());
@@ -32,9 +33,9 @@ public class TestExaminationDao extends AbstractTest<Exam> {
         exam.setCurrentQuestion(3);
 
         List<Question> questionList = new ArrayList<Question>();
-        questionList.add(questionDAO.getRandomQuestion());
-        questionList.add(questionDAO.getRandomQuestion());
-        questionList.add(questionDAO.getRandomQuestion());
+        questionList.add(questionDAO.selectById(1));
+        questionList.add(questionDAO.selectById(28));
+        questionList.add(questionDAO.selectById(29));
         exam.setQuestions(questionList);
 
         boolean inserted = examDAO.insert(exam);
@@ -49,7 +50,6 @@ public class TestExaminationDao extends AbstractTest<Exam> {
         for (int i = 0; i < questionList.size(); ++i) {
             assertEquals(questionList.get(i).getId(), newList.get(i).getId());
         }
-
 
         examDAO.delete(id);
         assertNull(examDAO.selectById(id));
