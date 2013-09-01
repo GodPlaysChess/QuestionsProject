@@ -34,8 +34,8 @@ public class TestExaminationDao extends AbstractTest<Exam> {
 
         List<Question> questionList = new ArrayList<Question>();
         questionList.add(questionDAO.selectById(1));
-        questionList.add(questionDAO.selectById(28));
         questionList.add(questionDAO.selectById(29));
+        questionList.add(questionDAO.selectById(28));
         exam.setQuestions(questionList);
 
         boolean inserted = examDAO.insert(exam);
@@ -46,6 +46,7 @@ public class TestExaminationDao extends AbstractTest<Exam> {
         Exam exam1 = examDAO.selectById(id);
         assertNotNull(exam1);
 
+        /* ordering test */
         List<Question> newList = exam1.getQuestions();
         for (int i = 0; i < questionList.size(); ++i) {
             assertEquals(questionList.get(i).getId(), newList.get(i).getId());
