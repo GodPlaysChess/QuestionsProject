@@ -36,8 +36,13 @@ public class ExaminationController {
     public ModelAndView submitAnswer(Answer answer) {
         /* save answer somewhere */
         ModelAndView modelAndView = new ModelAndView("next_question");
-        modelAndView.addObject("question_info", examinationService.next(answer.getExamId()));
-        return modelAndView;
+        QuestionInfo questionInfo = examinationService.next(answer.getExamId());
+        if (questionInfo.getQuestion() != null) {
+            modelAndView.addObject("question_info", questionInfo);
+            return modelAndView;
+        } else {
+            return finishExam();
+        }
     }
 
     @RequestMapping(value = {"/finish_exam.html"}, method = RequestMethod.GET)
