@@ -10,8 +10,8 @@
 
     <div id="main-container" class="row main-container">
         <div id="center-container" class="span12">
-            <textarea disabled="true" name="text" rows="10" class="input-block-level span12"
-                      style="width:100%;">${question_info.question.text}</textarea>
+            <textarea disabled="true" name="text" rows="10" class="span12"
+                      >${question_info.question.text}</textarea>
         </div>
     </div>
     <form action="/submit_answer.html" method="post">

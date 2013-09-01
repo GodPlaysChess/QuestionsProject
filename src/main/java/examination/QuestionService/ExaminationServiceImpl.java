@@ -56,6 +56,7 @@ public class ExaminationServiceImpl implements ExaminationService {
         if (index < exam.getQuestions().size()) {
             currentQuestion = exam.getQuestions().get(index);
             exam.setCurrentQuestion(currentQuestion.getId());
+            examDAO.update(exam);
         } else {
             exam.setCurrentQuestion(-1);
         }
