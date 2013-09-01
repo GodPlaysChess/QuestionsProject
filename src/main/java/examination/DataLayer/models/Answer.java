@@ -12,6 +12,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class Answer implements BaseModel {
+
     private long id;
     private long studentId;
     private long questionId;
@@ -102,4 +103,21 @@ public class Answer implements BaseModel {
     public void setTimeFinish(Date timeFinish) {
         this.timeFinish = timeFinish;
     }
+
+    public void setMarkCode(int markCode) {
+        mark = Mark.getByValue(markCode);
+    }
+
+    public int getMarkCode() {
+        return mark.getCode();
+    }
+
+    public void setAnswerStatusCode(int answerStatusCode) {
+        answerStatus = AnswerStatus.getByValue(answerStatusCode);
+    }
+
+    public int getAnswerStatusCode() {
+        return answerStatus.getCode();
+    }
+
 }

@@ -1,0 +1,116 @@
+package examination.DataLayer.dao;
+
+import examination.DataLayer.models.Answer;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Transaction;
+import org.hibernate.classic.Session;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+@Repository
+public class AnswerDAOImpl extends BaseDAOImpl implements AnswerDAO {
+
+    @Nullable
+    @Override
+    public Answer selectById(long id) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        Answer answer = null;
+        try {
+            tx = session.beginTransaction();
+            answer = (Answer) session.get(Answer.class, id);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Get exam error: ", e);
+        } finally {
+            session.close();
+        }
+        return answer;
+    }
+
+
+    @Override
+    public boolean insert(Answer model) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.save(model);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Add error", e);
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+
+    @Override
+    public List<Answer> selectList(long offset, int limit) {
+        List<Answer> result;
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Criteria cr = session.createCriteria(Answer.class);
+            cr.setFirstResult((int) offset);      // BAD Since cast offset to int!!
+            cr.setMaxResults(limit);
+            result = cr.list();
+            tx.commit();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Select list error: ", e);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean deleteList(long offset, int limit) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean update(Answer model) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.update(model);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Update answer error: ", e);
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean delete(long id) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Answer answer =
+                    (Answer) session.get(Answer.class, id);
+            session.delete(answer);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Delete answer error: ", e);
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+}
