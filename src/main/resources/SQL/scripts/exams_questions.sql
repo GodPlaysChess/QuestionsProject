@@ -1,7 +1,9 @@
 CREATE TABLE `questionsproject`.exams_questions (
   `exam_id`     BIGINT NOT NULL AUTO_INCREMENT,
   `question_id` BIGINT NOT NULL,
+  `index_col` BIGINT,
   PRIMARY KEY (`exam_id`, `question_id`));
+
 
 INSERT INTO `exams_questions` (exam_id, question_id) VALUES (1, 1);
 INSERT INTO `exams_questions` (exam_id, question_id) VALUES (1, 2);
@@ -11,3 +13,4 @@ INSERT INTO `exams_questions` (exam_id, question_id) VALUES (1, 9);
 INSERT INTO `exams_questions` (exam_id, question_id) VALUES (2, 1);
 INSERT INTO `exams_questions` (exam_id, question_id) VALUES (2, 11);
 INSERT INTO `exams_questions` (exam_id, question_id) VALUES (3, 1);
+

@@ -14,10 +14,12 @@
         <property name="timeFinish" column="time_finish" type="java.util.Date"/>
         <property name="currentQuestion" column="current_question" type="long"/>
 
-        <bag name="questions" table="exams_questions" lazy="false">
+        <list name="questions" table="exams_questions" lazy="false">
             <key column="exam_id"/>
+            <list-index column="index_col"/>
             <many-to-many column="question_id" class="examination.DataLayer.models.Question"/>
-        </bag>
+        </list>
+
 
     </class>
 
