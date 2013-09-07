@@ -99,4 +99,9 @@ public class ExaminationServiceImpl implements ExaminationService {
     public List<Exam> getCurrentExams(long studentId) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public Exam selectById(long examId) {
+        return examDAO.selectById(examId);
+    }
 }

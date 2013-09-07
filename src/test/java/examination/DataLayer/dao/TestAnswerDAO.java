@@ -3,10 +3,15 @@ package examination.DataLayer.dao;
 import examination.DataLayer.models.Answer;
 import examination.DataLayer.models.enums.AnswerStatus;
 import examination.DataLayer.models.enums.Mark;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+
+import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class TestAnswerDAO extends AbstractTest<Answer> {
 
@@ -25,7 +30,22 @@ public class TestAnswerDAO extends AbstractTest<Answer> {
         answer.setAnswerStatus(AnswerStatus.APPROVED);
         answer.setTimeStart(new Date());
 
-        baseCheck(answer, answerDAO);
+        boolean inserted = answerDAO.insert(answer);
+        assertTrue(answer.getId() > 0);
+        assertTrue(inserted);
+
+        long id = answer.getId();
+
+        /* get exam */
+        answer = answerDAO.selectById(id);
+        Assert.assertNotNull(answer);
+
+        Answer answer1 = answerDAO.getAnswerByQuestionId(1, 1);
+        assertNotNull(answer1);
+
+        /* delete exam */
+        answerDAO.delete(id);
+        assertNull(answerDAO.selectById(id));
 
     }
 }

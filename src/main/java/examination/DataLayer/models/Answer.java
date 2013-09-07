@@ -5,12 +5,6 @@ import examination.DataLayer.models.enums.Mark;
 
 import java.util.Date;
 
-/**
- * author: a.savanovich
- * Date: 14.07.13
- * Time: 16:02
- * To change this template use File | Settings | File Templates.
- */
 public class Answer implements BaseModel {
 
     private long id;

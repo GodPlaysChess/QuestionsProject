@@ -5,6 +5,8 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Nullable;
@@ -112,5 +114,28 @@ public class AnswerDAOImpl extends BaseDAOImpl implements AnswerDAO {
             session.close();
         }
         return true;
+    }
+
+    @Override
+    public Answer getAnswerByQuestionId(long examId, long questionId) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        Answer answer = null;
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(Answer.class);
+            criteria.add(Restrictions.eq("examId", examId));
+            criteria.add(Restrictions.eq("questionId", questionId));
+            List<Answer> answers = criteria.list();
+            answer = answers.get(0);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Get exam error: ", e);
+        } finally {
+            session.close();
+        }
+        return answer;
+
     }
 }
