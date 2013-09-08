@@ -3,8 +3,10 @@ import examination.DataLayer.models.Answer;
 
 public interface AnswerService {
 
-    boolean save(Answer answer);
+    boolean manualSave(Answer answer);
 
     Answer selectById(long id);
+
+    boolean autoSave(Answer answer);
 
 }

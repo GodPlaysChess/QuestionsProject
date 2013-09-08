@@ -20,10 +20,10 @@ public class AnswerServiceImpl implements AnswerService {
     @Autowired
     private ExaminationService examinationService;
 
-    @Override
-    public boolean save(Answer answer) {
+
+    private boolean save(Answer answer, AnswerStatus answerStatus) {
         answer.setMarkCode(0);
-        answer.setAnswerStatus(AnswerStatus.getByValue(1));
+        answer.setAnswerStatus(answerStatus);
         // get the exam
         Exam currentExam = examinationService.selectById(answer.getExamId());
         List<Question> questions = currentExam.getQuestions();
@@ -35,7 +35,7 @@ public class AnswerServiceImpl implements AnswerService {
                 break;
             }
         }
-        Date prevTimeFinish = null;
+        Date prevTimeFinish;
         if (index >= 0) {
             long prevQuestionId = questions.get(index).getId();
             prevTimeFinish = answerDAO.getAnswerByQuestionId(currentExam.getId(),
@@ -43,10 +43,18 @@ public class AnswerServiceImpl implements AnswerService {
         } else {
             prevTimeFinish = currentExam.getTimeStart();
         }
-
         answer.setTimeStart(prevTimeFinish);
         answer.setTimeFinish(new Date());
-        return answerDAO.insert(answer);
+        if (answerDAO.selectById(answer.getId()) == null) {
+            return answerDAO.insert(answer);
+        } else {
+            return answerDAO.update(answer);
+        }
+    }
+
+    @Override
+    public boolean manualSave(Answer answer) {
+        return save(answer, AnswerStatus.APPROVED);
     }
 
     @Override
@@ -54,4 +62,8 @@ public class AnswerServiceImpl implements AnswerService {
         return answerDAO.selectById(id);
     }
 
+    @Override
+    public boolean autoSave(Answer answer) {
+        return save(answer, AnswerStatus.AUTOSAVE);
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -38,7 +39,7 @@ public class ExaminationController {
 
     @RequestMapping(value = {"/submit_answer.html"}, method = RequestMethod.POST)
     public ModelAndView submitAnswer(Answer answer) {
-        answerService.save(answer);
+        answerService.manualSave(answer);
         ModelAndView modelAndView = new ModelAndView("next_question");
         QuestionInfo questionInfo = examinationService.next(answer.getExamId());
         if (questionInfo.getQuestion() != null) {
@@ -53,14 +54,12 @@ public class ExaminationController {
     public ModelAndView finishExam() {
         //examinationService.finish();
         ModelAndView modelAndView = new ModelAndView("finish_exam");
-        return modelAndView;
-    }
+        return modelAndView;    }
 
-    /*@RequestMapping(value = {"/exam_question.html"}, method = RequestMethod.GET)
-    public ModelAndView nextQuestion(@RequestParam(value = "exam_id",
-            required = true) long examId) {
-        ModelAndView modelAndView = new ModelAndView("next_question");
-        modelAndView.addObject("question_info", examinationService.next(examId));
-        return modelAndView;
-    }*/
+
+    @RequestMapping(value = {"/submit_answer.json"}, method = RequestMethod.POST)
+    @ResponseBody
+    public boolean saveAnswer(Answer answer) {
+        return answerService.autoSave(answer);
+    }
 }
