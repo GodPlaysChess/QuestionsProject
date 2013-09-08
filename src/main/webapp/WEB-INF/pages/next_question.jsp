@@ -8,7 +8,7 @@
     <script>
         function saveAns() {
             var data = $('form').serialize();
-            $.post("sumbit_answer.json", data);
+            $.post("submit_answer.json", data);
         }
         $(document).ready(function () {
             setInterval(saveAns, 1000)

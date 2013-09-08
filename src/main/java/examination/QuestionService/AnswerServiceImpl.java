@@ -48,8 +48,9 @@ public class AnswerServiceImpl implements AnswerService {
         }
         answer.setTimeStart(prevTimeFinish);
         answer.setTimeFinish(new Date());
-        if (answerDAO.getAnswerByQuestionId(currentExam.getId(),
-                currentId) == null) {
+        Answer thisAnswer = answerDAO.getAnswerByQuestionId(currentExam.getId(),
+                currentId);
+        if (thisAnswer == null) {
             return answerDAO.insert(answer);
         } else {
             return answerDAO.update(answer);
