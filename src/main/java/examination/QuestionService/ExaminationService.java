@@ -12,8 +12,6 @@ public interface ExaminationService {
 
     QuestionInfo current(long examenId);
 
-    void finish(long examenId);
-
     List<Exam> getCurrentExams(long studentId);
 
     Exam selectById(long examId);

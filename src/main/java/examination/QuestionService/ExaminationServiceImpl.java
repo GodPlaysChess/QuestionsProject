@@ -56,10 +56,10 @@ public class ExaminationServiceImpl implements ExaminationService {
         if (index < exam.getQuestions().size()) {
             currentQuestion = exam.getQuestions().get(index);
             exam.setCurrentQuestion(currentQuestion.getId());
-            examDAO.update(exam);
         } else {
             exam.setCurrentQuestion(-1);
         }
+        examDAO.update(exam);
         QuestionInfo questionInfo = new QuestionInfo();
         questionInfo.setExam(exam);
         questionInfo.setQuestion(currentQuestion);
@@ -85,14 +85,6 @@ public class ExaminationServiceImpl implements ExaminationService {
         questionInfo.setExam(exam);
         questionInfo.setQuestion(currentQuestion);
         return questionInfo;
-    }
-
-    @Override
-    public void finish(long examenId) {
-        Exam exam = examDAO.selectById(examenId);
-        exam.setCurrentQuestion(-1);
-        exam.setTimeFinish(new Date());
-        examDAO.update(exam);
     }
 
     @Override
