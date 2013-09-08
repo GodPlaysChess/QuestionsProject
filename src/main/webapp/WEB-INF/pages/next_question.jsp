@@ -5,14 +5,14 @@
     <script type="text/javascript" src="/js/jquery-1.10.2.js">
     </script>
 
-    <script>
-        function saveAns() {
+    <script type="text/javascript">
+        var saveAns = function() {
             var data = $('form').serialize();
-            $.post("submit_answer.json", data);
-        }
+            $.post("/submit_answer.json", data);
+        };
         $(document).ready(function () {
-            setInterval(saveAns, 1000)
-        })
+            setInterval(saveAns, 10000);
+        });
     </script>
 </head>
 <BODY>
@@ -28,9 +28,6 @@
     </div>
 
     <form action="/submit_answer.html" method="post">
-        <button class="btn btn-large btn-success pull-left">
-            submit answer
-        </button>
         <input type="hidden" name="studentId" value="${question_info.exam.studentId}">
         <input type="hidden" name="examId" value="${question_info.exam.id}">
         <input type="hidden" name="questionId" value="${question_info.question.id}">
@@ -40,6 +37,9 @@
 
             </textarea>
         </div>
+        <button class="btn btn-large">
+            submit answer
+        </button>
     </form>
 
 </div>
