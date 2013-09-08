@@ -6,7 +6,6 @@
 <BODY>
 <h1 class='text-center'>Вопрос № ${getQuestionPage.id}</h1>
 <div id="global-container" class="container">
-
     <div id="main-container" class="row main-container">
         <div id="center-container" class="span12">
             <form action="savequestion.html" method="post">

@@ -4,12 +4,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * author: a.savanovich
- * Date: 14.07.13
- * Time: 15:58
- * To change this template use File | Settings | File Templates.
- */
+
 public enum Mark {
     TRUE(1), FAlSE(2), UNDEFINED(0);
     private int code;

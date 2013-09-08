@@ -22,7 +22,7 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Autowired
     private QuestionDAO questionDAO;
     @Autowired
-    ExamDAO examDAO;
+    private ExamDAO examDAO;
 
     @Override
     public QuestionInfo start(long studentId, long courseId) {

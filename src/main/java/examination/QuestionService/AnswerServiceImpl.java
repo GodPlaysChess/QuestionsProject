@@ -7,11 +7,12 @@ import examination.DataLayer.models.Exam;
 import examination.DataLayer.models.Question;
 import examination.DataLayer.models.enums.AnswerStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
-
+@Service
 public class AnswerServiceImpl implements AnswerService {
 
     @Autowired
@@ -21,6 +22,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public boolean save(Answer answer) {
+        answer.setMarkCode(0);
         answer.setAnswerStatus(AnswerStatus.getByValue(1));
         // get the exam
         Exam currentExam = examinationService.selectById(answer.getExamId());
@@ -33,9 +35,9 @@ public class AnswerServiceImpl implements AnswerService {
                 break;
             }
         }
-        long prevQuestionId = questions.get(index).getId();
         Date prevTimeFinish = null;
-        if (index > 0) {
+        if (index >= 0) {
+            long prevQuestionId = questions.get(index).getId();
             prevTimeFinish = answerDAO.getAnswerByQuestionId(currentExam.getId(),
                     prevQuestionId).getTimeFinish();
         } else {
@@ -51,10 +53,5 @@ public class AnswerServiceImpl implements AnswerService {
     public Answer selectById(long id) {
         return answerDAO.selectById(id);
     }
-
-
-
-    /*   выставляет timeStart, timeFinish
-         answerStatus       */
 
 }

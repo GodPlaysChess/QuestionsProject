@@ -14,17 +14,22 @@
                       >${question_info.question.text}</textarea>
         </div>
     </div>
+
+
     <form action="/submit_answer.html" method="post">
         <button class="btn btn-large btn-success pull-left">
             submit answer
         </button>
+        <input type="hidden" name="studentId" value="${question_info.exam.studentId}">
+        <input type="hidden" name="examId" value="${question_info.exam.id}">
+        <input type="hidden" name="questionId" value="${question_info.question.id}">
         <div id="answer-container" class="span8">
             <textarea name="text" rows="12" class="input-block-level span8">
 
-            </textarea>
+                </textarea>
         </div>
-        <input type="hidden" name="examId" value="${question_info.exam.id}">
     </form>
+
     <form action="/submit_answer.html" method="post">
         <button class="btn btn-large btn-warning pull-right">
             skip question

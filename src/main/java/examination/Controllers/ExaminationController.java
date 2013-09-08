@@ -1,6 +1,8 @@
 package examination.Controllers;
 
 import examination.DataLayer.models.Answer;
+import examination.QuestionService.AnswerService;
+import examination.QuestionService.AnswerServiceImpl;
 import examination.QuestionService.ExaminationService;
 import examination.QuestionService.models.QuestionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class ExaminationController {
 
     @Autowired
     private ExaminationService examinationService;
+    @Autowired
+    private AnswerService answerService;
 
     @RequestMapping(value = {"/start.html"}, method = RequestMethod.GET)
     public ModelAndView startExam() {
@@ -34,7 +38,7 @@ public class ExaminationController {
 
     @RequestMapping(value = {"/submit_answer.html"}, method = RequestMethod.POST)
     public ModelAndView submitAnswer(Answer answer) {
-        /* save answer somewhere */
+        answerService.save(answer);
         ModelAndView modelAndView = new ModelAndView("next_question");
         QuestionInfo questionInfo = examinationService.next(answer.getExamId());
         if (questionInfo.getQuestion() != null) {
