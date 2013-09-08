@@ -36,16 +36,20 @@ public class AnswerServiceImpl implements AnswerService {
             }
         }
         Date prevTimeFinish;
+        long currentId;
         if (index >= 0) {
             long prevQuestionId = questions.get(index).getId();
             prevTimeFinish = answerDAO.getAnswerByQuestionId(currentExam.getId(),
                     prevQuestionId).getTimeFinish();
+            currentId = prevQuestionId;
         } else {
             prevTimeFinish = currentExam.getTimeStart();
+            currentId = currentExam.getCurrentQuestion();
         }
         answer.setTimeStart(prevTimeFinish);
         answer.setTimeFinish(new Date());
-        if (answerDAO.selectById(answer.getId()) == null) {
+        if (answerDAO.getAnswerByQuestionId(currentExam.getId(),
+                currentId) == null) {
             return answerDAO.insert(answer);
         } else {
             return answerDAO.update(answer);

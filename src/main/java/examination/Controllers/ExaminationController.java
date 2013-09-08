@@ -2,7 +2,7 @@ package examination.Controllers;
 
 import examination.DataLayer.models.Answer;
 import examination.QuestionService.AnswerService;
-import examination.QuestionService.AnswerServiceImpl;
+
 import examination.QuestionService.ExaminationService;
 import examination.QuestionService.models.QuestionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 
 @Controller
@@ -54,7 +53,8 @@ public class ExaminationController {
     public ModelAndView finishExam() {
         //examinationService.finish();
         ModelAndView modelAndView = new ModelAndView("finish_exam");
-        return modelAndView;    }
+        return modelAndView;
+    }
 
 
     @RequestMapping(value = {"/submit_answer.json"}, method = RequestMethod.POST)
