@@ -1,11 +1,11 @@
 package examination.QuestionService;
 
 import examination.DataLayer.dao.AnswerDAO;
-import examination.DataLayer.dao.AnswerDAOImpl;
 import examination.DataLayer.models.Answer;
 import examination.DataLayer.models.Exam;
 import examination.DataLayer.models.Question;
 import examination.DataLayer.models.enums.AnswerStatus;
+import examination.DataLayer.models.enums.Mark;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class AnswerServiceImpl implements AnswerService {
 
 
     private boolean save(Answer answer, AnswerStatus answerStatus) {
-        answer.setMarkCode(0);
+        answer.setMark(Mark.UNDEFINED);
         answer.setAnswerStatus(answerStatus);
         // get the exam
         Exam currentExam = examinationService.selectById(answer.getExamId());
@@ -36,20 +36,18 @@ public class AnswerServiceImpl implements AnswerService {
             }
         }
         Date prevTimeFinish;
-        long currentId;
         if (index >= 0) {
             long prevQuestionId = questions.get(index).getId();
-            prevTimeFinish = answerDAO.getAnswerByQuestionId(currentExam.getId(),
-                    prevQuestionId).getTimeFinish();
-            currentId = prevQuestionId;
+            Answer prevAnswer = answerDAO.getAnswerByQuestionId(answer.getExamId(),
+                    prevQuestionId);
+            prevTimeFinish = prevAnswer.getTimeFinish();
+
         } else {
             prevTimeFinish = currentExam.getTimeStart();
-            currentId = currentExam.getCurrentQuestion();
         }
         answer.setTimeStart(prevTimeFinish);
         answer.setTimeFinish(new Date());
-        Answer thisAnswer = answerDAO.getAnswerByQuestionId(currentExam.getId(),
-                currentId);
+        Answer thisAnswer = answerDAO.selectById(answer.getId());
         if (thisAnswer == null) {
             return answerDAO.insert(answer);
         } else {
