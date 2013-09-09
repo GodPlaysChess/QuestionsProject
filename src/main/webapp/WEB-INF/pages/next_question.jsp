@@ -11,12 +11,12 @@
             $.post("/submit_answer.json", data);
         };
         $(document).ready(function () {
-            setInterval(saveAns, 10000);
+            setInterval(saveAns, 1000);
         });
     </script>
 </head>
-<BODY>
 
+<BODY>
 <div id="global-container" class="container">
     <h1 class="text-center"> Question # ${question_info.question.id} </h1>
 
