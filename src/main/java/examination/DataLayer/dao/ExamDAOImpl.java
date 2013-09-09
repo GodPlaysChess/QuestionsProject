@@ -75,7 +75,7 @@ public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
         try {
             tx = session.beginTransaction();
             Criteria cr = session.createCriteria(Exam.class);
-            cr.add(Restrictions.in("idexams", examIds));
+            cr.add(Restrictions.in("id", examIds)); //perhaps not correct was "idexams"
             result = cr.list();
             tx.commit();
             return result;
@@ -145,5 +145,24 @@ public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
             session.close();
         }
         return true;
+    }
+
+    @Override
+    public List<Exam> getCurrentExams(long studentId) {
+        List<Exam> result;
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Criteria cr = session.createCriteria(Exam.class);
+            cr.add(Restrictions.eq("studentId", studentId));
+            result = cr.list();
+            tx.commit();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Select list error: ", e);
+        }
+        return null;
     }
 }

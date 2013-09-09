@@ -2,6 +2,7 @@ package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Exam;
 import examination.DataLayer.models.Question;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -51,6 +52,9 @@ public class TestExaminationDao extends AbstractTest<Exam> {
         for (int i = 0; i < questionList.size(); ++i) {
             assertEquals(questionList.get(i).getId(), newList.get(i).getId());
         }
+
+        List<Exam> exams = examDAO.getCurrentExams(2);
+        Assert.assertNotNull(exams);
 
         examDAO.delete(id);
         assertNull(examDAO.selectById(id));
