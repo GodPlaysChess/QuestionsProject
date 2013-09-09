@@ -33,7 +33,6 @@ public class QuestionController {
             // TODO add info about bad fields
             return new RedirectView(createRedirectUrl(question.getId()));
         }
-
         questionService.addOrModifyQuestion(question);
         RedirectView redirectView = new RedirectView(createRedirectUrl(question.getId()));
         return redirectView;
