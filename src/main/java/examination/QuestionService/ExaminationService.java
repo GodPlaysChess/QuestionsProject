@@ -3,6 +3,7 @@ package examination.QuestionService;
 import examination.QuestionService.models.QuestionInfo;
 import examination.DataLayer.models.Exam;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public interface ExaminationService {
@@ -14,5 +15,6 @@ public interface ExaminationService {
 
     List<Exam> getCurrentExams(long studentId);
 
+    @Nullable
     Exam selectById(long examId);
 }
