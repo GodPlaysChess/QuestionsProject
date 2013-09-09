@@ -8,10 +8,10 @@
     <script type="text/javascript">
         var saveAns = function() {
             var data = $('form').serialize();
-            $.post("/submit_answer.json", data);
+            $.post("/submit_answer-json.json", data);
         };
         $(document).ready(function () {
-            setInterval(saveAns, 1000);
+            setInterval(saveAns, 10000);
         });
     </script>
 </head>
@@ -37,7 +37,7 @@
 
             </textarea>
         </div>
-        <button class="btn btn-large">
+        <button class="btn btn-large btn-primary ">
             submit answer
         </button>
     </form>

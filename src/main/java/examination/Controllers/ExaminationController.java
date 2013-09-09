@@ -63,7 +63,7 @@ public class ExaminationController {
     }
 
 
-    @RequestMapping(value = {"/submit_answer.json"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/submit_answer-json.json"})
     @ResponseBody
     public boolean saveAnswer(Answer answer) {
         return answerService.autoSave(answer);
