@@ -84,7 +84,12 @@ public class AnswerDAOImpl extends BaseDAOImpl implements AnswerDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.update(model);
+            Answer answer = (Answer) session.get(Answer.class, model.getId());
+            answer.setTimeFinish(model.getTimeFinish());
+            answer.setTimeStart(model.getTimeStart());
+            answer.setText(model.getText());
+            answer.setAnswerStatus(model.getAnswerStatus());
+            session.update(answer);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -127,7 +132,9 @@ public class AnswerDAOImpl extends BaseDAOImpl implements AnswerDAO {
             criteria.add(Restrictions.eq("examId", examId));
             criteria.add(Restrictions.eq("questionId", questionId));
             List<Answer> answers = criteria.list();
-            answer = answers.get(0);
+            if (answers.size() > 0) {
+                answer = answers.get(0);
+            }
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();

@@ -18,17 +18,14 @@ public class AnswerValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "text", "text", "field.required");
         Answer answer = (Answer) o;
 
-        if (answer.getId() < 0) {
+        if (answer.getId() == 0) {
             errors.rejectValue("id", "field.required");
         }
-        if (answer.getExamId() < 0) {
+        if (answer.getExamId() <= 0) {
             errors.rejectValue("examId", "field.required");
         }
-        if (answer.getStudentId() < 0) {
+        if (answer.getStudentId() <= 0) {
             errors.rejectValue("studentId", "field.required");
-        }
-        if (answer.getQuestionId() < 0) {
-            errors.rejectValue("questionId", "field.required");
         }
     }
 }

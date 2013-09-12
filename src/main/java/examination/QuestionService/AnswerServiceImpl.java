@@ -41,16 +41,17 @@ public class AnswerServiceImpl implements AnswerService {
             Answer prevAnswer = answerDAO.getAnswerByQuestionId(answer.getExamId(),
                     prevQuestionId);
             prevTimeFinish = prevAnswer.getTimeFinish();
-
         } else {
             prevTimeFinish = currentExam.getTimeStart();
         }
         answer.setTimeStart(prevTimeFinish);
         answer.setTimeFinish(new Date());
-        Answer thisAnswer = answerDAO.selectById(answer.getId());
+        //Answer thisAnswer = answerDAO.selectById(answer.getId());
+        Answer thisAnswer = answerDAO.getAnswerByQuestionId(answer.getExamId(), answer.getQuestionId());
         if (thisAnswer == null) {
             return answerDAO.insert(answer);
         } else {
+            answer.setId(thisAnswer.getId());
             return answerDAO.update(answer);
         }
     }

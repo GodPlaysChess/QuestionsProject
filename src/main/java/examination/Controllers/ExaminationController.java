@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 
@@ -40,19 +41,33 @@ public class ExaminationController {
     }
 
     @RequestMapping(value = {"/submit_answer.html"}, method = RequestMethod.POST)
-    public ModelAndView submitAnswer(@Valid Answer answer, BindingResult result) {
-        if (!result.hasErrors()) {
-            answerService.manualSave(answer);
-            ModelAndView modelAndView = new ModelAndView("next_question");
-            QuestionInfo questionInfo = examinationService.next(answer.getExamId());
-            if (questionInfo.getQuestion() != null) {
-                modelAndView.addObject("question_info", questionInfo);
-                return modelAndView;
-            } else {
-                return finishExam();
-            }
+    public RedirectView submitAnswer(@Valid Answer answer, BindingResult result) {
+        if (result.hasErrors()) {
+            return new RedirectView("/next_question.html");
         }
-        return submitAnswer(answer, result);
+        answerService.manualSave(answer);
+        long examId = answer.getExamId();
+        QuestionInfo questionInfo = examinationService.next(examId);
+        if (questionInfo.getQuestion() != null) {
+            //        RedirectView redirectView = new RedirectView("/next_question.html", questionInfo);
+            RedirectView redirectView = new RedirectView(createRedirectedUrl(examId));
+            return redirectView;
+        } else {
+            return new RedirectView("/finish_exam.html");
+        }
+    }
+
+    private String createRedirectedUrl(long examId) {
+        return "/next_question.html?examid=" + examId;
+    }
+
+    @RequestMapping(value = {"/next_question.html"}, method = RequestMethod.GET)
+    public ModelAndView nextQuestion(@RequestParam(value = "examid", required = true)
+                                     long examId) {
+        ModelAndView modelAndView = new ModelAndView("next_question");
+        QuestionInfo questionInfo = examinationService.next(examId);
+        modelAndView.addObject("question_info", questionInfo);
+        return modelAndView;
     }
 
     @RequestMapping(value = {"/finish_exam.html"}, method = RequestMethod.GET)
@@ -61,7 +76,6 @@ public class ExaminationController {
         ModelAndView modelAndView = new ModelAndView("finish_exam");
         return modelAndView;
     }
-
 
     @RequestMapping(value = {"/submit_answer-json.json"})
     @ResponseBody
