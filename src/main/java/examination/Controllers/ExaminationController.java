@@ -41,26 +41,28 @@ public class ExaminationController {
     }
 
     @RequestMapping(value = {"/submit_answer.html"}, method = RequestMethod.POST)
-    public RedirectView submitAnswer(@Valid Answer answer, BindingResult result) {
+    public Object submitAnswer(@Valid Answer answer, BindingResult result) {
         if (result.hasErrors()) {
-            return new RedirectView("/next_question.html");
+            /*ModelAndView modelAndView = new ModelAndView("next_question");
+            long qId = answer.getQuestionId();
+
+            modelAndView.addObject("question_info", questionInfo);
+            return modelAndView;*/
+            return new ModelAndView("start");
         }
         answerService.manualSave(answer);
         long examId = answer.getExamId();
         QuestionInfo questionInfo = examinationService.next(examId);
         if (questionInfo.getQuestion() != null) {
-            //        RedirectView redirectView = new RedirectView("/next_question.html", questionInfo);
-            RedirectView redirectView = new RedirectView(createRedirectedUrl(examId));
-            return redirectView;
+            ModelAndView modelAndView = new ModelAndView("next_question");
+            modelAndView.addObject("question_info", questionInfo);
+            return modelAndView;
         } else {
+           // examinationService.finish();
             return new RedirectView("/finish_exam.html");
         }
     }
-
-    private String createRedirectedUrl(long examId) {
-        return "/next_question.html?examid=" + examId;
-    }
-
+/*
     @RequestMapping(value = {"/next_question.html"}, method = RequestMethod.GET)
     public ModelAndView nextQuestion(@RequestParam(value = "examid", required = true)
                                      long examId) {
@@ -68,7 +70,7 @@ public class ExaminationController {
         QuestionInfo questionInfo = examinationService.next(examId);
         modelAndView.addObject("question_info", questionInfo);
         return modelAndView;
-    }
+    }*/
 
     @RequestMapping(value = {"/finish_exam.html"}, method = RequestMethod.GET)
     public ModelAndView finishExam() {
