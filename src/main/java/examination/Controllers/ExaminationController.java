@@ -41,14 +41,13 @@ public class ExaminationController {
     }
 
     @RequestMapping(value = {"/submit_answer.html"}, method = RequestMethod.POST)
-    public Object submitAnswer(@Valid Answer answer, BindingResult result) {
+    public ModelAndView submitAnswer(@Valid Answer answer, BindingResult result) {
         if (result.hasErrors()) {
-            /*ModelAndView modelAndView = new ModelAndView("next_question");
-            long qId = answer.getQuestionId();
-
+            ModelAndView modelAndView = new ModelAndView("next_question");
+            long examId = answer.getExamId();
+            QuestionInfo questionInfo = examinationService.current(examId);
             modelAndView.addObject("question_info", questionInfo);
-            return modelAndView;*/
-            return new ModelAndView("start");
+            return modelAndView;
         }
         answerService.manualSave(answer);
         long examId = answer.getExamId();
@@ -58,9 +57,13 @@ public class ExaminationController {
             modelAndView.addObject("question_info", questionInfo);
             return modelAndView;
         } else {
-           // examinationService.finish();
-            return new RedirectView("/finish_exam.html");
+            ModelAndView modelAndView = createRedirectModelAndView("/finish_exam.html");
+            return modelAndView;
         }
+    }
+
+    protected ModelAndView createRedirectModelAndView(String url) {
+        return new ModelAndView(new RedirectView(url));
     }
 /*
     @RequestMapping(value = {"/next_question.html"}, method = RequestMethod.GET)
