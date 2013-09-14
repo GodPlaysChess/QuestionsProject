@@ -75,7 +75,10 @@ public class ExaminationController {
 
     @RequestMapping(value = {"/submit_answer-json.json"})
     @ResponseBody
-    public boolean saveAnswer(Answer answer) {
+    public boolean saveAnswer(@Valid Answer answer, BindingResult result) {
+        if (result.hasErrors()) {
+            return false;
+        }
         return answerService.autoSave(answer);
     }
 }
