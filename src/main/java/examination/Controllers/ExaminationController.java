@@ -65,15 +65,6 @@ public class ExaminationController {
     protected ModelAndView createRedirectModelAndView(String url) {
         return new ModelAndView(new RedirectView(url));
     }
-/*
-    @RequestMapping(value = {"/next_question.html"}, method = RequestMethod.GET)
-    public ModelAndView nextQuestion(@RequestParam(value = "examid", required = true)
-                                     long examId) {
-        ModelAndView modelAndView = new ModelAndView("next_question");
-        QuestionInfo questionInfo = examinationService.next(examId);
-        modelAndView.addObject("question_info", questionInfo);
-        return modelAndView;
-    }*/
 
     @RequestMapping(value = {"/finish_exam.html"}, method = RequestMethod.GET)
     public ModelAndView finishExam() {

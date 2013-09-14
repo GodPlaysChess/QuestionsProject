@@ -11,7 +11,8 @@
         <property name="studentId" column="student_id" type="long"/>
         <property name="questionId" column="question_id" type="long"/>
         <property name="examId" column="exam_id" type="long"/>
-        <property name="text" column="text" type="java.lang.String"/>
+        <property name="text" column="text"/>
+        <!--<property name="text" column="text" type="java.lang.String"/>-->
         <property name="intAnswer" column="int_answer" type="int"/>
         <property name="markCode" column="mark" type="int"/>
         <property name="answerStatusCode" column="answer_status" type="int"/>
