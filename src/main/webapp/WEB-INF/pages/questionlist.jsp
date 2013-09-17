@@ -4,7 +4,7 @@
     <link type="text/css" rel="stylesheet" href="/bootstrap/bootstrap.css"/>
 </head>
 <BODY>
-<h1 class='text-center'>Вопросы: ${questionList.} штук</h1>
+<h1 class='text-center'>Вопросы: ${questionList.size()} штук</h1>
 <div id="global-container" class="container">
     <table class="table table-striped">
         <thead>

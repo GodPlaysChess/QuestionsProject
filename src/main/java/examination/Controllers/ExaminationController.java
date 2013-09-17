@@ -1,6 +1,7 @@
 package examination.Controllers;
 
 import examination.DataLayer.models.Answer;
+import examination.DataLayer.models.Exam;
 import examination.QuestionService.AnswerService;
 
 import examination.QuestionService.ExaminationService;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -80,5 +83,45 @@ public class ExaminationController {
             return false;
         }
         return answerService.autoSave(answer);
+    }
+
+    @RequestMapping(value={"/repair.html"}, method=RequestMethod.POST)
+    public ModelAndView continueExam(@RequestParam(value = "examId", required = true) long examId){
+        QuestionInfo questionInfo = examinationService.current(examId);
+        ModelAndView modelAndView = new ModelAndView("next_question");
+        modelAndView.addObject("question_info", questionInfo);
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = {"/repair.json"}, method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView showExamsList(@RequestParam(value = "studentId",
+            required = true) long studentId) {
+        List<Exam> examList = examinationService.getCurrentExams(studentId);
+        if (examList == null) {
+            return new ModelAndView("start");
+        }
+        List<Exam> incompleteExams = new ArrayList<Exam>();
+        for (Exam exam : examList) {
+            if (exam.getTimeFinish() == null) {
+                incompleteExams.add(exam);
+            }
+        }
+        if (examList.size() == 0) {
+            return new ModelAndView("start");
+        } else if (incompleteExams.size() == 1) {
+            Exam exam = incompleteExams.get(0);
+            QuestionInfo questionInfo = examinationService.current(exam.getId());
+            ModelAndView modelAndView = new ModelAndView("next_question");
+            modelAndView.addObject("question_info", questionInfo);
+            return modelAndView;
+        } else {
+            //TODO show exams list (which are incomplete) i.e where Time_Finish = null;
+            ModelAndView modelAndView = new ModelAndView("exam_list");
+            modelAndView.addObject("exam_list", incompleteExams);
+            return modelAndView;
+        }
+
     }
 }
