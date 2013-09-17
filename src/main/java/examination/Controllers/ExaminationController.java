@@ -117,7 +117,6 @@ public class ExaminationController {
             modelAndView.addObject("question_info", questionInfo);
             return modelAndView;
         } else {
-            //TODO show exams list (which are incomplete) i.e where Time_Finish = null;
             ModelAndView modelAndView = new ModelAndView("exam_list");
             modelAndView.addObject("exam_list", incompleteExams);
             return modelAndView;
