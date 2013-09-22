@@ -60,14 +60,12 @@ public class EvaluationController {
             required = true) long examId) {
         ModelAndView modelAndView = new ModelAndView("answers_list");
         List<Answer> answers = answerService.getAnswersByExamId(examId);
-        //    modelAndView.addObject("answers", answers);
         List<Long> questions = new ArrayList<Long>();
         for (Answer a : answers) {
             if (a.getMark().equals(Mark.UNDEFINED))
                 questions.add(a.getQuestionId());
         }
         List<Question> questionList = questionService.selectList(questions);
-        //   modelAndView.addObject("questions", questionList);
         Map<Question, Answer> answerMap = new HashMap<Question, Answer>();
         for (int i = 0; i < questionList.size(); i++) {
             answerMap.put(questionList.get(i), answers.get(i));
