@@ -76,7 +76,6 @@
                         <button id="suc-${entry.value.id}" class="btn btn-success">Correct</button>
                         <button id="wro-${entry.value.id}" class="btn btn-danger">Wrong</button>
                     </div>
-                        <%--  <input type="hidden" name="markCode">--%>
 
                 </form>
             </div>
