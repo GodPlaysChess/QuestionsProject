@@ -84,11 +84,13 @@ public class AnswerDAOImpl extends BaseDAOImpl implements AnswerDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
+            /* not everything is updated ??? */
             Answer answer = (Answer) session.get(Answer.class, model.getId());
             answer.setTimeFinish(model.getTimeFinish());
             answer.setTimeStart(model.getTimeStart());
             answer.setText(model.getText());
             answer.setAnswerStatus(model.getAnswerStatus());
+            answer.setMark(model.getMark()); // previously mark was not updated
             session.update(answer);
             tx.commit();
         } catch (HibernateException e) {

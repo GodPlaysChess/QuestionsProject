@@ -84,4 +84,9 @@ public class AnswerServiceImpl implements AnswerService {
     public List<Answer> getAnswersByExamId(long examId) {
         return answerDAO.getAnswerByExamId(examId);
     }
+
+    @Override
+    public boolean update(Answer answer) {
+        return answerDAO.update(answer);
+    }
 }

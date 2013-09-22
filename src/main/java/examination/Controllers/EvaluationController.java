@@ -2,6 +2,7 @@ package examination.Controllers;
 
 import examination.DataLayer.models.Answer;
 import examination.DataLayer.models.Question;
+import examination.DataLayer.models.enums.Mark;
 import examination.QuestionService.AnswerService;
 import examination.QuestionService.ExaminationService;
 import examination.QuestionService.ExaminationServiceImpl;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -61,27 +63,26 @@ public class EvaluationController {
         //    modelAndView.addObject("answers", answers);
         List<Long> questions = new ArrayList<Long>();
         for (Answer a : answers) {
-            questions.add(a.getQuestionId());
+            if (a.getMark().equals(Mark.UNDEFINED))
+                questions.add(a.getQuestionId());
         }
         List<Question> questionList = questionService.selectList(questions);
         //   modelAndView.addObject("questions", questionList);
         Map<Question, Answer> answerMap = new HashMap<Question, Answer>();
-        for (int i = 0; i < answers.size(); i++) {
+        for (int i = 0; i < questionList.size(); i++) {
             answerMap.put(questionList.get(i), answers.get(i));
         }
         modelAndView.addObject("aMap", answerMap);
         return modelAndView;
     }
 
-    @RequestMapping(value = {"evaluate_answer.html"}, method = RequestMethod.POST)
-    public ModelAndView evaluateAnswer(@RequestParam(value = "mark", required = true) long mark,
-                                       @RequestParam(value = "answer", required = true) Answer answer) {
-        //get examId
-        //save answer
-        // if success remove from the inevaluated list
-        // show list again
-        ModelAndView modelAndView = new ModelAndView("answer_list");
-        return modelAndView;
+    @RequestMapping(value = {"/evaluate.json"}, method = RequestMethod.POST)
+    @ResponseBody
+    public boolean evaluateAnswer(@RequestParam(value = "markCode", required = true) int markCode,
+                                  @RequestParam(value = "answerID", required = true) long answerID) {
+        Answer answer = answerService.selectById(answerID);
+        answer.setMarkCode(markCode);
+        return answerService.update(answer);
     }
 
 }

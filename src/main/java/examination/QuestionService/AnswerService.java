@@ -15,4 +15,6 @@ public interface AnswerService {
 
     List<Answer> getAnswersByExamId(long examId);
 
+    boolean update(Answer answer);
+
 }
