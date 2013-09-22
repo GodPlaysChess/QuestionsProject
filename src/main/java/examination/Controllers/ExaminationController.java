@@ -93,7 +93,6 @@ public class ExaminationController {
         return modelAndView;
     }
 
-
     @RequestMapping(value = {"/repair.json"}, method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView showExamsList(@RequestParam(value = "studentId",

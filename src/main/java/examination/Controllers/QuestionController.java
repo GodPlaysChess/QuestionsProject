@@ -59,15 +59,10 @@ public class QuestionController {
         return redirectView;
     }
 
-    @RequestMapping(value = {"/questionlist.html"}, method = RequestMethod.GET)
+/*    @RequestMapping(value = {"/questionlist.html"}, method = RequestMethod.GET)
     public ModelAndView questionList() {
         ModelAndView modelAndView = new ModelAndView("questionlist");
         return modelAndView;
-    }
-
-    // here are examination service controllers
-
-
-
+    }*/
 
 }

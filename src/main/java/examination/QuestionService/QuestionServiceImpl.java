@@ -5,6 +5,8 @@ import examination.DataLayer.models.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QuestionServiceImpl implements QuestionService {
 
@@ -20,17 +22,22 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void deleteQuestion(Long QuestionID) {
-        questionDAO.delete(QuestionID);
+    public void deleteQuestion(Long questionID) {
+        questionDAO.delete(questionID);
     }
 
     @Override
-    public Question getQuestion(Long QuestionID) {
-        Question q = questionDAO.selectById(QuestionID);
+    public Question getQuestion(Long questionID) {
+        Question q = questionDAO.selectById(questionID);
         if (q == null) {
             return new Question();
         }
         return q;
+    }
+
+    @Override
+    public List<Question> selectList(List<Long> questionIDs) {
+        return questionDAO.selectList(questionIDs);
     }
 
 

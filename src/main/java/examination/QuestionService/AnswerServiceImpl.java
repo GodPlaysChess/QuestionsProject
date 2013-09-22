@@ -74,4 +74,14 @@ public class AnswerServiceImpl implements AnswerService {
     public boolean autoSave(Answer answer) {
         return save(answer, AnswerStatus.AUTOSAVE);
     }
+
+    @Override
+    public List<Answer> getInevaluatedAnswers() {
+        return answerDAO.getInevaluatedAnswers();
+    }
+
+    @Override
+    public List<Answer> getAnswersByExamId(long examId) {
+        return answerDAO.getAnswerByExamId(examId);
+    }
 }

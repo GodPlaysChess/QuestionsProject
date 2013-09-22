@@ -63,5 +63,31 @@
     </fieldset>
 </form>
 
+<form class="form-horizontal" action="/exams_to_evaluate.html">
+    <fieldset>
+        <!-- Form Name -->
+        <legend>Evaluate answers</legend>
+        <!-- Text input-->
+        <div class="control-group">
+            <label class="control-label" for="textinput">select course </label>
+            <div class="controls">
+                <input id="textinput" name="courseId" type="number" class="input-small">
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="control-group">
+            <label class="control-label" for="begin"></label>
+
+            <div class="controls">
+                <button id="begin" name="begin" class="btn btn-primary">Begin</button>
+            </div>
+        </div>
+    </fieldset>
+
+
+</form>
+
+
 </BODY>
 </HTML>

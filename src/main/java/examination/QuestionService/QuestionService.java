@@ -6,9 +6,11 @@ public interface QuestionService {
 
     boolean addOrModifyQuestion(Question question);
 
-    void deleteQuestion(Long QuestionID);
+    void deleteQuestion(Long questionID);
 
-    Question getQuestion(Long QuestionID);
+    Question getQuestion(Long questionID);
+
+    List<Question> selectList(List<Long> questionIDs);
 
 
 }

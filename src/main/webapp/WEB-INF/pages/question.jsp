@@ -8,7 +8,7 @@
 <div id="global-container" class="container">
     <div id="main-container" class="row main-container">
         <div id="center-container" class="span12">
-            <form action="savequestion.html" method="post">
+            <form action="/savequestion.html" method="post">
             <textarea name="text" rows="10" class="input-block-level span12"
                       style="width:100%;">${getQuestionPage.text}</textarea>
                 <input type="hidden" name="id" value="${getQuestionPage.id}"/>

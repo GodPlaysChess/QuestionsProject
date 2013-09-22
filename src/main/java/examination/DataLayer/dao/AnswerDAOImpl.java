@@ -145,4 +145,50 @@ public class AnswerDAOImpl extends BaseDAOImpl implements AnswerDAO {
         return answer;
 
     }
+
+    //need to write test for it
+    @Override
+    public List<Answer> getInevaluatedAnswers() {
+        List<Answer> result;
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Criteria cr = session.createCriteria(Answer.class);
+            cr.add(Restrictions.eq("markCode", 0));
+            cr.add(Restrictions.eq("answerStatusCode", 1));
+            result = cr.list();
+            tx.commit();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Select list error: ", e);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Answer> getAnswerByExamId(long examId) {
+        List<Answer> result;
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(Answer.class);
+            criteria.add(Restrictions.eq("examId", examId));
+            result = criteria.list();
+            tx.commit();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Get exam error: ", e);
+        } finally {
+            session.close();
+        }
+        return null;
+
+    }
+
+
 }
+
