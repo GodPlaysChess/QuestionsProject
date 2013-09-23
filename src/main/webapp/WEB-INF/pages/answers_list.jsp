@@ -24,10 +24,14 @@
                                 var markCode = 1;
                                 var answerID = $(this).attr('id');
                                 answerID = answerID.substring(4);
-                                $.post("/evaluate.json", {mark_code: markCode, answer_id: answerID})
-                                var txt = $(this).closest(".clickedparent").find('textarea')[1];
-                                $(txt).removeClass("wrong");
-                                $(txt).addClass("good");
+                                $.post("/evaluate.json", {mark_code: markCode, answer_id: answerID}, function(response){
+                                    if (response){
+                                        var txt = $(this).closest(".clickedparent").find('textarea')[1];
+                                        $(txt).removeClass("wrong");
+                                        $(txt).addClass("good");
+                                    }
+                                })
+
                             }
                     );
                 }
@@ -40,11 +44,14 @@
                                 var markCode = 2;
                                 var answerID = $(this).attr('id');
                                 answerID = answerID.substring(4);
-                                $.post("/evaluate.json", {mark_code: markCode, answer_id: answerID})
+                                $.post("/evaluate.json", {mark_code: markCode, answer_id: answerID}, function(response){
+                                    if (response){
+                                    var txt = $(this).closest(".clickedparent").find('textarea')[1];
+                                    $(txt).removeClass("good");
+                                    $(txt).addClass("wrong");
+                                    }
+                                })
 
-                                var txt = $(this).closest(".clickedparent").find('textarea')[1];
-                                $(txt).removeClass("good");
-                                $(txt).addClass("wrong");
                             }
                     );
                 }
