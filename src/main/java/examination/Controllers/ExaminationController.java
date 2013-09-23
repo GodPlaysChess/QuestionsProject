@@ -76,7 +76,7 @@ public class ExaminationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/submit_answer-json.json"})
+    @RequestMapping(value = {"/submit_answer-json.json"}, method = RequestMethod.POST)
     @ResponseBody
     public boolean saveAnswer(@Valid Answer answer, BindingResult result) {
         if (result.hasErrors()) {
