@@ -93,8 +93,7 @@ public class ExaminationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/repair.json"}, method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping(value = {"/repair.html"}, method = RequestMethod.GET)
     public ModelAndView showExamsList(@RequestParam(value = "studentId",
             required = true) long studentId) {
         List<Exam> examList = examinationService.getCurrentExams(studentId);
@@ -123,3 +122,5 @@ public class ExaminationController {
 
     }
 }
+
+//jquery templates

@@ -5,7 +5,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <BODY>
-<h1 class='text-center'>Неоцененный вопросы</h1>
+<h1 class='text-center'>Непроверенные экзамены</h1>
 
 <div id="global-container" class="global-container">
     <div class="container">

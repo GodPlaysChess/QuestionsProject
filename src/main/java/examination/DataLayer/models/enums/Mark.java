@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 public enum Mark {
-    TRUE(1), FAlSE(2), UNDEFINED(0);
+    TRUE(1), FALSE(2), UNDEFINED(0);
     private int code;
 
     private Mark(int code) {

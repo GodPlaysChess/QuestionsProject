@@ -10,10 +10,8 @@
                             function (button) {
                                 button.preventDefault();
                                 var studentId = $("#studentId").val();
-                                $.post("/repair.json", {studentId: studentId}, function (model) {
-                                            document.write(model);
-                                        }
-                                );
+                                var link = "/repair.html?studentId=" + studentId;
+                                window.location.href = link;
                             })
                 })
     </script>
@@ -70,6 +68,7 @@
         <!-- Text input-->
         <div class="control-group">
             <label class="control-label" for="textinput">select course </label>
+
             <div class="controls">
                 <input id="textinput" name="courseId" type="number" class="input-small">
             </div>
