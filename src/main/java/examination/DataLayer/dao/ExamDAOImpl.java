@@ -1,6 +1,7 @@
 package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Exam;
+import examination.DataLayer.models.enums.ExamStatus;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
@@ -55,20 +56,20 @@ public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
         List<Exam> result;
         Session session = factory.openSession();
         Transaction tx = null;
-        try{
+        try {
                /*
                *
                * WRITE CODE HERE
                *
                * */
-        }   catch (HibernateException e) {
+        } catch (HibernateException e) {
             if (tx != null) tx.rollback();
             log.error("Select list error: ", e);
         }
         return null;
     }
 
-    public List<Exam> selectList(List<Long> examIds){
+    public List<Exam> selectList(List<Long> examIds) {
         List<Exam> result;
         Session session = factory.openSession();
         Transaction tx = null;
@@ -95,7 +96,7 @@ public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
             String sql = "DELETE FROM Exam WHERE id > :offset " +
                     "AND id < :maxnum";
             Query query = (Query) session.createSQLQuery(sql).addEntity(Exam.class)
-                    .setParameter("offset", offset).setParameter("maxnum", offset+limit);
+                    .setParameter("offset", offset).setParameter("maxnum", offset + limit);
 
             for (long id = offset; id < offset + limit; id++) {
                 delete(id);
@@ -156,6 +157,25 @@ public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
             tx = session.beginTransaction();
             Criteria cr = session.createCriteria(Exam.class);
             cr.add(Restrictions.eq("studentId", studentId));
+            result = cr.list();
+            tx.commit();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Select list error: ", e);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Exam> getInevaluatedExams() {
+        List<Exam> result;
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Criteria cr = session.createCriteria(Exam.class);
+            cr.add(Restrictions.eq("examStatusCode", 0));
             result = cr.list();
             tx.commit();
             return result;

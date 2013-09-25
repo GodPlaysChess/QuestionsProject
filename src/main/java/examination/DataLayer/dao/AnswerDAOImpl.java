@@ -84,8 +84,10 @@ public class AnswerDAOImpl extends BaseDAOImpl implements AnswerDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            /* not everything is updated ??? */
             Answer answer = (Answer) session.get(Answer.class, model.getId());
+            answer.setStudentId(model.getStudentId());
+            answer.setQuestionId(model.getQuestionId());
+            answer.setExamId(model.getExamId());
             answer.setTimeFinish(model.getTimeFinish());
             answer.setTimeStart(model.getTimeStart());
             answer.setText(model.getText());

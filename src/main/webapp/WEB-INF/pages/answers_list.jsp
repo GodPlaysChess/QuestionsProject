@@ -25,12 +25,13 @@
                                 var answerID = $(this).attr('id');
                                 answerID = answerID.substring(4);
                                 $.post("/evaluate.json", {mark_code: markCode, answer_id: answerID}, function(response){
+                                    console.log(response);
                                     if (response){
                                         var txt = $(this).closest(".clickedparent").find('textarea')[1];
                                         $(txt).removeClass("wrong");
                                         $(txt).addClass("good");
                                     }
-                                })
+                                });
 
                             }
                     );

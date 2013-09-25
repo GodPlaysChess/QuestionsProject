@@ -6,6 +6,7 @@ import examination.DataLayer.dao.QuestionDAO;
 import examination.DataLayer.models.Course;
 import examination.DataLayer.models.Exam;
 import examination.DataLayer.models.Question;
+import examination.DataLayer.models.enums.ExamStatus;
 import examination.QuestionService.models.QuestionInfo;
 import examination.utils.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class ExaminationServiceImpl implements ExaminationService {
         exam.setCourseId(courseId);
         exam.setStudentId(studentId);
         exam.setTimeStart(new Date());
+        exam.setExamStatus(ExamStatus.NOT_CHECKED);
         List<Question> questions = course.getQuestions();
         if (questions == null || questions.isEmpty()) {
             throw new IllegalArgumentException();
@@ -90,6 +92,11 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Override
     public Exam selectById(long examId) {
         return examDAO.selectById(examId);
+    }
+
+    @Override
+    public List<Exam> getInevaluatedExams() {
+        return examDAO.getInevaluatedExams();
     }
 
     @Override

@@ -17,4 +17,6 @@ public interface ExaminationService {
 
     @Nullable
     Exam selectById(long examId);
+
+    List<Exam> getInevaluatedExams();
 }

@@ -10,21 +10,21 @@
 <div id="global-container" class="global-container">
     <div class="container">
         <div class="row">
-            <c:forEach var="ex" items="${examIds}">
+            <c:forEach var="ex" items="${exams}">
                 <div class="span4">
                     <form class="form-horizontal" action="/evaluate.html" method="post">
                         <fieldset>
                             <!-- Form Name -->
-                            <legend>Exam N ${ex}</legend>
+                            <legend>Exam N ${ex.id}</legend>
                             <!-- Button -->
                             <div class="control-group">
-                                <label class="control-label" for="cont">Course description</label>
+                                <label class="control-label" for="cont">Course # ${ex.courseId}</label>
 
                                 <div class="controls">
                                     <button id="cont" name="cont" class="btn btn-success">Continue</button>
                                 </div>
                             </div>
-                            <input type="hidden" name="examId" value="${ex}"/>
+                            <input type="hidden" name="exam_id" value="${ex.id}"/>
                         </fieldset>
                     </form>
                 </div>

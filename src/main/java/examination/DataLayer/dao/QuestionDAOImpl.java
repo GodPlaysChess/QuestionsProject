@@ -101,7 +101,10 @@ public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.update(question);
+            Question q = (Question)session.get(Question.class, question.getId());
+            q.setText(question.getText());
+            q.setType(question.getType());
+            session.update(q);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();

@@ -2,6 +2,7 @@ package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Exam;
 import examination.DataLayer.models.Question;
+import examination.DataLayer.models.enums.ExamStatus;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class TestExaminationDao extends AbstractTest<Exam> {
         exam.setTimeStart(new Date());
         exam.setTimeFinish(new Date());
         exam.setCurrentQuestion(3);
+        exam.setExamStatus(ExamStatus.NOT_CHECKED);
 
         List<Question> questionList = new ArrayList<Question>();
         questionList.add(questionDAO.selectById(1));
