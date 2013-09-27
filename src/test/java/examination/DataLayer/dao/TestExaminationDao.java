@@ -41,10 +41,12 @@ public class TestExaminationDao extends AbstractTest<Exam> {
         questionList.add(questionDAO.selectById(28));
         exam.setQuestions(questionList);
 
+        /* insert */
         boolean inserted = examDAO.insert(exam);
         assertTrue(exam.getId() > 0);
         assertTrue(inserted);
 
+        /* select */
         long id = exam.getId();
         Exam exam1 = examDAO.selectById(id);
         assertNotNull(exam1);
@@ -55,11 +57,29 @@ public class TestExaminationDao extends AbstractTest<Exam> {
             assertEquals(questionList.get(i).getId(), newList.get(i).getId());
         }
 
+        /* get by student id */
         List<Exam> exams = examDAO.getCurrentExams(2);
         Assert.assertNotNull(exams);
 
+        /* update */
+        exam.setCourseId(4);
+        examDAO.update(exam);
+        exam1 = examDAO.selectById(id);
+        assertEquals(exam1.getCourseId(), 4);
+
+        /* delete */
         examDAO.delete(id);
         assertNull(examDAO.selectById(id));
+
+        /* not entirely corrected yet */
+        exams = examDAO.getInevaluatedExams();
+        assertNotNull(exams);
+        if (exams.size() > 0) {
+            for (Exam e : exams) {
+                assertEquals(e.getExamStatus(), ExamStatus.NOT_CHECKED);
+            }
+        }
+
 
     }
 }

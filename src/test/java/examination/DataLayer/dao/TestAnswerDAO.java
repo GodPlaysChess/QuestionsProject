@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -36,14 +37,21 @@ public class TestAnswerDAO extends AbstractTest<Answer> {
 
         long id = answer.getId();
 
-        /* get exam */
+        /* get answer */
         answer = answerDAO.selectById(id);
         Assert.assertNotNull(answer);
 
+        /* update */
+        answer.setText("updated text");
+        answerDAO.update(answer);
+        answer = answerDAO.selectById(id);
+        assertEquals(answer.getText(), "updated text");
+
+        /* find answer by exam and question id*/
         Answer answer1 = answerDAO.getAnswerByQuestionId(1, 1);
         assertNotNull(answer1);
 
-        /* delete exam */
+        /* delete answer */
         answerDAO.delete(id);
         assertNull(answerDAO.selectById(id));
 

@@ -13,8 +13,6 @@ public interface BaseDAO <T extends BaseModel> {
 
     List<T> selectList(long offset, int limit);
 
-    boolean deleteList(long offset, int limit);
-
     boolean update(T model);
 
     boolean delete(long id);

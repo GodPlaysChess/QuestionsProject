@@ -74,26 +74,12 @@ public class AnswerDAOImpl extends BaseDAOImpl implements AnswerDAO {
     }
 
     @Override
-    public boolean deleteList(long offset, int limit) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public boolean update(Answer model) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Answer answer = (Answer) session.get(Answer.class, model.getId());
-            answer.setStudentId(model.getStudentId());
-            answer.setQuestionId(model.getQuestionId());
-            answer.setExamId(model.getExamId());
-            answer.setTimeFinish(model.getTimeFinish());
-            answer.setTimeStart(model.getTimeStart());
-            answer.setText(model.getText());
-            answer.setAnswerStatus(model.getAnswerStatus());
-            answer.setMark(model.getMark()); // previously mark was not updated
-            session.update(answer);
+            session.update(model);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();

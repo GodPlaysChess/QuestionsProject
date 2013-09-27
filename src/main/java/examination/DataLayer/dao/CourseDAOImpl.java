@@ -70,24 +70,6 @@ public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
         return null;
     }
 
-    @Override
-    public boolean deleteList(long offset, int limit) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            List<Course> courses = selectList(offset, limit);
-            session.delete(courses);
-            tx.commit();
-            return true;
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            log.error("Delete list error: ", e);
-        }
-        return false;
-
-    }
 
     @Override
     public boolean update(Course model) {

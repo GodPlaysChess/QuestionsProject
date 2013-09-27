@@ -88,29 +88,6 @@ public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
     }
 
     @Override
-    public boolean deleteList(long offset, int limit) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            String sql = "DELETE FROM Exam WHERE id > :offset " +
-                    "AND id < :maxnum";
-            Query query = (Query) session.createSQLQuery(sql).addEntity(Exam.class)
-                    .setParameter("offset", offset).setParameter("maxnum", offset + limit);
-
-            for (long id = offset; id < offset + limit; id++) {
-                delete(id);
-            }
-            tx.commit();
-            return true;
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            log.error("Delete list error: ", e);
-        }
-        return false;
-    }
-
-    @Override
     public boolean update(Exam model) {
         Session session = factory.openSession();
         Transaction tx = null;

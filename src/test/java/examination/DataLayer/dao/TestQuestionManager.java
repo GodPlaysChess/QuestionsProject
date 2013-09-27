@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class TestQuestionManager extends AbstractTest<Question> {
 
@@ -23,8 +26,25 @@ public class TestQuestionManager extends AbstractTest<Question> {
         Question question = new Question();
         question.setText("this message must be deleted");
         question.setType(QuestionType.RADIOBUTTON);
+        boolean inserted = questionDAO.insert(question);
+        assertTrue(question.getId() > 0);
+        assertTrue(inserted);
 
-        baseCheck(question, questionDAO);
+        long id = question.getId();
+
+        /* get */
+        question = questionDAO.selectById(id);
+        assertNotNull(question);
+
+        /* update */
+        question.setText("updated");
+        questionDAO.update(question);
+        question = questionDAO.selectById(id);
+        assertEquals(question.getText(), "updated");
+
+        /* delete */
+        questionDAO.delete(id);
+        assertNull(questionDAO.selectById(id));
 
         /* GET LIST with OFFSET Question */
         List<Long> ids = new ArrayList<Long>();
@@ -47,9 +67,12 @@ public class TestQuestionManager extends AbstractTest<Question> {
         Question question1 = questionDAO.getRandomQuestion();
         assertNotNull(question1);
 
+
+
+
         /* Rollback */
-        for (long id : ids){
-            questionDAO.delete(id);
+        for (long i : ids) {
+            questionDAO.delete(i);
         }
     }
 

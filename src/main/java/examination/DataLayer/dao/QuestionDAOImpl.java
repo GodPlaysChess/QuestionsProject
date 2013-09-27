@@ -101,10 +101,7 @@ public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Question q = (Question)session.get(Question.class, question.getId());
-            q.setText(question.getText());
-            q.setType(question.getType());
-            session.update(q);
+            session.update(question);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -165,32 +162,6 @@ public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
             log.error("Select list error: ", e);
         }
         return null;
-    }
-
-    //BAD BAD BAD!!! REWRITE!!!
-    @Override
-    public boolean deleteList(long offset, int limit) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-           /* String sql = "DELETE FROM Question WHERE id > :offset " +
-                    "AND id < :maxnum";
-            Query query = (Query) session.createSQLQuery(sql).addEntity(Question.class)
-                    .setParameter("offset", offset).setParameter("maxnum", offset+limit);
-
-            for (long id = offset; id < offset + limit; id++) {
-                deleteQuestion(id);
-            }*/
-            List<Question> questions = selectList(offset, limit);
-            session.delete(questions);
-            tx.commit();
-            return true;
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            log.error("Delete list error: ", e);
-        }
-        return false;
     }
 
     @Override
