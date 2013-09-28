@@ -14,6 +14,20 @@
                                 window.location.href = link;
                             })
                 })
+  /*      $(document).ready(
+                function () {
+                    $("#begin").click()(
+                            function (button) {
+                                button.preventDefault();
+                               // var courseId = 0;
+                                var courseId = $("#course_id").val();
+                                console.log(courseId);
+                                var link = "/exams_to_evaluate.html?course_id=" + courseId;
+                                window.location.href = link;
+                            }
+                    )
+                }
+        )*/
     </script>
 </head>
 <BODY>
@@ -61,23 +75,21 @@
     </fieldset>
 </form>
 
-<form class="form-horizontal" action="/exams_to_evaluate.html">
+<form class="form-horizontal" action="/exams_to_evaluate.html" method="get">
     <fieldset>
         <!-- Form Name -->
         <legend>Evaluate answers</legend>
         <!-- Text input-->
         <div class="control-group">
-            <label class="control-label" for="textinput">select course </label>
+            <label class="control-label" for="course_id">Select course </label>
 
             <div class="controls">
-                <input id="textinput" name="courseId" type="number" class="input-small">
+                <input id="course_id" name="course_id" type="number" value="0" class="input-small">
             </div>
         </div>
-
         <!-- Button -->
         <div class="control-group">
             <label class="control-label" for="begin"></label>
-
             <div class="controls">
                 <button id="begin" name="begin" class="btn btn-primary">Begin</button>
             </div>

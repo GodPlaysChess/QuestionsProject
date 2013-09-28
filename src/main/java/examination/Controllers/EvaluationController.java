@@ -30,11 +30,24 @@ public class EvaluationController {
     private ExaminationService examinationService;
 
 
-    @RequestMapping(value = ("/exams_to_evaluate.html"))
-    public ModelAndView toEvaluationPage() {
+    @RequestMapping(value = ("/exams_to_evaluate.html"), method = RequestMethod.GET)
+    public ModelAndView toEvaluationPage(@RequestParam(value = "course_id") long courseId) {
         ModelAndView modelAndView = new ModelAndView("exams_evaluate");
+
         List<Exam> exams = examinationService.getInevaluatedExams();
-        modelAndView.addObject("exams", exams);
+
+        List<Exam> examsByCourse = new ArrayList<Exam>();
+        for (Exam e : exams) {
+            if (e.getCourseId() == courseId) {
+                examsByCourse.add(e);
+            }
+        }
+        if (examsByCourse.size() == 0) {
+            modelAndView.addObject("exams", exams);
+        } else {
+            modelAndView.addObject("exams", examsByCourse);
+        }
+
         return modelAndView;
     }
 
