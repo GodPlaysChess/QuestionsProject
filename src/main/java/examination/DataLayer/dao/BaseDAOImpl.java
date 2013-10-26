@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 public abstract class BaseDAOImpl {
 
     protected SessionFactory factory;
-    protected static Logger log = Logger.getLogger(QuestionDAOImpl.class);
+    protected static final Logger log = Logger.getLogger(QuestionDAOImpl.class);
 
     @PostConstruct
     private void createFactory() {

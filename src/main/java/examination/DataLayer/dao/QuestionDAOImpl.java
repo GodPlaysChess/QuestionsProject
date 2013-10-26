@@ -16,6 +16,8 @@ import java.util.Random;
 @Repository
 public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
 
+    private Random generator = new Random();
+
     private boolean addQuestion(Question question) {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -61,7 +63,7 @@ public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
             criteria.setProjection(Projections.rowCount());
             int count = ((Number) criteria.uniqueResult()).intValue();
             if (0 != count) {
-                int index = new Random().nextInt(count);
+                int index = generator.nextInt(count);
                 criteria = session.createCriteria(Question.class);
                 question = (Question) criteria.setFirstResult(index)
                         .setMaxResults(1).uniqueResult();

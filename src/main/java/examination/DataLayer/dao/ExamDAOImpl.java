@@ -1,7 +1,6 @@
 package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Exam;
-import examination.DataLayer.models.enums.ExamStatus;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
@@ -9,7 +8,6 @@ import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import javax.management.Query;
 import java.util.List;
 
 @Repository
@@ -53,19 +51,6 @@ public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
 
     @Override
     public List<Exam> selectList(long offset, int limit) {
-        List<Exam> result;
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-               /*
-               *
-               * WRITE CODE HERE
-               *
-               * */
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            log.error("Select list error: ", e);
-        }
         return null;
     }
 
