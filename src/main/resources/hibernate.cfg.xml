@@ -16,7 +16,7 @@
             root
         </property>
         <property name="hibernate.connection.password">
-            warcraft
+            password
         </property>
 
         <mapping resource="question.hbm.xml"/>
