@@ -12,7 +12,7 @@
         <div class="row">
             <c:forEach var="ex" items="${exams}">
                 <div class="span4">
-                    <form class="form-horizontal" action="/evaluate.html" method="post">
+                    <form class="form-horizontal" action="/evaluate.html" method="get">
                         <fieldset>
                             <!-- Form Name -->
                             <legend>Exam N ${ex.id}</legend>

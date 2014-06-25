@@ -24,14 +24,19 @@
                                 var markCode = 1;
                                 var answerID = $(this).attr('id');
                                 answerID = answerID.substring(4);
-                                $.post("/evaluate.json", {mark_code: markCode, answer_id: answerID}, function(response){
-                                    console.log(response);
+                                $.ajax({type: "POST",
+                                url : "/evaluate.json",
+                                data: {mark: 'TRUE', answer_id: answerID},
+                               // contentType: "application/json",
+                                contentType : 'application/x-www-form-urlencoded',
+                                dataType: 'json',
+                                success: function(response){
                                     if (response){
-                                        var txt = $(this).closest(".clickedparent").find('textarea')[1];
+                                        var txt = $(button.currentTarget).closest('.clickedparent').find('textarea')[1];
                                         $(txt).removeClass("wrong");
                                         $(txt).addClass("good");
                                     }
-                                });
+                                }});
 
                             }
                     );
@@ -42,12 +47,11 @@
                     $(".btn-danger").click(
                             function (button) {
                                 button.preventDefault();
-                                var markCode = 2;
                                 var answerID = $(this).attr('id');
                                 answerID = answerID.substring(4);
-                                $.post("/evaluate.json", {mark_code: markCode, answer_id: answerID}, function(response){
+                                $.post("/evaluate.json", {mark: "FALSE", answer_id: answerID}, function(response){
                                     if (response){
-                                    var txt = $(this).closest(".clickedparent").find('textarea')[1];
+                                    var txt = $(button.target).closest(".clickedparent").find('textarea')[1];
                                     $(txt).removeClass("good");
                                     $(txt).addClass("wrong");
                                     }
@@ -84,13 +88,13 @@
             </div>
 
             <div class="span12 pagination-centered">
-                <form class="form-horizontal" action="/evaluate.html" method="post">
+                <div class="form-horizontal">
 
                     <div class="control-group inline">
                         <button id="suc-${entry.key.id}" class="btn btn-success">Correct</button>
                         <button id="wro-${entry.key.id}" class="btn btn-danger">Wrong</button>
                     </div>
-                </form>
+                </div>
             </div>
 
         </div>

@@ -51,7 +51,7 @@ public class EvaluationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/evaluate.html"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/evaluate.html"}, method = RequestMethod.GET)
     public ModelAndView beginEvaluation(@RequestParam(value = "exam_id",
             required = true) long examId) {
         ModelAndView modelAndView = new ModelAndView("answers_list");
@@ -74,14 +74,13 @@ public class EvaluationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/evaluate.json"})
+    @RequestMapping(value = {"/evaluate.json"}, method = RequestMethod.POST)
     @ResponseBody
-    public boolean evaluateAnswer(@RequestParam(value = "mark_code", required = true) int markCode,
+    public boolean evaluateAnswer(@RequestParam(value = "mark", required = true) Mark mark,
                                   @RequestParam(value = "answer_id", required = true) long answerID) {
         Answer answer = answerService.selectById(answerID);
-        answer.setMarkCode(markCode);
-        boolean callback = answerService.update(answer);
-        return callback;
+        answer.setMark(mark);
+        return answerService.update(answer);
     }
 
 }
