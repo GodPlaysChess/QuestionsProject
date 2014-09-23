@@ -55,22 +55,7 @@ public class AnswerDAOImpl extends BaseDAOImpl implements AnswerDAO {
 
     @Override
     public List<Answer> selectList(long offset, int limit) {
-        List<Answer> result;
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Criteria cr = session.createCriteria(Answer.class);
-            cr.setFirstResult((int) offset);      // BAD Since cast offset to int!!
-            cr.setMaxResults(limit);
-            result = cr.list();
-            tx.commit();
-            return result;
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            log.error("Select list error: ", e);
-        }
-        return null;
+        return selectList(offset, limit, Answer.class);
     }
 
     @Override

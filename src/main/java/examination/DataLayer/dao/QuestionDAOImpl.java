@@ -3,7 +3,6 @@ package examination.DataLayer.dao;
 import examination.DataLayer.models.Question;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Projections;
@@ -147,23 +146,7 @@ public class QuestionDAOImpl extends BaseDAOImpl implements QuestionDAO {
 
     @Override
     public List<Question> selectList(long offset, int limit) {
-        List<Question> result;
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-
-            Criteria cr = session.createCriteria(Question.class);
-            cr.setFirstResult((int) offset);      // BAD Since cast offset to int!!
-            cr.setMaxResults(limit);
-            result = cr.list();
-            tx.commit();
-            return result;
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            log.error("Select list error: ", e);
-        }
-        return null;
+        return selectList(offset, limit, Question.class);
     }
 
     @Override
