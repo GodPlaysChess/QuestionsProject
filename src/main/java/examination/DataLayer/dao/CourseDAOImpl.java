@@ -5,7 +5,7 @@ import examination.DataLayer.models.Question;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
-import org.hibernate.classic.Session;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

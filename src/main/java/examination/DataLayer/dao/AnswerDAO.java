@@ -2,7 +2,6 @@ package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Answer;
 
-import java.util.Date;
 import java.util.List;
 
 public interface AnswerDAO extends BaseDAO<Answer> {

@@ -11,7 +11,7 @@
             <generator class="native"/>
         </id>
         <property name="typeCode" column="type" type="int"/>
-        <property name="text" column="text"/>
+        <property name="text" column="text" type="java.lang.String"/>
         <!--<property name="text" column="text" type="java.lang.String"/>-->
 
     </class>
