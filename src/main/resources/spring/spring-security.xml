@@ -14,7 +14,8 @@
             <cache-control />
         </headers>
 
-        <intercept-url pattern="/start.html" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/start.html" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/teacher/**" access="hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')" />
 
         <form-login login-page="/login.html"
                     default-target-url="/"

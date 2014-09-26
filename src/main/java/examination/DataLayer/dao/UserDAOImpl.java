@@ -54,9 +54,8 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(User.class);
             criteria.add(Restrictions.eq("username", username));
-            List<User> users = criteria.list();
-            if (users.size() > 0) {
-                user = users.get(0);
+            user = (User) criteria.uniqueResult();
+            if (user != null) {
                 user.setAuthorities();
             }
             tx.commit();

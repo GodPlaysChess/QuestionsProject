@@ -95,8 +95,20 @@ public class ExaminationServiceImpl implements ExaminationService {
     }
 
     @Override
-    public List<Exam> getInevaluatedExams() {
-        return examDAO.getInevaluatedExams();
+    public List<Exam> getInevaluatedExams(long courseId) {
+        return examDAO.getInevaluatedExams(courseId);
+    }
+
+    @Override
+    public List<Course> getCoursesList(int offset, int limit) {
+        return courseDAO.selectList(offset, limit);
+    }
+
+    @Override
+    public void finishExamination(long examId) {
+        Exam exam = examDAO.selectById(examId);
+        exam.setExamStatus(ExamStatus.CHECKED);
+        examDAO.update(exam);
     }
 
     @Override

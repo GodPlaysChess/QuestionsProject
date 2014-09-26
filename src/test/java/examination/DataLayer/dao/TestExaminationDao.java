@@ -72,7 +72,7 @@ public class TestExaminationDao extends AbstractTest<Exam> {
         assertNull(examDAO.selectById(id));
 
         /* not entirely corrected yet */
-        exams = examDAO.getInevaluatedExams();
+        exams = examDAO.getInevaluatedExams(0);
         assertNotNull(exams);
         if (exams.size() > 0) {
             for (Exam e : exams) {

@@ -25,7 +25,7 @@
                                 var answerID = $(this).attr('id');
                                 answerID = answerID.substring(4);
                                 $.ajax({type: "POST",
-                                url : "/evaluate.json",
+                                url : "/teacher/evaluate.json",
                                 data: {mark: 'TRUE', answer_id: answerID},
                                // contentType: "application/json",
                                 contentType : 'application/x-www-form-urlencoded',
@@ -49,7 +49,7 @@
                                 button.preventDefault();
                                 var answerID = $(this).attr('id');
                                 answerID = answerID.substring(4);
-                                $.post("/evaluate.json", {mark: "FALSE", answer_id: answerID}, function(response){
+                                $.post("/teacher/evaluate.json", {mark: "FALSE", answer_id: answerID}, function(response){
                                     if (response){
                                     var txt = $(button.target).closest(".clickedparent").find('textarea')[1];
                                     $(txt).removeClass("good");

@@ -1,5 +1,6 @@
 package examination.QuestionService;
 
+import examination.DataLayer.models.Course;
 import examination.QuestionService.models.QuestionInfo;
 import examination.DataLayer.models.Exam;
 
@@ -18,5 +19,10 @@ public interface ExaminationService {
     @Nullable
     Exam selectById(long examId);
 
-    List<Exam> getInevaluatedExams();
+    List<Exam> getInevaluatedExams(long courseId);
+
+    List<Course> getCoursesList(int offset, int limit);
+
+    void finishExamination(long examId);
+
 }

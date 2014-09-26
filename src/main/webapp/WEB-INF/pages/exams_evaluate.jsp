@@ -12,7 +12,7 @@
         <div class="row">
             <c:forEach var="ex" items="${exams}">
                 <div class="span4">
-                    <form class="form-horizontal" action="/evaluate.html" method="get">
+                    <form class="form-horizontal" action="/teacher/evaluate.html" method="get">
                         <fieldset>
                             <!-- Form Name -->
                             <legend>Exam N ${ex.id}</legend>
@@ -21,7 +21,7 @@
                                 <label class="control-label" for="cont">Course # ${ex.courseId}</label>
 
                                 <div class="controls">
-                                    <button id="cont" name="cont" class="btn btn-success">Continue</button>
+                                    <button id="cont" class="btn btn-success">Continue</button>
                                 </div>
                             </div>
                             <input type="hidden" name="exam_id" value="${ex.id}"/>

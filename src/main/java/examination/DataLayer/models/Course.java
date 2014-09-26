@@ -4,9 +4,18 @@ import java.util.List;
 
 public class Course implements BaseModel {
     private long id;
+    String name;
     private List<Question> questions;
     private int examQuestionsNumber;
     private GradingSystem gradingSystem;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public GradingSystem getGradingSystem() {
         return gradingSystem;

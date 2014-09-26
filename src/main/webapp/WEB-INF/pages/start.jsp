@@ -1,34 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <HTML>
 <head>
     <link type="text/css" rel="stylesheet" href="/bootstrap/bootstrap.css"/>
-    <script type="text/javascript" src="/js/jquery-1.10.2.js"></script>
-    <script>
-        $(document).ready(
-                function () {
-                    $("#cont").click(
-                            function (button) {
-                                button.preventDefault();
-                                var studentId = $("#studentId").val();
-                                var link = "/repair.html?studentId=" + studentId;
-                                window.location.href = link;
-                            })
-                })
-  /*      $(document).ready(
-                function () {
-                    $("#begin").click()(
-                            function (button) {
-                                button.preventDefault();
-                               // var courseId = 0;
-                                var courseId = $("#course_id").val();
-                                console.log(courseId);
-                                var link = "/exams_to_evaluate.html?course_id=" + courseId;
-                                window.location.href = link;
-                            }
-                    )
-                }
-        )*/
-    </script>
 </head>
 <BODY>
 
@@ -44,60 +20,63 @@
 
             <div class="controls">
                 <button id="start" name="start" class="btn btn-success">Start Text</button>
-                <button id="cont" name="cont" class="btn btn-warning">Continue Test</button>
+                <a href="/repair.html" class="btn btn-warning">Continue Test</a>
             </div>
         </div>
 
-        <!-- Prepended text-->
         <div class="control-group">
-            <label class="control-label" for="courseId"></label>
+            <label class="control-label"></label>
 
             <div class="controls">
                 <div class="input-prepend">
-                    <span class="add-on">course</span>
-                    <input id="courseId" name="courseId" class="input-xlarge" placeholder="number here" type="number">
-                </div>
+                    <span class="add-on">Выберите курс</span>
+                    <select name="course_id">
+                        <c:forEach var="course" items="${courses}">
+                            <option value="${course.id}">${course.id}</option>
+                        </c:forEach>
+                    </select>
 
-            </div>
-        </div>
-
-        <!-- Prepended text-->
-        <div class="control-group">
-            <label class="control-label" for="studentId"></label>
-
-            <div class="controls">
-                <div class="input-prepend">
-                    <span class="add-on">student</span>
-                    <input id="studentId" name="studentId" class="input-xlarge" placeholder="number here" type="number">
                 </div>
             </div>
         </div>
     </fieldset>
 </form>
 
-<form class="form-horizontal" action="/exams_to_evaluate.html" method="get">
+<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')">
+
+<form class="form-horizontal" action="/teacher/exams_to_evaluate.html" method="get">
     <fieldset>
         <!-- Form Name -->
-        <legend>Evaluate answers</legend>
+        <legend>Проверить ответы</legend>
         <!-- Text input-->
         <div class="control-group">
-            <label class="control-label" for="course_id">Select course </label>
+            <label class="control-label"></label>
 
             <div class="controls">
-                <input id="course_id" name="course_id" type="number" value="0" class="input-small">
+                <div class="input-prepend">
+                    <span class="add-on">Выберите курс</span>
+                    <select name="course_id">
+                        <option value="0">Все курсы</option>
+                        <c:forEach var="course" items="${courses}">
+                            <option value="${course.id}">${course.id}</option>
+                        </c:forEach>
+                    </select>
+
+                </div>
             </div>
         </div>
         <!-- Button -->
         <div class="control-group">
             <label class="control-label" for="begin"></label>
             <div class="controls">
-                <button id="begin" name="begin" class="btn btn-primary">Begin</button>
+                <button id="begin" class="btn btn-primary">Проверить</button>
             </div>
         </div>
     </fieldset>
 
 
 </form>
+</sec:authorize>
 
 
 </BODY>

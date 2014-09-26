@@ -1,11 +1,9 @@
 package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Course;
-import examination.DataLayer.models.Question;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Transaction;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -51,23 +49,7 @@ public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
 
     @Override
     public List<Course> selectList(long offset, int limit) {
-        List<Course> result;
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-
-            Criteria cr = session.createCriteria(Question.class);
-            cr.setFirstResult((int)offset);      // BAD Since cast offset to int!!
-            cr.setMaxResults(limit);
-            result = cr.list();
-            tx.commit();
-            return result;
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            log.error("Select list error: ", e);
-        }
-        return null;
+        return selectList(offset, limit, Course.class);
     }
 
 

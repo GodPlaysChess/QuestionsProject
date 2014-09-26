@@ -130,7 +130,7 @@ public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
     }
 
     @Override
-    public List<Exam> getInevaluatedExams() {
+    public List<Exam> getInevaluatedExams(long courseId) {
         List<Exam> result;
         Session session = factory.openSession();
         Transaction tx = null;
@@ -138,6 +138,9 @@ public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
             tx = session.beginTransaction();
             Criteria cr = session.createCriteria(Exam.class);
             cr.add(Restrictions.eq("examStatusCode", 0));
+            if (courseId > 0) {
+                cr.add(Restrictions.eq("courseId", courseId));
+            }
             result = cr.list();
             tx.commit();
             return result;

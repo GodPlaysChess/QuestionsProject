@@ -1,12 +1,16 @@
 package examination.Controllers;
 
 import examination.DataLayer.models.Answer;
+import examination.DataLayer.models.Course;
 import examination.DataLayer.models.Exam;
 import examination.QuestionService.AnswerService;
 
 import examination.QuestionService.ExaminationService;
+import examination.QuestionService.UserDetailsServiceImpl;
 import examination.QuestionService.models.QuestionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,15 +36,24 @@ public class ExaminationController {
     @RequestMapping(value = {"/start.html"}, method = RequestMethod.GET)
     public ModelAndView startExam() {
         ModelAndView modelAndView = new ModelAndView("start");
+        List<Course> courses = examinationService.getCoursesList(0, 0);
+        modelAndView.addObject("courses", courses);
         return modelAndView;
     }
 
     @RequestMapping(value = {"/start.html"}, method = RequestMethod.POST)
-    public ModelAndView startExam(@RequestParam(value = "courseId", required = true) long courseId,
-                                  @RequestParam(value = "studentId", required = true) long studentId) {
+    public ModelAndView startExam(@RequestParam(value = "course_id", required = true) long courseId) {
         ModelAndView modelAndView = new ModelAndView("next_question");
-        modelAndView.addObject("question_info", examinationService.start(studentId, courseId));
+        long userId = getCurrentUserId();
+
+        modelAndView.addObject("question_info", examinationService.start(userId, courseId));
         return modelAndView;
+    }
+
+    private long getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsServiceImpl.CustomUser customUser = (UserDetailsServiceImpl.CustomUser)authentication.getPrincipal();
+        return customUser.getUserId();
     }
 
     @RequestMapping(value = {"/submit_answer.html"}, method = RequestMethod.POST)
@@ -94,9 +107,8 @@ public class ExaminationController {
     }
 
     @RequestMapping(value = {"/repair.html"}, method = RequestMethod.GET)
-    public ModelAndView showExamsList(@RequestParam(value = "studentId",
-            required = true) long studentId) {
-        List<Exam> examList = examinationService.getCurrentExams(studentId);
+    public ModelAndView showExamsList() {
+        List<Exam> examList = examinationService.getCurrentExams(getCurrentUserId());
         if (examList == null) {
             return new ModelAndView("start");
         }

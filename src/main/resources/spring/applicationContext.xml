@@ -27,34 +27,6 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <bean id="modelValidator" class="examination.validation.ModelValidator"/>
     <mvc:annotation-driven validator="modelValidator"/>
-
-
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost/questionsproject" />
-        <property name="username" value="root" />
-        <property name="password" value="admin" />
-    </bean>
-
-    <!--    <bean id="sessionFactory"
-              class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-            <property name="dataSource" ref="dataSource"/>
-            <property name="mappingResources">
-                <list>
-                    <value>exam.hmb.xml</value>
-                    <value>question.hmb.xml</value>
-                </list>
-            </property>
-            <property name="hibernateProperties">
-                <props>
-                    <prop key="dialect">org.hibernate.dialect.HSQLDialect</prop>
-                </props>
-            </property>
-        </bean>
-
-        <jdbc:embedded-database id="dataSource"/>-->
 </beans>
 
 
