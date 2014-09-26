@@ -4,7 +4,6 @@ import examination.DataLayer.models.Answer;
 import examination.DataLayer.models.Course;
 import examination.DataLayer.models.Exam;
 import examination.QuestionService.AnswerService;
-
 import examination.QuestionService.ExaminationService;
 import examination.QuestionService.UserDetailsServiceImpl;
 import examination.QuestionService.models.QuestionInfo;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,6 +36,7 @@ public class ExaminationController {
         ModelAndView modelAndView = new ModelAndView("start");
         List<Course> courses = examinationService.getCoursesList(0, 0);
         modelAndView.addObject("courses", courses);
+        modelAndView.addObject("showRepair", examinationService.getIncompleteExams(getCurrentUserId()).size()>0);
         return modelAndView;
     }
 
@@ -73,8 +72,7 @@ public class ExaminationController {
             modelAndView.addObject("question_info", questionInfo);
             return modelAndView;
         } else {
-            ModelAndView modelAndView = createRedirectModelAndView("/finish_exam.html");
-            return modelAndView;
+            return createRedirectModelAndView("/finish_exam.html");
         }
     }
 
@@ -84,9 +82,7 @@ public class ExaminationController {
 
     @RequestMapping(value = {"/finish_exam.html"}, method = RequestMethod.GET)
     public ModelAndView finishExam() {
-        //examinationService.finish();
-        ModelAndView modelAndView = new ModelAndView("finish_exam");
-        return modelAndView;
+        return new ModelAndView("finish_exam");
     }
 
     @RequestMapping(value = {"/submit_answer-json.json"}, method = RequestMethod.POST)
@@ -108,18 +104,9 @@ public class ExaminationController {
 
     @RequestMapping(value = {"/repair.html"}, method = RequestMethod.GET)
     public ModelAndView showExamsList() {
-        List<Exam> examList = examinationService.getCurrentExams(getCurrentUserId());
-        if (examList == null) {
-            return new ModelAndView("start");
-        }
-        List<Exam> incompleteExams = new ArrayList<Exam>();
-        for (Exam exam : examList) {
-            if (exam.getTimeFinish() == null) {
-                incompleteExams.add(exam);
-            }
-        }
-        if (examList.size() == 0) {
-            return new ModelAndView("start");
+        List<Exam> incompleteExams = examinationService.getIncompleteExams(getCurrentUserId());
+        if (incompleteExams.size() == 0) {
+            return createRedirectModelAndView("start.html");
         } else if (incompleteExams.size() == 1) {
             Exam exam = incompleteExams.get(0);
             QuestionInfo questionInfo = examinationService.current(exam.getId());

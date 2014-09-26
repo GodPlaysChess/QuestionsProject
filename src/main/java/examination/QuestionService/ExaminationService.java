@@ -16,6 +16,8 @@ public interface ExaminationService {
 
     List<Exam> getCurrentExams(long studentId);
 
+    List<Exam> getIncompleteExams(long studentId);
+
     @Nullable
     Exam selectById(long examId);
 

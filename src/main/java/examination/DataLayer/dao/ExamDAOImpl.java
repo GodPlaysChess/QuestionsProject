@@ -1,6 +1,7 @@
 package examination.DataLayer.dao;
 
 import examination.DataLayer.models.Exam;
+import examination.DataLayer.models.enums.ExamStatus;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
@@ -137,7 +138,7 @@ public class ExamDAOImpl extends BaseDAOImpl implements ExamDAO {
         try {
             tx = session.beginTransaction();
             Criteria cr = session.createCriteria(Exam.class);
-            cr.add(Restrictions.eq("examStatusCode", 0));
+            cr.add(Restrictions.eq("examStatusCode", ExamStatus.NOT_CHECKED.getCode()));
             if (courseId > 0) {
                 cr.add(Restrictions.eq("courseId", courseId));
             }

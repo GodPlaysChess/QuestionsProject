@@ -12,6 +12,7 @@ import examination.utils.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -59,7 +60,9 @@ public class ExaminationServiceImpl implements ExaminationService {
             currentQuestion = exam.getQuestions().get(index);
             exam.setCurrentQuestion(currentQuestion.getId());
         } else {
+            // exam ended
             exam.setCurrentQuestion(-1);
+            exam.setTimeFinish(new Date());
         }
         examDAO.update(exam);
         QuestionInfo questionInfo = new QuestionInfo();
@@ -114,6 +117,18 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Override
     public List<Exam> getCurrentExams(long studentId) {
         return examDAO.getCurrentExams(studentId);
+    }
+
+    @Override
+    public List<Exam> getIncompleteExams(long studentId) {
+        List<Exam> examList = getCurrentExams(studentId);
+        List<Exam> incompleteExams = new ArrayList<Exam>();
+        for (Exam exam : examList) {
+            if (exam.getTimeFinish() == null) {
+                incompleteExams.add(exam);
+            }
+        }
+        return incompleteExams;
     }
 
 

@@ -20,7 +20,10 @@
 
             <div class="controls">
                 <button id="start" name="start" class="btn btn-success">Start Text</button>
-                <a href="/repair.html" class="btn btn-warning">Continue Test</a>
+                <c:if test="${showRepair}">
+                    <a href="/repair.html" class="btn btn-warning">Continue Test</a>
+                </c:if>
+
             </div>
         </div>
 
