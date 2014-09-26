@@ -1,5 +1,6 @@
 package examination.DataLayer.dao;
 
+import examination.DataLayer.models.Course;
 import examination.DataLayer.models.Exam;
 import examination.DataLayer.models.Question;
 import examination.DataLayer.models.enums.ExamStatus;
@@ -27,8 +28,11 @@ public class TestExaminationDao extends AbstractTest<Exam> {
     public void test() {
         /* Insert Examination */
         Exam exam = new Exam();
+        Course course = new Course();
+        course.setId(1);
         //exam.setId(0);
-        exam.setCourseId(1);
+        // exam.setCourseId(1);
+        exam.setCourse(course);
         exam.setStudentId(2);
         exam.setTimeStart(new Date());
         exam.setTimeFinish(new Date());
@@ -62,7 +66,8 @@ public class TestExaminationDao extends AbstractTest<Exam> {
         Assert.assertNotNull(exams);
 
         /* update */
-        exam.setCourseId(4);
+        course.setId(4);
+        exam.setCourse(course);
         examDAO.update(exam);
         exam1 = examDAO.selectById(id);
         assertEquals(exam1.getCourseId(), 4);

@@ -30,7 +30,8 @@ public class ExaminationServiceImpl implements ExaminationService {
     public QuestionInfo start(long studentId, long courseId) {
         Course course = courseDAO.selectById(courseId);
         Exam exam = new Exam();
-        exam.setCourseId(courseId);
+        // exam.setCourseId(courseId);
+        exam.setCourse(course);
         exam.setStudentId(studentId);
         exam.setTimeStart(new Date());
         exam.setExamStatus(ExamStatus.NOT_CHECKED);

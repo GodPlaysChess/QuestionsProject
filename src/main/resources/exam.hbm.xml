@@ -8,7 +8,6 @@
         <id name="id" type="long" column="exam_id">
             <generator class="native"/>
         </id>
-        <property name="courseId" column="course_id" type="long"/>
         <property name="studentId" column="student_id" type="long"/>
         <property name="timeStart" column="time_start" type="java.util.Date"/>
         <property name="timeFinish" column="time_finish" type="java.util.Date"/>
@@ -20,6 +19,8 @@
             <list-index column="index_col"/>
             <many-to-many column="question_id" class="examination.DataLayer.models.Question"/>
         </list>
+
+        <many-to-one name="course" column="course_id" class="examination.DataLayer.models.Course" lazy="false"/>
 
 
     </class>

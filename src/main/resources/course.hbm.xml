@@ -9,6 +9,7 @@
             <generator class="native"/>
         </id>
         <property name="examQuestionsNumber" column="questions_number" type="int"/>
+        <property name="name" column="name" type="string"/>
      <!--   <property name="gradingSystem" column="grading_system" type="long"/>-->
 
         <bag name="questions" table="courses_questions" lazy="false">

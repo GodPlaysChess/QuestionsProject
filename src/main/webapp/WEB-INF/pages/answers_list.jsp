@@ -2,7 +2,10 @@
 <HTML>
 <head>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <link type="text/css" rel="stylesheet" href="/bootstrap/bootstrap.css"/>
+    <%--<link type="text/css" rel="stylesheet" href="/bootstrap/bootstrap.css"/>--%>
+    <link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link href="/bootstrap/style.css" rel="stylesheet">
+    <%--<link href="http://startbootstrap.com/templates/modern-business/css/modern-business.css" rel="stylesheet">--%>
     <style type="text/css">
         .wrong {
             background-color: #ffc057 !important;
@@ -32,7 +35,7 @@
                                 dataType: 'json',
                                 success: function(response){
                                     if (response){
-                                        var txt = $(button.currentTarget).closest('.clickedparent').find('textarea')[1];
+                                        var txt = $(button.currentTarget).closest('.clickedparent');
                                         $(txt).removeClass("wrong");
                                         $(txt).addClass("good");
                                     }
@@ -51,7 +54,7 @@
                                 answerID = answerID.substring(4);
                                 $.post("/teacher/evaluate.json", {mark: "FALSE", answer_id: answerID}, function(response){
                                     if (response){
-                                    var txt = $(button.target).closest(".clickedparent").find('textarea')[1];
+                                    var txt = $(button.target).closest(".clickedparent");
                                     $(txt).removeClass("good");
                                     $(txt).addClass("wrong");
                                     }
@@ -64,13 +67,15 @@
     </script>
 </head>
 <BODY>
+<%@include file="header.jsp" %>
 <h1 class="text-center"> Непроверенные ответы </h1>
 
 <!-- varStatus could be used there -->
 
 <div id='global-container' class="container">
     <c:forEach var="entry" items="${aMap}">
-        <div id="ans-${entry.key.id}" class="span12 clickedparent" style="border-bottom: 3px solid #000000">
+        <div id="ans-${entry.key.id}" class="span12 clickedparent <c:if test="${entry.key.mark==\"TRUE\"}">good</c:if>
+        <c:if test="${entry.key.mark==\"FALSE\"}">wrong</c:if>" style="border-bottom: 3px solid #000000">
 
             <div class="span12 pagination-centered">
                 <label><strong>Question</strong> </label>
@@ -81,10 +86,7 @@
 
             <div class="span12 pagination-centered">
                 <label><strong>Answer</strong></label>
-                <textarea disabled="true"
-                          <c:if test="${entry.key.mark==\"TRUE\"}">class="good"</c:if>
-                          <c:if test="${entry.key.mark==\"FALSE\"}">class="wrong"</c:if>
-                        >${entry.key.text}</textarea>
+                <textarea disabled="true">${entry.key.text}</textarea>
             </div>
 
             <div class="span12 pagination-centered">

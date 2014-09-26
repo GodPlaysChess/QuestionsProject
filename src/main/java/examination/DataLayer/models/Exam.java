@@ -7,13 +7,27 @@ import java.util.List;
 
 public class Exam implements BaseModel {
     private long id;
-    private long courseId;
+    // private long courseId;
     private long studentId;
     private List<Question> questions;
     private Date timeStart;
     private Date timeFinish;
     private long currentQuestion;
     private ExamStatus examStatus;
+
+    private Course course;
+
+    public String getCourseName() {
+        return course.getName();
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
     public ExamStatus getExamStatus() {
         return examStatus;
@@ -41,11 +55,7 @@ public class Exam implements BaseModel {
     }
 
     public long getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(long courseId) {
-        this.courseId = courseId;
+        return course.getId();
     }
 
     public long getStudentId() {
