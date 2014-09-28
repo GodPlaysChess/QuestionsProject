@@ -22,12 +22,12 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     @Nullable
     @Override
     public User selectById(long id) {
-        return null;
+        return selectById(id, User.class);
     }
 
     @Override
     public boolean insert(User model) {
-        return false;
+        return super.insert(model);
     }
 
     @Override
@@ -37,12 +37,12 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User model) {
-        return false;
+        return super.update(model);
     }
 
     @Override
     public boolean delete(long id) {
-        return false;
+        return delete(id, User.class);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            log.error("Get exam error: ", e);
+            log.error("Get user error: ", e);
         } finally {
             session.close();
         }

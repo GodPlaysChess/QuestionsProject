@@ -21,7 +21,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/teacher")
-public class EvaluationController {
+public class EvaluationController extends BaseController {
 
     @Autowired
     private AnswerService answerService;

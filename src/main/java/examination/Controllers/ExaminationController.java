@@ -5,11 +5,8 @@ import examination.DataLayer.models.Course;
 import examination.DataLayer.models.Exam;
 import examination.QuestionService.AnswerService;
 import examination.QuestionService.ExaminationService;
-import examination.QuestionService.UserDetailsServiceImpl;
 import examination.QuestionService.models.QuestionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.util.List;
 
 
 @Controller
-public class ExaminationController {
+public class ExaminationController extends BaseController {
 
     @Autowired
     private ExaminationService examinationService;
@@ -49,12 +45,6 @@ public class ExaminationController {
         return modelAndView;
     }
 
-    private long getCurrentUserId() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsServiceImpl.CustomUser customUser = (UserDetailsServiceImpl.CustomUser)authentication.getPrincipal();
-        return customUser.getUserId();
-    }
-
     @RequestMapping(value = {"/submit_answer.html"}, method = RequestMethod.POST)
     public ModelAndView submitAnswer(@Valid Answer answer, BindingResult result) {
         if (result.hasErrors()) {
@@ -74,10 +64,6 @@ public class ExaminationController {
         } else {
             return createRedirectModelAndView("/finish_exam.html");
         }
-    }
-
-    protected ModelAndView createRedirectModelAndView(String url) {
-        return new ModelAndView(new RedirectView(url));
     }
 
     @RequestMapping(value = {"/finish_exam.html"}, method = RequestMethod.GET)

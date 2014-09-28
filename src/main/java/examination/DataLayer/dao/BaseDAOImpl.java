@@ -16,7 +16,7 @@ import java.util.List;
 public abstract class BaseDAOImpl {
 
     protected SessionFactory factory;
-    protected static final Logger log = Logger.getLogger(QuestionDAOImpl.class);
+    protected static final Logger log = Logger.getLogger(BaseDAOImpl.class);
 
     @PostConstruct
     private void createFactory() {
@@ -46,5 +46,76 @@ public abstract class BaseDAOImpl {
         }
         return null;
     }
+
+    protected  <T> boolean update(T model) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.update(model);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Update model error: ", e);
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+
+    protected <T> boolean insert(T model) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.save(model);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Add error", e);
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+
+    protected <T> T selectById(long id, Class<T> clazz) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        T course = null;
+        try {
+            tx = session.beginTransaction();
+            course = (T) session.get(clazz, id);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Get exam error: ", e);
+        } finally {
+            session.close();
+        }
+        return course;
+    }
+
+    protected <T> boolean delete(long id, Class<T> clazz) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            T course =
+                (T) session.get(clazz, id);
+            session.delete(course);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            log.error("Delete model error: ", e);
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+
 
 }

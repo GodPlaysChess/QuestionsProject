@@ -18,7 +18,7 @@
             </property>
             <set name="userRole" table="user_roles" inverse="true" fetch="select">
                 <key>
-                    <column name="user_id" length="45" not-null="true" />
+                    <column name="user_id" not-null="true" />
                 </key>
                 <one-to-many class="examination.DataLayer.models.UserRole" />
             </set>
