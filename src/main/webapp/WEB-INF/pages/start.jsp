@@ -35,7 +35,7 @@
                     <span class="add-on">Выберите курс</span>
                     <select name="course_id">
                         <c:forEach var="course" items="${courses}">
-                            <option value="${course.id}">${course.id}</option>
+                            <option value="${course.id}">${course.name}</option>
                         </c:forEach>
                     </select>
 
@@ -61,7 +61,7 @@
                     <select name="course_id">
                         <option value="0">Все курсы</option>
                         <c:forEach var="course" items="${courses}">
-                            <option value="${course.id}">${course.id}</option>
+                            <option value="${course.id}">${course.name}</option>
                         </c:forEach>
                     </select>
 

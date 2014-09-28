@@ -5,4 +5,5 @@
 </head>
 <BODY>
     <h1>Congratulations, the test is finished</h1>
+    <a href="/start.html">На главную</a>
 </BODY>

@@ -1,7 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <HTML>
 <head>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
     <%--<link type="text/css" rel="stylesheet" href="/bootstrap/bootstrap.css"/>--%>
     <link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
     <link href="/bootstrap/style.css" rel="stylesheet">
@@ -19,51 +20,36 @@
     </style>
     <script type="text/javascript" src="/js/jquery-1.10.2.js"></script>
     <script>
+        var onclick = function (button) {
+            button.preventDefault();
+            var mark = button.data.mark;
+            var answerID = $(this).attr('id');
+            answerID = answerID.substring(4);
+            $.ajax({type: "POST",
+                url : "/teacher/evaluate.json",
+                data: {mark: mark, answer_id: answerID},
+                dataType: 'json',
+                success: function(response){
+                    debugger;
+                    if (response){
+                        var txt = $(button.currentTarget).closest('.clickedparent');
+                        if (mark === 'TRUE') {
+                            $(txt).removeClass("wrong");
+                            $(txt).addClass("good");
+                        } if (mark === 'FALSE') {
+                            $(txt).removeClass("good");
+                            $(txt).addClass("wrong");
+                        }
+                    }
+                }});
+
+        };
         $(document).ready(
                 function () {
-                    $(".btn-success").click(
-                            function (button) {
-                                button.preventDefault();
-                                var markCode = 1;
-                                var answerID = $(this).attr('id');
-                                answerID = answerID.substring(4);
-                                $.ajax({type: "POST",
-                                url : "/teacher/evaluate.json",
-                                data: {mark: 'TRUE', answer_id: answerID},
-                               // contentType: "application/json",
-                                contentType : 'application/x-www-form-urlencoded',
-                                dataType: 'json',
-                                success: function(response){
-                                    if (response){
-                                        var txt = $(button.currentTarget).closest('.clickedparent');
-                                        $(txt).removeClass("wrong");
-                                        $(txt).addClass("good");
-                                    }
-                                }});
-
-                            }
-                    );
+                    $(".btn-success").click({ mark: "TRUE"}, onclick);
+                    $(".btn-danger").click({ mark: "FALSE"}, onclick);
                 }
-        )
-        $(document).ready(
-                function () {
-                    $(".btn-danger").click(
-                            function (button) {
-                                button.preventDefault();
-                                var answerID = $(this).attr('id');
-                                answerID = answerID.substring(4);
-                                $.post("/teacher/evaluate.json", {mark: "FALSE", answer_id: answerID}, function(response){
-                                    if (response){
-                                    var txt = $(button.target).closest(".clickedparent");
-                                    $(txt).removeClass("good");
-                                    $(txt).addClass("wrong");
-                                    }
-                                })
-
-                            }
-                    );
-                }
-        )
+        );
     </script>
 </head>
 <BODY>
@@ -74,21 +60,14 @@
 
 <div id='global-container' class="container">
     <c:forEach var="entry" items="${aMap}">
-        <div id="ans-${entry.key.id}" class="span12 clickedparent <c:if test="${entry.key.mark==\"TRUE\"}">good</c:if>
-        <c:if test="${entry.key.mark==\"FALSE\"}">wrong</c:if>" style="border-bottom: 3px solid #000000">
-
-            <div class="span12 pagination-centered">
-                <label><strong>Question</strong> </label>
-                <textarea id="text-${entry.key.id}" disabled="true"
-
-                        >${entry.value.text}</textarea>
+        <div class="row clickedparent <c:if test="${entry.key.mark==\"TRUE\"}">good</c:if>
+        <c:if test="${entry.key.mark==\"FALSE\"}">wrong</c:if>">
+            <div class="col-md-6 ">
+                    ${entry.value.text}
             </div>
-
-            <div class="span12 pagination-centered">
-                <label><strong>Answer</strong></label>
-                <textarea disabled="true">${entry.key.text}</textarea>
+            <div class="col-md-6">
+                <c:out value="${entry.key.text}"/>
             </div>
-
             <div class="span12 pagination-centered">
                 <div class="form-horizontal">
 
@@ -100,8 +79,7 @@
             </div>
 
         </div>
+
     </c:forEach>
 </div>
-
-
 </BODY>

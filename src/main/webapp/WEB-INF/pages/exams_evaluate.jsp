@@ -28,23 +28,6 @@
                         </h4>
                     </div>
                 </div>
-                <%--<div class="span4">--%>
-                <%--<form class="form-horizontal" action="/teacher/evaluate.html" method="get">--%>
-                <%--<fieldset>--%>
-                <%--<!-- Form Name -->--%>
-                <%--<legend>${ex.id} ${ex.course.name} <fmt:formatDate value="${ex.timeStart}" pattern="MM/dd/yyyy"/></legend>--%>
-                <%--<!-- Button -->--%>
-                <%--<div class="control-group">--%>
-                <%--<label class="control-label" for="cont">Course # ${ex.course.name}</label>--%>
-
-                <%--<div class="controls">--%>
-                <%--<button id="cont" class="btn btn-success">Continue</button>--%>
-                <%--</div>--%>
-                <%--</div>--%>
-                <%--<input type="hidden" name="exam_id" value="${ex.id}"/>--%>
-                <%--</fieldset>--%>
-                <%--</form>--%>
-                <%--</div>--%>
             </c:forEach>
         </div>
     </div>
