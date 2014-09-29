@@ -1,9 +1,11 @@
 package examination.DataLayer.models;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * author: a.savanovich
@@ -16,7 +18,15 @@ public class User implements BaseModel {
     private String password;
     private long id;
 
-    private Set<UserRole> userRole = new HashSet<UserRole>(0);
+    private Set<String> userRoleString = new HashSet<String>(0);
+
+    public Set<String> getUserRoleString() {
+        return userRoleString;
+    }
+
+    public void setUserRoleString(Set<String> userRoleString) {
+        this.userRoleString = userRoleString;
+    }
 
     List<SimpleGrantedAuthority> newAuthorities = new ArrayList<SimpleGrantedAuthority>();
 
@@ -25,8 +35,8 @@ public class User implements BaseModel {
     }
 
     public void setAuthorities() {
-        for (UserRole role : userRole) {
-            newAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
+        for (String role : userRoleString) {
+            newAuthorities.add(new SimpleGrantedAuthority(role));
         }
     }
 
@@ -54,13 +64,5 @@ public class User implements BaseModel {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Set<UserRole> getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(Set<UserRole> userRole) {
-        this.userRole = userRole;
     }
 }

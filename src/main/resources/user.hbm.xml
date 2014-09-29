@@ -16,11 +16,11 @@
             <property name="password" type="string">
                 <column name="password" length="60" not-null="true" />
             </property>
-            <set name="userRole" table="user_roles" inverse="true" fetch="select">
+            <set name="userRoleString" table="user_roles" lazy="false">
                 <key>
                     <column name="user_id" not-null="true" />
                 </key>
-                <one-to-many class="examination.DataLayer.models.UserRole" />
+                <element column="role" type="string"/>
             </set>
         </class>
 </hibernate-mapping>

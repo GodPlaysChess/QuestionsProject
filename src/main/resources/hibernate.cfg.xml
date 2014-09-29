@@ -7,7 +7,6 @@
         <mapping resource="exam.hbm.xml"/>
         <mapping resource="course.hbm.xml"/>
         <mapping resource="answer.hbm.xml"/>
-        <mapping resource="UserRoles.hbm.xml"/>
         <mapping resource="user.hbm.xml"/>
 
     </session-factory>

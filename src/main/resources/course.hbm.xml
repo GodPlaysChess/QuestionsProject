@@ -14,7 +14,7 @@
 
         <bag name="questions" table="courses_questions" lazy="false">
             <key column="course_id"/>
-            <many-to-many column="question_id" class="examination.DataLayer.models.Question"/>
+            <many-to-many column="question_id" unique="true" class="examination.DataLayer.models.Question"/>
         </bag>
 
     </class>

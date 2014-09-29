@@ -15,7 +15,7 @@ public class TestRegistrationServiceImpl extends AbstractTest<User> {
     private RegistrationService registrationService;
     @Autowired
     private UserDAO userDAO;
-    @Ignore
+    // @Ignore
     @Test
     public void testRegister() throws Exception {
         try {
@@ -25,7 +25,7 @@ public class TestRegistrationServiceImpl extends AbstractTest<User> {
         }
         User user = userDAO.selectByName("sas4");
         userDAO.delete(user.getId());
-        assertEquals(1, user.getUserRole().size());
+        assertEquals(1, user.getUserRoleString().size());
 
     }
 

@@ -1,9 +1,7 @@
 package examination.QuestionService;
 
 import examination.DataLayer.dao.UserDAO;
-import examination.DataLayer.dao.UserRoleDAO;
 import examination.DataLayer.models.User;
-import examination.DataLayer.models.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * author: a.savanovich
@@ -23,8 +20,6 @@ import java.util.TreeSet;
 public class RegistrationServiceImpl implements RegistrationService {
     @Autowired
     private UserDAO usersDAO;
-    @Autowired
-    private UserRoleDAO userRoleDAO;
     @Override
     public void register(String username, String password) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -33,12 +28,9 @@ public class RegistrationServiceImpl implements RegistrationService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(hashedPassword);
-        Set<UserRole> roles = new HashSet<>(1);
-        UserRole role = new UserRole();
-        role.setRole("USER_ROLE");
-        userRoleDAO.insert(role);
-        roles.add(role);
-        user.setUserRole(roles);
+        Set<String> strRoles = new HashSet<>(1);
+        strRoles.add("ROLE_USER");
+        user.setUserRoleString(strRoles);
         usersDAO.insert(user);
 
     }
