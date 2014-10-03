@@ -4,8 +4,26 @@ import examination.DataLayer.models.enums.QuestionType;
 
 public class Question implements BaseModel {
     private long id;
+    private long courseId;
+    private long zoneId;
     private QuestionType type;
     private String text;
+
+    public long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
+    }
+
+    public long getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(long zoneId) {
+        this.zoneId = zoneId;
+    }
 
     public void setId(long id) {
         this.id = id;
