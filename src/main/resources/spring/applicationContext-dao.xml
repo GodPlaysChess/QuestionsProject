@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <bean id="abstractSqlSessionFactory" scope="singleton" class="examination.DataLayer.dao.mybatis.DefaultSqlSessionFactoryBean" abstract="true">
+        <property name="cacheEnabled" value="false"/>
+        <property name="localCacheScope" value="STATEMENT"/>
+    </bean>
+
+    <bean id="commondbDataSource" class="org.apache.ibatis.datasource.unpooled.UnpooledDataSource">
+        <property name="driver" value="${commondb.driver}"/>
+        <property name="url" value="${commondb.url}"/>
+        <property name="username" value="${commondb.user}"/>
+        <property name="password" value="${commondb.password}"/>
+        <property name="autoCommit" value="true"/>
+    </bean>
+
+    <bean id="commondbTransactionFactory" class="org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory">
+    </bean>
+
+    <bean id="commondbSqlSessionFactory"
+          parent="abstractSqlSessionFactory">
+        <property name="dataSource" ref="commondbDataSource"/>
+        <property name="transactionFactory" ref="commondbTransactionFactory"/>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:/ibatis/*.xml</value>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>
+

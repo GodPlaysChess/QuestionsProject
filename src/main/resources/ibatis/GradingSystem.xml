@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cluster.questionproject">
+
+    <resultMap id="PrivateResourceResultMap" type="examination.DataLayer.models.GradingRaw">
+        <result property="percent" column="percent"/>
+        <result property="markCode" column="mark_code"/>
+    </resultMap>
+
+    <select id="selectGradingRaws" resultMap="PrivateResourceResultMap" parameterType="map">
+        SELECT *
+        FROM commondb.questionsproject.grading_system
+        WHERE system_id = #{systemId}
+    </select>
+
+    <insert id="insertGrading" parameterType="examination.DataLayer.models.GradingRaw">
+        INSERT INTO questionsproject.grading_system (
+        system_id,
+        percent,
+        mark_code
+        ) VALUES (
+        #{systemId},
+        #{percent},
+        #{markCode}
+        )
+    </insert>
+</mapper>

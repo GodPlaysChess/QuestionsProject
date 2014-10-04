@@ -8,6 +8,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            classpath*:spring/applicationContext-dao.xml,
             classpath*:spring/applicationContext.xml,
             classpath*:spring/spring-security.xml
         </param-value>

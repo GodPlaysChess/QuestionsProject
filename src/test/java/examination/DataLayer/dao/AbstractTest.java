@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:/spring/applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath*:/spring/applicationContext.xml", "classpath*:/spring/applicationContext-dao.xml"})
 public class AbstractTest <T extends BaseModel> {
 
     protected void baseCheck(T model, BaseDAO <T> dao) {
