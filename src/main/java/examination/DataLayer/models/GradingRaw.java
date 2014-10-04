@@ -6,7 +6,7 @@ package examination.DataLayer.models;
  * Time: 13:31
  * To change this template use File | Settings | File Templates.
  */
-public class GradingRaw {
+public class GradingRaw implements BaseModel {
     private int systemId;
     private int percent;
     private int markCode;
@@ -33,5 +33,10 @@ public class GradingRaw {
 
     public void setMarkCode(int markCode) {
         this.markCode = markCode;
+    }
+
+    @Override
+    public long getId() {
+        return systemId;
     }
 }
