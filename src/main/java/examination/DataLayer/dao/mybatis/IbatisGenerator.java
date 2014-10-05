@@ -11,8 +11,6 @@ import static com.google.common.base.CaseFormat.*;
  */
 public class IbatisGenerator {
 
-    // private static final Logger log = Logger.getLogger(IbatisGenerator.class);
-
     public static String generateAll(Class c, String dbName) {
         StringBuilder builder = new StringBuilder();
         builder.append(BEGIN).append('\n');
@@ -27,18 +25,14 @@ public class IbatisGenerator {
     }
 
     public static void generateIbatis(Class c, StringBuilder builder) {
-        // log.info("Класс: " + c.getName());
         builder.append(generateHeader(c));
         Field[] fields = c.getDeclaredFields();
         for (Field field : fields) {
             Class fieldType = field.getType();
             String name = generateLine(field.getName(), fieldType);
             if(name.equals("int")) {
-                // log.info("Имя: " + field.getName());
             }
             builder.append(name).append('\n');
-            // log.info("Имя: " + field.getName());
-            // log.info("Тип: " + fieldType.getName());
         }
         builder.append("</resultMap>\n");
     }
