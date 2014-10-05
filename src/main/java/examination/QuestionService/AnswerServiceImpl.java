@@ -20,11 +20,6 @@ public class AnswerServiceImpl implements AnswerService {
     @Autowired
     private ExaminationService examinationService;
 
-    /*метод сэйв стал ок. теперь можно сделать оптимизацию.
-    переместить селект thisAnswer в начало метода. и если он
-    был, не вычислять повторно timeStart, а сетить из старого
-    значения*/
-
     private boolean save(Answer answer, AnswerStatus answerStatus) {
         answer.setMark(Mark.UNDEFINED);
         answer.setAnswerStatus(answerStatus);
@@ -43,7 +38,7 @@ public class AnswerServiceImpl implements AnswerService {
         if (index >= 0) {
             long prevQuestionId = questions.get(index).getId();
             Answer prevAnswer = answerDAO.getAnswerByQuestionId(answer.getExamId(),
-                    prevQuestionId);
+                prevQuestionId);
             prevTimeFinish = prevAnswer.getTimeFinish();
         } else {
             prevTimeFinish = currentExam.getTimeStart();
