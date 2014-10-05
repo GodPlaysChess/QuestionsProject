@@ -40,6 +40,9 @@
                             $(txt).removeClass("good");
                             $(txt).addClass("wrong");
                         }
+                        if ($('#only-unmarked-input').is(':checked')) {
+                            $(txt).slideUp("slow");
+                        }
                     }
                 }});
 
@@ -48,6 +51,16 @@
                 function () {
                     $(".btn-success").click({ mark: "TRUE"}, onclick);
                     $(".btn-danger").click({ mark: "FALSE"}, onclick);
+                    $('#only-unmarked-input').change(function() {
+                        var elementsToHide = $('.clickedparent.wrong, .clickedparent.good');
+                        console.log(elementsToHide);
+                        if ($('#only-unmarked-input').is(':checked')) {
+                            elementsToHide.slideUp("fast");
+                        } else {
+                            elementsToHide.slideDown("slow");
+                        }
+                    });
+                    $('#only-unmarked-input').click();
                 }
         );
     </script>
@@ -59,6 +72,11 @@
 <!-- varStatus could be used there -->
 
 <div id='global-container' class="container">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" id="only-unmarked-input"> Только непроверенные
+        </label>
+    </div>
     <c:forEach var="entry" items="${aMap}">
         <div class="row clickedparent <c:if test="${entry.key.mark==\"TRUE\"}">good</c:if>
         <c:if test="${entry.key.mark==\"FALSE\"}">wrong</c:if>">
